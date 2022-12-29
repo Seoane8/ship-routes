@@ -10,3 +10,5 @@ gradle-app.setting
 
 .env.local
 .env.*.local
+
+.idea
