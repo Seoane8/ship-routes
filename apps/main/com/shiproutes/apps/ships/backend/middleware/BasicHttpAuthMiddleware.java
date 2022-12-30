@@ -1,4 +1,4 @@
-package com.shiproutes.apps.ship.backend.middleware;
+package com.shiproutes.apps.ships.backend.middleware;
 
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.command.CommandHandlerExecutionError;

@@ -1,6 +1,6 @@
 package com.shiproutes.apps;
 
-import com.shiproutes.apps.ship.backend.ShipApplication;
+import com.shiproutes.apps.ships.backend.ShipsApplication;
 import com.shiproutes.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -65,7 +65,7 @@ public class Starter {
     private static HashMap<String, Class<?>> applications() {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
-        applications.put("ship", ShipApplication.class);
+        applications.put("ships", ShipsApplication.class);
 
         return applications;
     }
@@ -73,7 +73,7 @@ public class Starter {
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
-        commands.put("ship", ShipApplication.commands());
+        commands.put("ships", ShipsApplication.commands());
 
         return commands;
     }

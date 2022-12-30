@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ShipServerConfiguration {
+public class ShipsServerConfiguration {
     private final CommandBus bus;
 
-    public ShipServerConfiguration(CommandBus bus) {
+    public ShipsServerConfiguration(CommandBus bus) {
         this.bus = bus;
     }
 

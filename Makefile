@@ -26,6 +26,6 @@ ping-mysql:
 	@docker exec ship-routes-mysql mysqladmin --user=root --password= --host "127.0.0.1" ping --silent
 
 # Start the app
-.PHONY: start-ship
-start-ship:
-	@./gradlew bootRun --args='ship server'
+.PHONY: start-ships
+start-ships:
+	@./gradlew bootRun --args='ships server'

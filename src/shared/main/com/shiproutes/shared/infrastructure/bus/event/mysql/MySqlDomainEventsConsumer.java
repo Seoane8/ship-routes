@@ -24,7 +24,7 @@ public class MySqlDomainEventsConsumer {
     private Boolean shouldStop = false;
 
     public MySqlDomainEventsConsumer(
-        @Qualifier("ship-session_factory") SessionFactory sessionFactory,
+        @Qualifier("ships-session_factory") SessionFactory sessionFactory,
         DomainEventsInformation domainEventsInformation,
         SpringApplicationEventBus bus
     ) {

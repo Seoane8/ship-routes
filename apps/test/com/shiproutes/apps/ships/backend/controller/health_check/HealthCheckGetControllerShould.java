@@ -1,4 +1,4 @@
-package com.shiproutes.apps.ship.backend.controller.health_check;
+package com.shiproutes.apps.ships.backend.controller.health_check;
 
 import com.shiproutes.apps.ApplicationTestCase;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ final class HealthCheckGetControllerShould extends ApplicationTestCase {
         HttpHeaders headers = new HttpHeaders();
         headers.setBasicAuth("javi", "barbitas");
 
-        assertResponse("/health-check", 200, "{'application':'ship','status':'ok'}", headers);
+        assertResponse("/health-check", 200, "{'application':'ships','status':'ok'}", headers);
     }
 
     @Test

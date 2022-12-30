@@ -37,11 +37,11 @@ public class ShipsHibernateConfiguration {
     @Bean("ships-data_source")
     public DataSource dataSource() throws IOException, ParameterNotExist {
         return factory.dataSource(
-            config.get("SHIP_DATABASE_HOST"),
-            config.getInt("SHIP_DATABASE_PORT"),
-            config.get("SHIP_DATABASE_NAME"),
-            config.get("SHIP_DATABASE_USER"),
-            config.get("SHIP_DATABASE_PASSWORD")
+            config.get("SHIPS_DATABASE_HOST"),
+            config.getInt("SHIPS_DATABASE_PORT"),
+            config.get("SHIPS_DATABASE_NAME"),
+            config.get("SHIPS_DATABASE_USER"),
+            config.get("SHIPS_DATABASE_PASSWORD")
         );
     }
 }

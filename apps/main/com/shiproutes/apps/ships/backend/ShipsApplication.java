@@ -11,9 +11,9 @@ import java.util.HashMap;
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(
     includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Service.class),
-    value = {"com.shiproutes.shared", "com.shiproutes.ships", "com.shiproutes.apps.ship.backend"}
+    value = {"com.shiproutes.shared", "com.shiproutes.ships", "com.shiproutes.apps.ships.backend"}
 )
-public class ShipApplication {
+public class ShipsApplication {
     public static HashMap<String, Class<?>> commands() {
         return new HashMap<String, Class<?>>() {{
         }};

@@ -3,5 +3,5 @@ rootProject.name = 'ship-routes'
 include ':shared'
 project(':shared').projectDir = new File('src/shared')
 
-include ':ship'
-project(':ship').projectDir = new File('src/ship')
+include ':ships'
+project(':ships').projectDir = new File('src/ships')

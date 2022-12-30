@@ -1,4 +1,4 @@
-package com.shiproutes.apps.ship.backend.controller.health_check;
+package com.shiproutes.apps.ships.backend.controller.health_check;
 
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
@@ -22,7 +22,7 @@ public final class HealthCheckGetController extends ApiController {
     @GetMapping("/health-check")
     public HashMap<String, String> index() {
         HashMap<String, String> status = new HashMap<>();
-        status.put("application", "ship");
+        status.put("application", "ships");
         status.put("status", "ok");
 
         return status;
