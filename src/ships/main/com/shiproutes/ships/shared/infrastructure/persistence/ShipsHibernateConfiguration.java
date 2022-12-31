@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ShipsHibernateConfiguration {
     private final HibernateConfigurationFactory factory;
     private final Parameter config;
-    private final String CONTEXT_NAME = "ship";
+    private final String CONTEXT_NAME = "ships";
 
     public ShipsHibernateConfiguration(HibernateConfigurationFactory factory, Parameter config) {
         this.factory = factory;
