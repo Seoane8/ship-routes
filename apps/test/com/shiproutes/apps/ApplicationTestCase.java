@@ -68,8 +68,7 @@ public abstract class ApplicationTestCase {
     ) throws Exception {
         mockMvc
             .perform(request(HttpMethod.valueOf(method), endpoint).content(body).contentType(APPLICATION_JSON))
-            .andExpect(status().is(expectedStatusCode))
-            .andExpect(content().string(""));
+            .andExpect(status().is(expectedStatusCode));
     }
 
     protected void assertRequest(
@@ -79,8 +78,7 @@ public abstract class ApplicationTestCase {
     ) throws Exception {
         mockMvc
             .perform(request(HttpMethod.valueOf(method), endpoint))
-            .andExpect(status().is(expectedStatusCode))
-            .andExpect(content().string(""));
+            .andExpect(status().is(expectedStatusCode));
     }
 
     protected void givenISendEventsToTheBus(DomainEvent... domainEvents) {

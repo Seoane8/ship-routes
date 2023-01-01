@@ -16,12 +16,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class ApiExceptionMiddleware implements Filter {
     private final RequestMappingHandlerMapping mapping;
+    private final HashMap<Class<? extends Throwable>, HttpStatus> genericErrorMapping;
 
     public ApiExceptionMiddleware(RequestMappingHandlerMapping mapping) {
         this.mapping = mapping;
+        this.genericErrorMapping = genericErrorMapping();
     }
 
     @Override
@@ -43,7 +46,7 @@ public final class ApiExceptionMiddleware implements Filter {
                 chain.doFilter(request, response);
             } catch (NestedServletException exception) {
                 if (possibleController instanceof ApiController) {
-                    handleCustomError(response, httpResponse, (ApiController) possibleController, exception);
+                        handleCustomError(response, httpResponse, (ApiController) possibleController, exception);
                 }
             }
         } catch (Exception e) {
@@ -86,10 +89,23 @@ public final class ApiExceptionMiddleware implements Filter {
             return ((DomainError) error).errorCode();
         }
 
-        return Utils.toSnake(error.getClass().toString());
+        return Utils.toSnake(error.getClass().getSimpleName());
     }
 
     private int statusFor(HashMap<Class<? extends DomainError>, HttpStatus> errorMapping, Throwable error) {
-        return errorMapping.getOrDefault(error.getClass(), HttpStatus.INTERNAL_SERVER_ERROR).value();
+        return Optional
+            .ofNullable(errorMapping.get(error.getClass()))
+            .orElseGet(() -> genericStatusFor(error))
+            .value();
+    }
+
+    private HttpStatus genericStatusFor(Throwable error) {
+        return genericErrorMapping.getOrDefault(error.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private HashMap<Class<? extends Throwable>, HttpStatus> genericErrorMapping() {
+        return new HashMap<>() {{
+            put(IllegalArgumentException.class, HttpStatus.BAD_REQUEST);
+        }};
     }
 }

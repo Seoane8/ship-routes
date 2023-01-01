@@ -36,6 +36,7 @@ public final class HibernateConfigurationFactory {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setHibernateProperties(hibernateProperties());
+        sessionFactory.setPackagesToScan("com.shiproutes." + contextName);
 
         List<Resource> mappingFiles = searchMappingFiles(contextName);
 
