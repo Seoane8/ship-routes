@@ -1,5 +1,6 @@
 package com.shiproutes.apps;
 
+import com.shiproutes.apps.ports.backend.PortsApplication;
 import com.shiproutes.apps.ships.backend.ShipsApplication;
 import com.shiproutes.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
@@ -63,19 +64,17 @@ public class Starter {
     }
 
     private static HashMap<String, Class<?>> applications() {
-        HashMap<String, Class<?>> applications = new HashMap<>();
-
-        applications.put("ships", ShipsApplication.class);
-
-        return applications;
+        return new HashMap<>(){{
+            put("ships", ShipsApplication.class);
+            put("ports", PortsApplication.class);
+        }};
     }
 
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
-        HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
-
-        commands.put("ships", ShipsApplication.commands());
-
-        return commands;
+        return new HashMap<>(){{
+            put("ships", ShipsApplication.commands());
+            put("ports", PortsApplication.commands());
+        }};
     }
 
     private static Boolean existCommand(String applicationName, String commandName) {

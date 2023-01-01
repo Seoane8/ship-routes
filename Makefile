@@ -29,3 +29,6 @@ ping-mysql:
 .PHONY: start-ships
 start-ships:
 	@./gradlew bootRun --args='ships server'
+.PHONY: start-ports
+start-ports:
+	@./gradlew bootRun --args='ports server'
