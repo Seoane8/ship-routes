@@ -1,10 +1,12 @@
 package com.shiproutes.ships.ship.application.record;
 
+import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.ships.ship.domain.*;
 
 import java.util.List;
 
+@Service
 public final class ShipRecorder {
     private final ShipRepository repository;
     private final EventBus eventBus;
