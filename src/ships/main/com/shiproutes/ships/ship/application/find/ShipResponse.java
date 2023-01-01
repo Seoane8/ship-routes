@@ -1,10 +1,11 @@
 package com.shiproutes.ships.ship.application.find;
 
+import com.shiproutes.shared.domain.bus.query.Response;
 import com.shiproutes.ships.ship.domain.Ship;
 
 import java.util.Objects;
 
-public final class ShipResponse {
+public final class ShipResponse implements Response {
 
     private final String imo;
     private final String name;
