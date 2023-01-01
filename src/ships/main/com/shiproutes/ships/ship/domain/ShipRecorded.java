@@ -11,6 +11,12 @@ public final class ShipRecorded extends DomainEvent {
     private final String name;
     private final Integer teus;
 
+    public ShipRecorded() {
+        super(null);
+        this.name = null;
+        this.teus = null;
+    }
+
     public ShipRecorded(String aggregateId, String name, Integer teus) {
         super(aggregateId);
         this.name = name;
