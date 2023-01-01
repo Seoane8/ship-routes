@@ -9,7 +9,7 @@ class ShipPostControllerShould extends ShipApplicationTestCase {
     void record_a_valid_unrecorded_ship() throws Exception {
         assertRequestWithBody(
             "POST", "/ships",
-            "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": \"113\"}",
+            "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": 113}",
             201
         );
     }
@@ -18,14 +18,14 @@ class ShipPostControllerShould extends ShipApplicationTestCase {
     void fail_when_ship_is_invalid() throws Exception {
         assertRequestWithBody(
             "POST", "/ships",
-            "{\"imo\": \"7052365\", \"name\": \"ASTRON\", \"teus\": \"113\"}",
+            "{\"imo\": \"7052365\", \"name\": \"ASTRON\", \"teus\": 113}",
             400
         );
     }
 
     @Test
     void fail_when_ship_is_already_recorded() throws Exception {
-        String ship = "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": \"113\"}";
+        String ship = "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": 113}";
 
         givenThereIsAExistentShip(ship);
 
