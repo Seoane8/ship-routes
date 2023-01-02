@@ -1,9 +1,6 @@
 package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 
-import com.shiproutes.ports.port.domain.Locode;
-import com.shiproutes.ports.port.domain.Port;
-import com.shiproutes.ports.port.domain.PortId;
-import com.shiproutes.ports.port.domain.PortName;
+import com.shiproutes.ports.port.domain.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +14,8 @@ public final class HibernatePortEntity {
     private String id;
     private String name;
     private String locode;
+    private Double latitude;
+    private Double longitude;
 
     public HibernatePortEntity() {
     }
@@ -25,13 +24,18 @@ public final class HibernatePortEntity {
         this.id = port.id().value();
         this.name = port.name().value();
         this.locode = port.locode().value();
+        this.latitude = port.coordinates().latitude().value();
+        this.longitude = port.coordinates().longitude().value();
     }
 
     public Port toEntity() {
         return new Port(
             new PortId(this.id),
             new PortName(this.name),
-            new Locode(this.locode)
-        );
+            new Locode(this.locode),
+            new Coordinates(
+                new Latitude(this.latitude),
+                new Longitude(this.longitude)
+            ));
     }
 }

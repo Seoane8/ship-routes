@@ -6,11 +6,13 @@ public final class Port {
     private final PortId id;
     private final PortName name;
     private final Locode locode;
+    private final Coordinates coordinates;
 
-    public Port(PortId id, PortName name, Locode locode) {
+    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates) {
         this.id = id;
         this.name = name;
         this.locode = locode;
+        this.coordinates = coordinates;
     }
 
     public PortId id() {
@@ -25,16 +27,22 @@ public final class Port {
         return locode;
     }
 
+    public Coordinates coordinates() {
+        return coordinates;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Port)) return false;
         Port port = (Port) o;
-        return Objects.equals(id, port.id) && Objects.equals(name, port.name) && Objects.equals(locode, port.locode);
+        return Objects.equals(id, port.id) && Objects.equals(name, port.name)
+            && Objects.equals(locode, port.locode) && Objects.equals(coordinates, port.coordinates);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, locode);
+        return Objects.hash(id, name, locode, coordinates);
     }
+
 }
