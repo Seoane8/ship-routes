@@ -41,7 +41,7 @@ public final class PortCreatedEvent extends DomainEvent {
 
     @Override
     public String eventName() {
-        return null;
+        return "port.created";
     }
 
     @Override
