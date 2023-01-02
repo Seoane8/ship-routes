@@ -1,9 +1,9 @@
 package com.shiproutes.shared.infrastructure.hibernate;
 
-import com.shiproutes.shared.domain.Identifier;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public abstract class HibernateRepository<T> {
         sessionFactory.getCurrentSession().clear();
     }
 
-    protected Optional<T> byId(Identifier id) {
+    protected Optional<T> byId(Serializable id) {
         return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id));
     }
 
