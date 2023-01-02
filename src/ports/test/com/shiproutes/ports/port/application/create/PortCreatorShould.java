@@ -2,6 +2,8 @@ package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.PortModuleUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
+import com.shiproutes.ports.port.domain.PortCreatedEvent;
+import com.shiproutes.ports.port.domain.PortCreatedEventMother;
 import com.shiproutes.ports.port.domain.PortMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ class PortCreatorShould extends PortModuleUnitTestCase {
     protected void setUp() {
         super.setUp();
 
-        creator = new PortCreator(repository);
+        creator = new PortCreator(repository, eventBus);
     }
 
     @Test
@@ -26,6 +28,16 @@ class PortCreatorShould extends PortModuleUnitTestCase {
         creator.create(port.id(), port.name(), port.locode(), port.coordinates());
 
         shouldHaveSaved(port);
+    }
+
+    @Test
+    void publish_port_created_event() {
+        Port port = PortMother.random();
+        PortCreatedEvent domainEvent = PortCreatedEventMother.fromPort(port);
+
+        creator.create(port.id(), port.name(), port.locode(), port.coordinates());
+
+        shouldHavePublished(domainEvent);
     }
 
     @Test
