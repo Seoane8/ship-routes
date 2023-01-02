@@ -5,3 +5,6 @@ project(':shared').projectDir = new File('src/shared')
 
 include ':ships'
 project(':ships').projectDir = new File('src/ships')
+
+include ':ports'
+project(':ports').projectDir = new File('src/ports')
