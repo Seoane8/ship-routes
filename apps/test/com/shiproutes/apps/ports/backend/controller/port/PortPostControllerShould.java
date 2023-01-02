@@ -36,7 +36,7 @@ class PortPostControllerShould extends PortApplicationTestCase {
     }
 
     @Test
-    void fail_when_test_already_exists() throws Exception {
+    void fail_when_port_already_exists() throws Exception {
         String port = "{" +
             "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
             "\"name\": \"Dunkerque\", " +

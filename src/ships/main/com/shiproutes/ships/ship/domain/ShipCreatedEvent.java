@@ -6,24 +6,24 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
-public final class ShipRecorded extends DomainEvent {
+public final class ShipCreatedEvent extends DomainEvent {
 
     private final String name;
     private final Integer teus;
 
-    public ShipRecorded() {
+    public ShipCreatedEvent() {
         super(null);
         this.name = null;
         this.teus = null;
     }
 
-    public ShipRecorded(String aggregateId, String name, Integer teus) {
+    public ShipCreatedEvent(String aggregateId, String name, Integer teus) {
         super(aggregateId);
         this.name = name;
         this.teus = teus;
     }
 
-    public ShipRecorded(String aggregateId, String eventId, String occurredOn, String name, Integer teus) {
+    public ShipCreatedEvent(String aggregateId, String eventId, String occurredOn, String name, Integer teus) {
         super(aggregateId, eventId, occurredOn);
         this.name = name;
         this.teus = teus;
@@ -31,7 +31,7 @@ public final class ShipRecorded extends DomainEvent {
 
     @Override
     public String eventName() {
-        return "ship.recorded";
+        return "ship.created";
     }
 
     @Override
@@ -45,7 +45,7 @@ public final class ShipRecorded extends DomainEvent {
     @Override
     public DomainEvent fromPrimitives(String aggregateId, HashMap<String, Serializable> body, String eventId,
                                       String occurredOn) {
-        return new ShipRecorded(
+        return new ShipCreatedEvent(
             aggregateId,
             eventId,
             occurredOn,
@@ -57,8 +57,8 @@ public final class ShipRecorded extends DomainEvent {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ShipRecorded)) return false;
-        ShipRecorded that = (ShipRecorded) o;
+        if (!(o instanceof ShipCreatedEvent)) return false;
+        ShipCreatedEvent that = (ShipCreatedEvent) o;
         return Objects.equals(name, that.name) && Objects.equals(teus, that.teus);
     }
 

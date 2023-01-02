@@ -1,4 +1,4 @@
-package com.shiproutes.ships.ship.application.record;
+package com.shiproutes.ships.ship.application.create;
 
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.command.CommandHandler;
@@ -7,17 +7,17 @@ import com.shiproutes.ships.ship.domain.ShipName;
 import com.shiproutes.ships.ship.domain.Teus;
 
 @Service
-public final class RecordShipCommandHandler implements CommandHandler<RecordShipCommand> {
+public final class CreateShipCommandHandler implements CommandHandler<CreateShipCommand> {
 
-    private final ShipRecorder recorder;
+    private final ShipCreator creator;
 
-    public RecordShipCommandHandler(ShipRecorder recorder) {
-        this.recorder = recorder;
+    public CreateShipCommandHandler(ShipCreator creator) {
+        this.creator = creator;
     }
 
     @Override
-    public void handle(RecordShipCommand command) {
-        recorder.record(
+    public void handle(CreateShipCommand command) {
+        creator.create(
             new IMO(command.imo()),
             new ShipName(command.name()),
             new Teus(command.teus())

@@ -1,13 +1,13 @@
-package com.shiproutes.ships.ship.application.record;
+package com.shiproutes.ships.ship.application.create;
 
 import com.shiproutes.shared.domain.bus.command.Command;
 
-public final class RecordShipCommand implements Command {
+public final class CreateShipCommand implements Command {
     private final String imo;
     private final String name;
     private final Integer teus;
 
-    public RecordShipCommand(String imo, String name, Integer teus) {
+    public CreateShipCommand(String imo, String name, Integer teus) {
         this.imo = imo;
         this.name = name;
         this.teus = teus;

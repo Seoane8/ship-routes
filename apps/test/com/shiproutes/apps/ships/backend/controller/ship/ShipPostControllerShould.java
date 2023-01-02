@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ShipPostControllerShould extends ShipApplicationTestCase {
 
     @Test
-    void record_a_valid_unrecorded_ship() throws Exception {
+    void create_a_valid_ship() throws Exception {
         assertRequestWithBody(
             "POST", "/ships",
             "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": 113}",
@@ -24,7 +24,7 @@ class ShipPostControllerShould extends ShipApplicationTestCase {
     }
 
     @Test
-    void fail_when_ship_is_already_recorded() throws Exception {
+    void fail_when_ship_already_exists() throws Exception {
         String ship = "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": 113}";
 
         givenThereIsAExistentShip(ship);

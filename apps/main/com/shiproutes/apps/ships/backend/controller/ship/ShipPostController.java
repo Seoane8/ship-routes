@@ -4,8 +4,8 @@ import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
-import com.shiproutes.ships.ship.application.record.RecordShipCommand;
-import com.shiproutes.ships.ship.domain.ShipAlreadyRecorded;
+import com.shiproutes.ships.ship.application.create.CreateShipCommand;
+import com.shiproutes.ships.ship.domain.ShipAlreadyExists;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +22,7 @@ public final class ShipPostController extends ApiController {
     }
 
     @PostMapping(value = "/ships")
-    public ResponseEntity<String> handle(@RequestBody RecordShipCommand command) {
+    public ResponseEntity<String> handle(@RequestBody CreateShipCommand command) {
         dispatch(command);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -31,7 +31,7 @@ public final class ShipPostController extends ApiController {
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
         return new HashMap<>() {{
-            put(ShipAlreadyRecorded.class, HttpStatus.CONFLICT);
+            put(ShipAlreadyExists.class, HttpStatus.CONFLICT);
         }};
     }
 }

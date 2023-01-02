@@ -1,4 +1,4 @@
-package com.shiproutes.ships.ship.application.record;
+package com.shiproutes.ships.ship.application.create;
 
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
@@ -7,26 +7,26 @@ import com.shiproutes.ships.ship.domain.*;
 import java.util.List;
 
 @Service
-public final class ShipRecorder {
+public final class ShipCreator {
     private final ShipRepository repository;
     private final EventBus eventBus;
 
-    public ShipRecorder(ShipRepository repository, EventBus eventBus) {
+    public ShipCreator(ShipRepository repository, EventBus eventBus) {
         this.repository = repository;
         this.eventBus = eventBus;
     }
 
-    public void record(IMO imo, ShipName name, Teus teus) throws ShipAlreadyRecorded {
+    public void create(IMO imo, ShipName name, Teus teus) throws ShipAlreadyExists {
         ensureShipNotExists(imo);
         Ship ship = new Ship(imo, name, teus);
         repository.save(ship);
-        ShipRecorded event = new ShipRecorded(ship.imo().value(), ship.name().value(), ship.teus().value());
+        ShipCreatedEvent event = new ShipCreatedEvent(ship.imo().value(), ship.name().value(), ship.teus().value());
         eventBus.publish(List.of(event));
     }
 
-    private void ensureShipNotExists(IMO imo) throws ShipAlreadyRecorded {
+    private void ensureShipNotExists(IMO imo) throws ShipAlreadyExists {
         if (repository.search(imo).isPresent()) {
-            throw new ShipAlreadyRecorded(imo);
+            throw new ShipAlreadyExists(imo);
         }
     }
 }
