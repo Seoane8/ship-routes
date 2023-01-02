@@ -22,8 +22,8 @@ public final class ShipPostController extends ApiController {
     }
 
     @PostMapping(value = "/ships")
-    public ResponseEntity<String> handle(@RequestBody Request request) {
-        dispatch(new RecordShipCommand(request.imo, request.name, request.teus));
+    public ResponseEntity<String> handle(@RequestBody RecordShipCommand command) {
+        dispatch(command);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -33,23 +33,5 @@ public final class ShipPostController extends ApiController {
         return new HashMap<>() {{
             put(ShipAlreadyRecorded.class, HttpStatus.CONFLICT);
         }};
-    }
-
-    private static final class Request {
-        private String imo;
-        private String name;
-        private int teus;
-
-        public void setImo(String imo) {
-            this.imo = imo;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setTeus(int teus) {
-            this.teus = teus;
-        }
     }
 }
