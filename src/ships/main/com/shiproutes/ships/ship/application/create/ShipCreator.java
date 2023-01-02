@@ -4,8 +4,6 @@ import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.ships.ship.domain.*;
 
-import java.util.List;
-
 @Service
 public final class ShipCreator {
     private final ShipRepository repository;
@@ -18,10 +16,11 @@ public final class ShipCreator {
 
     public void create(IMO imo, ShipName name, Teus teus) throws ShipAlreadyExists {
         ensureShipNotExists(imo);
-        Ship ship = new Ship(imo, name, teus);
+
+        Ship ship = Ship.create(imo, name, teus);
+
         repository.save(ship);
-        ShipCreatedEvent event = new ShipCreatedEvent(ship.imo().value(), ship.name().value(), ship.teus().value());
-        eventBus.publish(List.of(event));
+        eventBus.publish(ship.pullDomainEvents());
     }
 
     private void ensureShipNotExists(IMO imo) throws ShipAlreadyExists {

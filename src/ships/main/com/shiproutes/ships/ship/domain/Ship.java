@@ -1,8 +1,10 @@
 package com.shiproutes.ships.ship.domain;
 
+import com.shiproutes.shared.domain.AggregateRoot;
+
 import java.util.Objects;
 
-public final class Ship {
+public final class Ship extends AggregateRoot {
     private final IMO imo;
     private final ShipName name;
     private final Teus teus;
@@ -11,6 +13,14 @@ public final class Ship {
         this.imo = imo;
         this.name = name;
         this.teus = teus;
+    }
+
+    public static Ship create(IMO imo, ShipName name, Teus teus) {
+        Ship ship = new Ship(imo, name, teus);
+
+        ship.record(new ShipCreatedEvent(imo.value(), name.value(), teus.value()));
+
+        return ship;
     }
 
     public IMO imo() {
