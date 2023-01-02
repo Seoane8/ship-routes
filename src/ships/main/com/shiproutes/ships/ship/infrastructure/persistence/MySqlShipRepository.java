@@ -27,10 +27,6 @@ public class MySqlShipRepository extends HibernateRepository<HibernateShipEntity
 
     @Override
     public Optional<Ship> search(IMO imo) {
-        return Optional
-            .ofNullable(sessionFactory.getCurrentSession()
-                .byId(HibernateShipEntity.class)
-                .load(imo.value()))
-            .map(HibernateShipEntity::toEntity);
+        return byId(imo.value()).map(HibernateShipEntity::toEntity);
     }
 }
