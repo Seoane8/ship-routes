@@ -1,7 +1,7 @@
 package com.shiproutes.ships.ship.infrastructure.persistence;
 
+import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
-import com.shiproutes.ships.ship.domain.IMO;
 import com.shiproutes.ships.ship.domain.Ship;
 import com.shiproutes.ships.ship.domain.ShipRepository;
 import com.shiproutes.ships.ship.infrastructure.persistence.hibernate.HibernateShipEntity;

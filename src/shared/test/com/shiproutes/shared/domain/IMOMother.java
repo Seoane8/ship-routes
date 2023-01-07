@@ -1,6 +1,4 @@
-package com.shiproutes.ships.ship.domain;
-
-import com.shiproutes.shared.domain.IntegerMother;
+package com.shiproutes.shared.domain;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

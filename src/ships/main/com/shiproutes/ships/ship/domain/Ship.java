@@ -1,6 +1,7 @@
 package com.shiproutes.ships.ship.domain;
 
 import com.shiproutes.shared.domain.AggregateRoot;
+import com.shiproutes.shared.domain.IMO;
 
 import java.util.Objects;
 

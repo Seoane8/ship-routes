@@ -1,8 +1,8 @@
 package com.shiproutes.ships.ship.application.create;
 
+import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.command.CommandHandler;
-import com.shiproutes.ships.ship.domain.IMO;
 import com.shiproutes.ships.ship.domain.ShipName;
 import com.shiproutes.ships.ship.domain.Teus;
 

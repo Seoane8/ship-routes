@@ -1,8 +1,8 @@
 package com.shiproutes.ships.ship.application.find;
 
+import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.query.QueryHandler;
-import com.shiproutes.ships.ship.domain.IMO;
 
 @Service
 public final class FindShipQueryHandler implements QueryHandler<FindShipQuery, ShipResponse> {

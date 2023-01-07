@@ -1,7 +1,7 @@
 package com.shiproutes.ships.ship.application.find;
 
+import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
-import com.shiproutes.ships.ship.domain.IMO;
 import com.shiproutes.ships.ship.domain.ShipNotExists;
 import com.shiproutes.ships.ship.domain.ShipRepository;
 
