@@ -13,10 +13,10 @@ CREATE TABLE IF NOT EXISTS ports
 
 CREATE TABLE IF NOT EXISTS arrivals
 (
-    id     CHAR(36)  NOT NULL,
-    portId CHAR(36)  NOT NULL,
-    shipId CHAR(7)   NOT NULL,
-    date   TIMESTAMP NOT NULL,
+    id     CHAR(36)     NOT NULL,
+    portId CHAR(36)     NOT NULL,
+    shipId CHAR(7)      NOT NULL,
+    date   TIMESTAMP(3) NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
