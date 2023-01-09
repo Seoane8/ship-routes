@@ -22,3 +22,15 @@ CREATE TABLE IF NOT EXISTS arrivals
     ENGINE = InnoDB
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS departures
+(
+    id     CHAR(36)     NOT NULL,
+    portId CHAR(36)     NOT NULL,
+    shipId CHAR(7)      NOT NULL,
+    date   TIMESTAMP(3) NOT NULL,
+    PRIMARY KEY (id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.mockito.Mockito.*;
 
-public class ArrivalModuleUnitTestCase extends UnitTestCase {
+public abstract class ArrivalModuleUnitTestCase extends UnitTestCase {
 
     protected ArrivalRepository repository;
 
