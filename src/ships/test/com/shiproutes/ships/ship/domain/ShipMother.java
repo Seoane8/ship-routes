@@ -1,5 +1,7 @@
 package com.shiproutes.ships.ship.domain;
 
+import com.shiproutes.shared.domain.IMOMother;
+
 public final class ShipMother {
 
     public static Ship random() {

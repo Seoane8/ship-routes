@@ -1,16 +1,15 @@
 package com.shiproutes.ships.ship.infrastructure.persistence;
 
+import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.ships.ship.ShipModuleInfrastructureTestCase;
-import com.shiproutes.ships.ship.domain.IMOMother;
 import com.shiproutes.ships.ship.domain.Ship;
 import com.shiproutes.ships.ship.domain.ShipMother;
 import org.junit.jupiter.api.Test;
 
 import javax.transaction.Transactional;
-
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Transactional
 class MySqlShipRepositoryShould extends ShipModuleInfrastructureTestCase {

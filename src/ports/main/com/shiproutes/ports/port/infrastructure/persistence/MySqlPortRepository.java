@@ -1,9 +1,9 @@
 package com.shiproutes.ports.port.infrastructure.persistence;
 
 import com.shiproutes.ports.port.domain.Port;
-import com.shiproutes.ports.port.domain.PortId;
 import com.shiproutes.ports.port.domain.PortRepository;
 import com.shiproutes.ports.port.infrastructure.persistence.hibernate.HibernatePortEntity;
+import com.shiproutes.ports.shared.domain.PortId;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;

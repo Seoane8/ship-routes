@@ -1,14 +1,15 @@
 package com.shiproutes.ships.ship.application.find;
 
+import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.ships.ship.ShipModuleUnitTestCase;
-import com.shiproutes.ships.ship.domain.IMOMother;
 import com.shiproutes.ships.ship.domain.Ship;
 import com.shiproutes.ships.ship.domain.ShipMother;
 import com.shiproutes.ships.ship.domain.ShipNotExists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ShipFinderShould extends ShipModuleUnitTestCase {
 
