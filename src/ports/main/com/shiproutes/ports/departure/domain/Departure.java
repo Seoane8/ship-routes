@@ -1,11 +1,12 @@
 package com.shiproutes.ports.departure.domain;
 
 import com.shiproutes.ports.shared.domain.PortId;
+import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
 
 import java.util.Objects;
 
-public final class Departure {
+public final class Departure extends AggregateRoot {
 
     private final DepartureId id;
     private final PortId portId;
@@ -17,6 +18,19 @@ public final class Departure {
         this.portId = portId;
         this.shipId = shipId;
         this.date = date;
+    }
+
+    public static Departure create(DepartureId id, PortId portId, IMO shipId, DepartureDate date) {
+        Departure departure = new Departure(id, portId, shipId, date);
+
+        departure.record(new DepartureCreated(
+            id.value(),
+            portId.value(),
+            shipId.value(),
+            date.value()
+        ));
+
+        return departure;
     }
 
     public DepartureId id() {
