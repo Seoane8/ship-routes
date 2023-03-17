@@ -1,7 +1,7 @@
 package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 
 import com.shiproutes.ports.port.domain.*;
-import com.shiproutes.ports.shared.domain.PortId;
+import com.shiproutes.shared.domain.PortId;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

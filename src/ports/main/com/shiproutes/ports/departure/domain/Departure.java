@@ -1,8 +1,8 @@
 package com.shiproutes.ports.departure.domain;
 
-import com.shiproutes.ports.shared.domain.PortId;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.PortId;
 
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package com.shiproutes.ports.port.domain;
 
-import com.shiproutes.ports.shared.domain.PortId;
 import com.shiproutes.shared.domain.DomainError;
+import com.shiproutes.shared.domain.PortId;
 
 public final class PortAlreadyExists extends DomainError {
     public PortAlreadyExists(PortId portId) {

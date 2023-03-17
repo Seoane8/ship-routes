@@ -1,5 +1,6 @@
 package com.shiproutes.ports.shared.domain;
 
+import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.UuidMother;
 
 public final class PortIdMother {
