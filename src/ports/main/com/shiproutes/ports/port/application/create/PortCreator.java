@@ -1,7 +1,7 @@
 package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.domain.*;
-import com.shiproutes.ports.shared.domain.PortId;
+import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 

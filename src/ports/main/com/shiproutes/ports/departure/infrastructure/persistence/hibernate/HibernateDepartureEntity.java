@@ -3,8 +3,8 @@ package com.shiproutes.ports.departure.infrastructure.persistence.hibernate;
 import com.shiproutes.ports.departure.domain.Departure;
 import com.shiproutes.ports.departure.domain.DepartureDate;
 import com.shiproutes.ports.departure.domain.DepartureId;
-import com.shiproutes.ports.shared.domain.PortId;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.PortId;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

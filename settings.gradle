@@ -8,3 +8,6 @@ project(':ships').projectDir = new File('src/ships')
 
 include ':ports'
 project(':ports').projectDir = new File('src/ports')
+
+include ':routes'
+project(':routes').projectDir = new File('src/routes')

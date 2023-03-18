@@ -32,3 +32,6 @@ start-ships:
 .PHONY: start-ports
 start-ports:
 	@./gradlew bootRun --args='ports server'
+.PHONY: start-routes
+start-routes:
+	@./gradlew bootRun --args='routes server'
