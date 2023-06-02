@@ -1,29 +1,25 @@
 package com.shiproutes.ports.ship.domain;
 
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Teus;
 
 import java.util.Objects;
 
 public final class PortShip {
 
     private final IMO imo;
-    private final Integer teus;
+    private final Teus teus;
 
-    public PortShip(IMO imo, Integer teus) {
-        ensureTeusIsGreaterThenZero(teus);
+    public PortShip(IMO imo, Teus teus) {
         this.imo = imo;
         this.teus = teus;
-    }
-
-    private void ensureTeusIsGreaterThenZero(Integer value) {
-        if (value < 0) throw new IllegalArgumentException("Teus must be positive");
     }
 
     public IMO imo() {
         return imo;
     }
 
-    public Integer teus() {
+    public Teus teus() {
         return teus;
     }
 

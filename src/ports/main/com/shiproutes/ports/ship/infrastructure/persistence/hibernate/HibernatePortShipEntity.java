@@ -2,6 +2,7 @@ package com.shiproutes.ports.ship.infrastructure.persistence.hibernate;
 
 import com.shiproutes.ports.ship.domain.PortShip;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Teus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,13 +22,13 @@ public final class HibernatePortShipEntity {
 
     public HibernatePortShipEntity(PortShip port) {
         this.imo = port.imo().value();
-        this.teus = port.teus();
+        this.teus = port.teus().value();
     }
 
     public PortShip toEntity() {
         return new PortShip(
             new IMO(this.imo),
-            this.teus
+            new Teus(this.teus)
         );
     }
 

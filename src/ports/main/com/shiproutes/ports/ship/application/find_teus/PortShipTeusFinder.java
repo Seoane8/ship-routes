@@ -15,6 +15,6 @@ public final class PortShipTeusFinder {
     }
 
     public TeusResponse find(IMO imo) {
-        return repository.search(imo).map(PortShip::teus).map(TeusResponse::new).orElseThrow();
+        return repository.search(imo).map(PortShip::teus).map(TeusResponse::fromEntity).orElseThrow();
     }
 }

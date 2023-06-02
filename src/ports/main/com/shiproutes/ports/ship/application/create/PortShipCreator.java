@@ -4,6 +4,7 @@ import com.shiproutes.ports.ship.domain.PortShip;
 import com.shiproutes.ports.ship.domain.PortShipRepository;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 
 @Service
 public final class PortShipCreator {
@@ -14,7 +15,7 @@ public final class PortShipCreator {
         this.repository = repository;
     }
 
-    public void crate(IMO imo, Integer teus) {
+    public void crate(IMO imo, Teus teus) {
         if (repository.search(imo).isPresent()) return;
 
         PortShip ship = new PortShip(imo, teus);
