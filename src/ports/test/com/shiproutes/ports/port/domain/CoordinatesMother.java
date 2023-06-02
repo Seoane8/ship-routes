@@ -1,5 +1,8 @@
 package com.shiproutes.ports.port.domain;
 
+import com.shiproutes.ports.shared.domain.Coordinates;
+import com.shiproutes.ports.shared.domain.Latitude;
+import com.shiproutes.ports.shared.domain.Longitude;
 import com.shiproutes.shared.domain.MotherCreator;
 
 public final class CoordinatesMother {

@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port.domain;
+package com.shiproutes.ports.shared.domain;
 
 import java.util.Objects;
 
