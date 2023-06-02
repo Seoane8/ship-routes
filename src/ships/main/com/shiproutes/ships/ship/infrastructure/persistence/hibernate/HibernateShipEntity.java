@@ -1,9 +1,9 @@
 package com.shiproutes.ships.ship.infrastructure.persistence.hibernate;
 
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.ships.ship.domain.Ship;
 import com.shiproutes.ships.ship.domain.ShipName;
-import com.shiproutes.ships.ship.domain.Teus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

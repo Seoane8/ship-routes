@@ -1,6 +1,7 @@
 package com.shiproutes.ships.ship.domain;
 
 import com.shiproutes.shared.domain.MotherCreator;
+import com.shiproutes.shared.domain.Teus;
 
 public final class TeusMother {
 
