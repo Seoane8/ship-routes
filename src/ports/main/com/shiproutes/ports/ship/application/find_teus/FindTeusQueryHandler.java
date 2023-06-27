@@ -1,5 +1,7 @@
 package com.shiproutes.ports.ship.application.find_teus;
 
+import com.shiproutes.ports.shared.application.FindTeusQuery;
+import com.shiproutes.ports.shared.application.TeusResponse;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.query.QueryHandler;

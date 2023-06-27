@@ -1,5 +1,7 @@
 package com.shiproutes.ports.port.application.find;
 
+import com.shiproutes.ports.shared.application.FindPortQuery;
+import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.query.QueryHandler;

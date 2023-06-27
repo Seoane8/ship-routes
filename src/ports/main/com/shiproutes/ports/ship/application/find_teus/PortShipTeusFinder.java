@@ -1,5 +1,6 @@
 package com.shiproutes.ports.ship.application.find_teus;
 
+import com.shiproutes.ports.shared.application.TeusResponse;
 import com.shiproutes.ports.ship.domain.PortShip;
 import com.shiproutes.ports.ship.domain.PortShipRepository;
 import com.shiproutes.shared.domain.IMO;

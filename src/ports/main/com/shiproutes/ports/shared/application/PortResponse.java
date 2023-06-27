@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port.application.find;
+package com.shiproutes.ports.shared.application;
 
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.shared.domain.bus.query.Response;

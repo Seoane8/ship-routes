@@ -1,4 +1,4 @@
-package com.shiproutes.ports.ship.application.find_teus;
+package com.shiproutes.ports.shared.application;
 
 import com.shiproutes.shared.domain.IntValueObject;
 import com.shiproutes.shared.domain.Teus;

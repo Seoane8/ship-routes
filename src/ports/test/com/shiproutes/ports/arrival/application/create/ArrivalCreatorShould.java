@@ -17,12 +17,14 @@ class ArrivalCreatorShould extends ArrivalModuleUnitTestCase {
     protected void setUp() {
         super.setUp();
 
-        this.creator = new ArrivalCreator(repository, eventBus);
+        this.creator = new ArrivalCreator(repository, queryBus, eventBus);
     }
 
     @Test
     void create_new_arrival() {
         Arrival arrival = ArrivalMother.random();
+        shouldExistPortWithCoordinates(arrival.portId(), arrival.coordinates());
+        shouldExistShipWithTeus(arrival.shipId(), arrival.teus());
 
         creator.create(arrival.id(), arrival.portId(), arrival.shipId(), arrival.date());
 
@@ -33,6 +35,8 @@ class ArrivalCreatorShould extends ArrivalModuleUnitTestCase {
     void publish_arrival_created_event() {
         Arrival arrival = ArrivalMother.random();
         ArrivalCreated domainEvent = ArrivalCreatedMother.fromArrival(arrival);
+        shouldExistPortWithCoordinates(arrival.portId(), arrival.coordinates());
+        shouldExistShipWithTeus(arrival.shipId(), arrival.teus());
 
         creator.create(arrival.id(), arrival.portId(), arrival.shipId(), arrival.date());
 
