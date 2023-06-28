@@ -1,13 +1,13 @@
 package com.shiproutes.ports.departure;
 
+import com.shiproutes.ports.PortsContextUnitTestCase;
 import com.shiproutes.ports.departure.domain.Departure;
 import com.shiproutes.ports.departure.domain.DepartureRepository;
-import com.shiproutes.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.mockito.Mockito.*;
 
-public abstract class DepartureModuleUnitTestCase extends UnitTestCase {
+public abstract class DepartureModuleUnitTestCase extends PortsContextUnitTestCase {
 
     protected DepartureRepository repository;
 

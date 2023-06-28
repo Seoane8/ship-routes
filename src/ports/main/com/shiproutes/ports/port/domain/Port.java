@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port.domain;
 
+import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.PortId;
 

@@ -1,6 +1,11 @@
 package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 
-import com.shiproutes.ports.port.domain.*;
+import com.shiproutes.ports.port.domain.Locode;
+import com.shiproutes.ports.port.domain.Port;
+import com.shiproutes.ports.port.domain.PortName;
+import com.shiproutes.ports.shared.domain.Coordinates;
+import com.shiproutes.ports.shared.domain.Latitude;
+import com.shiproutes.ports.shared.domain.Longitude;
 import com.shiproutes.shared.domain.PortId;
 
 import javax.persistence.Entity;

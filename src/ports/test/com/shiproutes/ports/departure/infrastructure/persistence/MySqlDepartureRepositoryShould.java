@@ -13,21 +13,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MySqlDepartureRepositoryShould extends DepartureModuleInfrastructureTestCase {
 
     @Test
-    void save_a_arrival() {
+    void save_a_departure() {
         mySqlDepartureRepository.save(DepartureMother.random());
     }
 
     @Test
-    void return_an_existent_arrival() {
-        Departure arrival = DepartureMother.random();
-        mySqlDepartureRepository.save(arrival);
+    void return_an_existent_departure() {
+        Departure departure = DepartureMother.random();
+        mySqlDepartureRepository.save(departure);
 
-        Optional<Departure> arrivalFound = mySqlDepartureRepository.search(arrival.id());
-        assertEquals(Optional.of(arrival), arrivalFound);
+        Optional<Departure> departureFound = mySqlDepartureRepository.search(departure.id());
+        assertEquals(Optional.of(departure), departureFound);
     }
 
     @Test
-    void not_return_a_non_existent_arrival() {
+    void not_return_a_non_existent_departure() {
         assertEquals(Optional.empty(), mySqlDepartureRepository.search(DepartureIdMother.random()));
     }
 

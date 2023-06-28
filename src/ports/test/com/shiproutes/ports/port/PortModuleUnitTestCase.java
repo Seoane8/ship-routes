@@ -1,16 +1,15 @@
 package com.shiproutes.ports.port;
 
+import com.shiproutes.ports.PortsContextUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortRepository;
-import com.shiproutes.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
-public abstract class PortModuleUnitTestCase extends UnitTestCase {
+public abstract class PortModuleUnitTestCase extends PortsContextUnitTestCase {
 
     protected PortRepository repository;
 
