@@ -17,12 +17,14 @@ class DepartureCreatorShould extends DepartureModuleUnitTestCase {
     public void setUp() {
         super.setUp();
 
-        creator = new DepartureCreator(repository, eventBus);
+        creator = new DepartureCreator(repository, queryBus, eventBus);
     }
 
     @Test
     void save_a_valid_departure() {
         Departure departure = DepartureMother.random();
+        shouldExistPortWithCoordinates(departure.portId(), departure.coordinates());
+        shouldExistShipWithTeus(departure.shipId(), departure.teus());
 
         creator.create(departure.id(), departure.portId(), departure.shipId(), departure.date());
 
@@ -33,6 +35,8 @@ class DepartureCreatorShould extends DepartureModuleUnitTestCase {
     void publish_departure_created_event() {
         Departure departure = DepartureMother.random();
         DepartureCreated domainEvent = DepartureCreatedMother.fromDeparture(departure);
+        shouldExistPortWithCoordinates(departure.portId(), departure.coordinates());
+        shouldExistShipWithTeus(departure.shipId(), departure.teus());
 
         creator.create(departure.id(), departure.portId(), departure.shipId(), departure.date());
 
