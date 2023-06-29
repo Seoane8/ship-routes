@@ -23,7 +23,7 @@ class PortCreatorShould extends PortModuleUnitTestCase {
 
     @Test
     void create_new_port() {
-        Port port = PortMother.random();
+        Port port = PortMother.randomNew();
 
         creator.create(port.id(), port.name(), port.locode(), port.coordinates());
 
@@ -32,7 +32,7 @@ class PortCreatorShould extends PortModuleUnitTestCase {
 
     @Test
     void publish_port_created_event() {
-        Port port = PortMother.random();
+        Port port = PortMother.randomNew();
         PortCreatedEvent domainEvent = PortCreatedEventMother.fromPort(port);
 
         creator.create(port.id(), port.name(), port.locode(), port.coordinates());
@@ -43,7 +43,7 @@ class PortCreatorShould extends PortModuleUnitTestCase {
     @Test
     void throw_exception_when_port_already_exists() {
         assertThrows(Exception.class, () -> {
-            Port port = PortMother.random();
+            Port port = PortMother.randomNew();
 
             shouldExists(port);
 
