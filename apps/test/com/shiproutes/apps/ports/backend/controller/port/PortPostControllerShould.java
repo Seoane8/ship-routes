@@ -50,9 +50,5 @@ class PortPostControllerShould extends PortApplicationTestCase {
         assertRequestWithBody("POST", "/ports", port, 409);
     }
 
-    private void givenThenIsAExistentPort(String port) throws Exception {
-        assertRequestWithBody("POST", "/ports", port, 201);
-    }
-
 
 }

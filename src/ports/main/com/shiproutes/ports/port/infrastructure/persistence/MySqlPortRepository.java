@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("ports-transaction_manager")
@@ -27,5 +29,10 @@ public class MySqlPortRepository extends HibernateRepository<HibernatePortEntity
     @Override
     public Optional<Port> search(PortId id) {
         return byId(id.value()).map(HibernatePortEntity::toEntity);
+    }
+
+    @Override
+    public Set<Port> searchAll() {
+        return all().stream().map(HibernatePortEntity::toEntity).collect(Collectors.toSet());
     }
 }

@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS ports
 (
-    id        CHAR(36)     NOT NULL,
-    name      VARCHAR(255) NOT NULL,
-    locode    CHAR(5)      NOT NULL,
-    latitude  DOUBLE,
-    longitude DOUBLE,
+    id              CHAR(36)     NOT NULL,
+    name            VARCHAR(255) NOT NULL,
+    locode          CHAR(5)      NOT NULL,
+    latitude        DOUBLE,
+    longitude       DOUBLE,
+    totalDepartures BIGINT,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB

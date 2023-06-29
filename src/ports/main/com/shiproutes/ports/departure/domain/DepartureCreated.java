@@ -40,6 +40,10 @@ public final class DepartureCreated extends DomainEvent {
         return "arrival.created";
     }
 
+    public String portId() {
+        return portId;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{

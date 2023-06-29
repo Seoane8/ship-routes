@@ -11,16 +11,18 @@ public final class Port extends AggregateRoot {
     private final PortName name;
     private final Locode locode;
     private final Coordinates coordinates;
+    private PortTotalDepartures totalDepartures;
 
-    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates) {
+    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, PortTotalDepartures totalDepartures) {
         this.id = id;
         this.name = name;
         this.locode = locode;
         this.coordinates = coordinates;
+        this.totalDepartures = totalDepartures;
     }
 
     public static Port create(PortId id, PortName name, Locode locode, Coordinates coordinates) {
-        Port port = new Port(id, name, locode, coordinates);
+        Port port = new Port(id, name, locode, coordinates, PortTotalDepartures.initialize());
 
         port.record(new PortCreatedEvent(
             id.value(),
@@ -49,18 +51,25 @@ public final class Port extends AggregateRoot {
         return coordinates;
     }
 
+    public PortTotalDepartures totalDepartures() {
+        return totalDepartures;
+    }
+
+    public void incrementDepartures() {
+        totalDepartures = totalDepartures.increment();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Port)) return false;
         Port port = (Port) o;
-        return Objects.equals(id, port.id) && Objects.equals(name, port.name)
-            && Objects.equals(locode, port.locode) && Objects.equals(coordinates, port.coordinates);
+        return Objects.equals(id, port.id) && Objects.equals(name, port.name) && Objects.equals(locode, port.locode)
+            && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalDepartures, port.totalDepartures);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, locode, coordinates);
+        return Objects.hash(id, name, locode, coordinates, totalDepartures);
     }
-
 }

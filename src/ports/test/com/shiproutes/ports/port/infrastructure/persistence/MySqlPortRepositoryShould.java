@@ -7,7 +7,9 @@ import com.shiproutes.ports.shared.domain.PortIdMother;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,5 +33,20 @@ class MySqlPortRepositoryShould extends PortModuleInfrastructureTestCase {
     @Test
     void not_return_a_non_existent_port() {
         assertEquals(Optional.empty(), mySqlPortRepository.search(PortIdMother.random()));
+    }
+
+    @Test
+    void return_all_existent_ports() {
+        Port firstPort = PortMother.random();
+        Port secondPort = PortMother.random();
+        mySqlPortRepository.save(firstPort);
+        mySqlPortRepository.save(secondPort);
+
+        assertEquals(Set.of(firstPort, secondPort), mySqlPortRepository.searchAll());
+    }
+
+    @Test
+    void return_empty_list_when_no_port_exist() {
+        assertEquals(Collections.emptySet(), mySqlPortRepository.searchAll());
     }
 }

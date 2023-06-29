@@ -1,5 +1,6 @@
 package com.shiproutes.ports;
 
+import com.shiproutes.ports.port.domain.PortTotalDeparturesMother;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
@@ -21,8 +22,8 @@ public class PortsContextUnitTestCase extends UnitTestCase {
                 WordMother.random(),
                 WordMother.random(),
                 coordinates.longitude().value(),
-                coordinates.latitude().value()
-            )
+                coordinates.latitude().value(),
+                PortTotalDeparturesMother.random().value())
         );
     }
 
