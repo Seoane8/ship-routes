@@ -3,6 +3,7 @@ package com.shiproutes.ports.port;
 import com.shiproutes.ports.PortsContextUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortRepository;
+import com.shiproutes.shared.domain.PortId;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Optional;
@@ -26,5 +27,9 @@ public abstract class PortModuleUnitTestCase extends PortsContextUnitTestCase {
 
     protected void shouldExists(Port port) {
         when(repository.search(port.id())).thenReturn(Optional.of(port));
+    }
+
+    protected void shouldNotExist(PortId portId) {
+        when(repository.search(portId)).thenReturn(Optional.empty());
     }
 }
