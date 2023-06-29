@@ -9,6 +9,7 @@ gradle-app.setting
 !/var/log/.gitkeep
 
 .env.local
+.env.test
 .env.*.local
 
 .idea
