@@ -35,8 +35,8 @@ public final class PortEvent extends AggregateRoot {
 
         portEvent.record(new PortEventCreated(
             id.value(),
-            type.value(),
             portId.value(),
+            type.value(),
             shipId.value(),
             date.value()
         ));
