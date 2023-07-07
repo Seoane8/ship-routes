@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port.application.increment_departures;
+package com.shiproutes.ports.port.application.increment_events;
 
 import com.shiproutes.ports.port.PortModuleUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
@@ -12,27 +12,27 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class IncrementPortDeparturesOnPortEventCreatedShould extends PortModuleUnitTestCase {
+class IncrementPortEventsOnPortEventCreatedShould extends PortModuleUnitTestCase {
 
-    IncrementPortDeparturesOnPortEventCreated subscriber;
+    IncrementPortEventsOnPortEventCreated subscriber;
 
     @Override
     @BeforeEach
     public void setUp() {
         super.setUp();
 
-        subscriber = new IncrementPortDeparturesOnPortEventCreated(
-            new PortDeparturesIncrementer(repository)
+        subscriber = new IncrementPortEventsOnPortEventCreated(
+            new PortEventsIncrementer(repository)
         );
     }
 
     @Test
-    void increment_departures_of_existent_port() {
+    void increment_events_of_existent_port() {
         PortEventCreated event = PortEventCreatedMother.random();
 
         PortId portId = new PortId(event.portId());
         Port port = PortMother.fromId(portId);
-        Port expectedPortToSave = PortMother.incrementingDepartures(port);
+        Port expectedPortToSave = PortMother.incrementingEvents(port);
         shouldExists(port);
 
         subscriber.on(event);

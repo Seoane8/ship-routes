@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port.application.increment_departures;
+package com.shiproutes.ports.port.application.increment_events;
 
 import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.shared.domain.PortId;
@@ -8,11 +8,11 @@ import org.springframework.context.event.EventListener;
 
 @Service
 @DomainEventSubscriber({PortEventCreated.class})
-public final class IncrementPortDeparturesOnPortEventCreated {
+public final class IncrementPortEventsOnPortEventCreated {
 
-    private final PortDeparturesIncrementer incrementer;
+    private final PortEventsIncrementer incrementer;
 
-    public IncrementPortDeparturesOnPortEventCreated(PortDeparturesIncrementer incrementer) {
+    public IncrementPortEventsOnPortEventCreated(PortEventsIncrementer incrementer) {
         this.incrementer = incrementer;
     }
 

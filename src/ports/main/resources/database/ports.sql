@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS ports
     locode          CHAR(5)      NOT NULL,
     latitude        DOUBLE,
     longitude       DOUBLE,
-    totalDepartures BIGINT,
+    totalEvents     BIGINT,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
