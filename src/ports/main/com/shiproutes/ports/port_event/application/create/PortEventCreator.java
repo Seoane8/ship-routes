@@ -1,9 +1,6 @@
 package com.shiproutes.ports.port_event.application.create;
 
-import com.shiproutes.ports.port_event.domain.PortEvent;
-import com.shiproutes.ports.port_event.domain.PortEventDate;
-import com.shiproutes.ports.port_event.domain.PortEventId;
-import com.shiproutes.ports.port_event.domain.PortEventRepository;
+import com.shiproutes.ports.port_event.domain.*;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
@@ -31,10 +28,10 @@ public final class PortEventCreator {
         this.eventBus = eventBus;
     }
 
-    public void create(PortEventId id, PortId portId, IMO shipId, PortEventDate date) {
+    public void create(PortEventId id, PortEventType type, PortId portId, IMO shipId, PortEventDate date) {
         Coordinates coordinates = findPortCoordinates(portId);
         Teus teus = findShipTeus(shipId);
-        PortEvent portEvent = PortEvent.create(id, portId, coordinates, shipId, teus, date);
+        PortEvent portEvent = PortEvent.create(id, type, portId, coordinates, shipId, teus, date);
 
         repository.save(portEvent);
         eventBus.publish(portEvent.pullDomainEvents());

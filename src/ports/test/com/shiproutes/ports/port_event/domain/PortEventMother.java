@@ -10,6 +10,7 @@ public final class PortEventMother {
     public static PortEvent random() {
         return new PortEvent(
             PortEventIdMother.random(),
+            PortEventTypeMother.random(),
             PortIdMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),

@@ -3,6 +3,7 @@ package com.shiproutes.ports.port_event.infrastructure.persistence.hibernate;
 import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventDate;
 import com.shiproutes.ports.port_event.domain.PortEventId;
+import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.ports.shared.domain.Latitude;
 import com.shiproutes.ports.shared.domain.Longitude;
@@ -21,6 +22,7 @@ public final class HibernatePortEventEntity {
 
     @Id
     private String id;
+    private String type;
     private String portId;
     private Double latitude;
     private Double longitude;
@@ -33,6 +35,7 @@ public final class HibernatePortEventEntity {
 
     public HibernatePortEventEntity(PortEvent portEvent) {
         this.id = portEvent.id().value();
+        this.type = portEvent.type().value();
         this.portId = portEvent.portId().value();
         this.latitude = portEvent.coordinates().latitude().value();
         this.longitude = portEvent.coordinates().longitude().value();
@@ -44,6 +47,7 @@ public final class HibernatePortEventEntity {
     public PortEvent toEntity() {
         return new PortEvent(
             new PortEventId(this.id),
+            PortEventType.valueOf(type),
             new PortId(this.portId),
             new Coordinates(
                 new Latitude(this.latitude),

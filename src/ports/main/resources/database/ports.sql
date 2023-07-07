@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS ports
 CREATE TABLE IF NOT EXISTS port_events
 (
     id        CHAR(36)     NOT NULL,
+    type      CHAR(16)     NOT NULL,
     portId    CHAR(36)     NOT NULL,
     latitude  DOUBLE,
     longitude DOUBLE,

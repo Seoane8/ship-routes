@@ -11,14 +11,17 @@ import java.util.Objects;
 public final class PortEvent extends AggregateRoot {
 
     private final PortEventId id;
+    private final PortEventType type;
     private final PortId portId;
     private final Coordinates coordinates;
     private final IMO shipId;
     private final Teus teus;
     private final PortEventDate date;
 
-    public PortEvent(PortEventId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, PortEventDate date) {
+    public PortEvent(PortEventId id, PortEventType type, PortId portId, Coordinates coordinates, IMO shipId, Teus teus,
+                     PortEventDate date) {
         this.id = id;
+        this.type = type;
         this.portId = portId;
         this.coordinates = coordinates;
         this.shipId = shipId;
@@ -26,11 +29,13 @@ public final class PortEvent extends AggregateRoot {
         this.date = date;
     }
 
-    public static PortEvent create(PortEventId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, PortEventDate date) {
-        PortEvent portEvent = new PortEvent(id, portId, coordinates, shipId, teus, date);
+    public static PortEvent create(PortEventId id, PortEventType type, PortId portId, Coordinates coordinates,
+                                   IMO shipId, Teus teus, PortEventDate date) {
+        PortEvent portEvent = new PortEvent(id, type, portId, coordinates, shipId, teus, date);
 
         portEvent.record(new PortEventCreated(
             id.value(),
+            type.value(),
             portId.value(),
             shipId.value(),
             date.value()
@@ -41,6 +46,10 @@ public final class PortEvent extends AggregateRoot {
 
     public PortEventId id() {
         return id;
+    }
+
+    public PortEventType type() {
+        return type;
     }
 
     public PortId portId() {
@@ -65,20 +74,17 @@ public final class PortEvent extends AggregateRoot {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof PortEvent)) {
-            return false;
-        }
+
+        if (this == o) return true;
+        if (!(o instanceof PortEvent)) return false;
         PortEvent portEvent = (PortEvent) o;
-        return Objects.equals(id, portEvent.id) && Objects.equals(portId, portEvent.portId) && Objects.equals(
-            coordinates, portEvent.coordinates) && Objects.equals(shipId, portEvent.shipId) && Objects.equals(teus, portEvent.teus)
-            && Objects.equals(date, portEvent.date);
+        return Objects.equals(id, portEvent.id) && type == portEvent.type && Objects.equals(portId, portEvent.portId)
+            && Objects.equals(coordinates, portEvent.coordinates) && Objects.equals(shipId, portEvent.shipId)
+            && Objects.equals(teus, portEvent.teus) && Objects.equals(date, portEvent.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, portId, coordinates, shipId, teus, date);
+        return Objects.hash(id, type, portId, coordinates, shipId, teus, date);
     }
 }

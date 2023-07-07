@@ -1,23 +1,23 @@
 package com.shiproutes.ports.port.application.increment_departures;
 
-import com.shiproutes.ports.departure.domain.DepartureCreated;
+import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({DepartureCreated.class})
-public final class IncrementPortDeparturesOnDepartureCreated {
+@DomainEventSubscriber({PortEventCreated.class})
+public final class IncrementPortDeparturesOnPortEventCreated {
 
     private final PortDeparturesIncrementer incrementer;
 
-    public IncrementPortDeparturesOnDepartureCreated(PortDeparturesIncrementer incrementer) {
+    public IncrementPortDeparturesOnPortEventCreated(PortDeparturesIncrementer incrementer) {
         this.incrementer = incrementer;
     }
 
     @EventListener
-    public void on(DepartureCreated event) {
+    public void on(PortEventCreated event) {
         PortId portId = new PortId(event.portId());
 
         incrementer.increment(portId);

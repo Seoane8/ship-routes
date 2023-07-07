@@ -26,7 +26,7 @@ class PortEventCreatorShould extends PortEventModuleUnitTestCase {
         shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
-        creator.create(portEvent.id(), portEvent.portId(), portEvent.shipId(), portEvent.date());
+        creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());
 
         shouldHaveSaved(portEvent);
     }
@@ -38,7 +38,7 @@ class PortEventCreatorShould extends PortEventModuleUnitTestCase {
         shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
-        creator.create(portEvent.id(), portEvent.portId(), portEvent.shipId(), portEvent.date());
+        creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());
 
         shouldHavePublished(domainEvent);
     }
