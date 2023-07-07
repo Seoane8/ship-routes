@@ -1,20 +1,20 @@
-package com.shiproutes.ports.arrival.domain;
+package com.shiproutes.ports.port_event.domain;
 
 import com.shiproutes.ports.shared.domain.CoordinatesMother;
 import com.shiproutes.ports.shared.domain.PortIdMother;
 import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.shared.domain.TeusMother;
 
-public final class ArrivalMother {
+public final class PortEventMother {
 
-    public static Arrival random() {
-        return new Arrival(
-            ArrivalIdMother.random(),
+    public static PortEvent random() {
+        return new PortEvent(
+            PortEventIdMother.random(),
             PortIdMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),
-            ArrivalDateMother.random()
+            PortEventDateMother.random()
         );
     }
 

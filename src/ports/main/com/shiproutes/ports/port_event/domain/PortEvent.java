@@ -1,4 +1,4 @@
-package com.shiproutes.ports.arrival.domain;
+package com.shiproutes.ports.port_event.domain;
 
 import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.shared.domain.AggregateRoot;
@@ -8,16 +8,16 @@ import com.shiproutes.shared.domain.Teus;
 
 import java.util.Objects;
 
-public final class Arrival extends AggregateRoot {
+public final class PortEvent extends AggregateRoot {
 
-    private final ArrivalId id;
+    private final PortEventId id;
     private final PortId portId;
     private final Coordinates coordinates;
     private final IMO shipId;
     private final Teus teus;
-    private final ArrivalDate date;
+    private final PortEventDate date;
 
-    public Arrival(ArrivalId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, ArrivalDate date) {
+    public PortEvent(PortEventId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, PortEventDate date) {
         this.id = id;
         this.portId = portId;
         this.coordinates = coordinates;
@@ -26,20 +26,20 @@ public final class Arrival extends AggregateRoot {
         this.date = date;
     }
 
-    public static Arrival create(ArrivalId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, ArrivalDate date) {
-        Arrival arrival = new Arrival(id, portId, coordinates, shipId, teus, date);
+    public static PortEvent create(PortEventId id, PortId portId, Coordinates coordinates, IMO shipId, Teus teus, PortEventDate date) {
+        PortEvent portEvent = new PortEvent(id, portId, coordinates, shipId, teus, date);
 
-        arrival.record(new ArrivalCreated(
+        portEvent.record(new PortEventCreated(
             id.value(),
             portId.value(),
             shipId.value(),
             date.value()
         ));
 
-        return arrival;
+        return portEvent;
     }
 
-    public ArrivalId id() {
+    public PortEventId id() {
         return id;
     }
 
@@ -59,7 +59,7 @@ public final class Arrival extends AggregateRoot {
         return teus;
     }
 
-    public ArrivalDate date() {
+    public PortEventDate date() {
         return date;
     }
 
@@ -68,13 +68,13 @@ public final class Arrival extends AggregateRoot {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Arrival)) {
+        if (!(o instanceof PortEvent)) {
             return false;
         }
-        Arrival arrival = (Arrival) o;
-        return Objects.equals(id, arrival.id) && Objects.equals(portId, arrival.portId) && Objects.equals(
-            coordinates, arrival.coordinates) && Objects.equals(shipId, arrival.shipId) && Objects.equals(teus, arrival.teus)
-            && Objects.equals(date, arrival.date);
+        PortEvent portEvent = (PortEvent) o;
+        return Objects.equals(id, portEvent.id) && Objects.equals(portId, portEvent.portId) && Objects.equals(
+            coordinates, portEvent.coordinates) && Objects.equals(shipId, portEvent.shipId) && Objects.equals(teus, portEvent.teus)
+            && Objects.equals(date, portEvent.date);
     }
 
     @Override

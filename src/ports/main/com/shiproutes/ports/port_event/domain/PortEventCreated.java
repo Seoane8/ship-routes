@@ -1,4 +1,4 @@
-package com.shiproutes.ports.arrival.domain;
+package com.shiproutes.ports.port_event.domain;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -7,27 +7,27 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Objects;
 
-public final class ArrivalCreated extends DomainEvent {
+public final class PortEventCreated extends DomainEvent {
 
     private final String portId;
     private final String shipId;
     private final Instant date;
 
-    public ArrivalCreated() {
+    public PortEventCreated() {
         super(null);
         this.portId = null;
         this.shipId = null;
         this.date = null;
     }
 
-    public ArrivalCreated(String aggregateId, String portId, String shipId, Instant date) {
+    public PortEventCreated(String aggregateId, String portId, String shipId, Instant date) {
         super(aggregateId);
         this.portId = portId;
         this.shipId = shipId;
         this.date = date;
     }
 
-    public ArrivalCreated(String aggregateId, String eventId, String occurredOn, String portId, String shipId,
+    public PortEventCreated(String aggregateId, String eventId, String occurredOn, String portId, String shipId,
                           Instant date) {
         super(aggregateId, eventId, occurredOn);
         this.portId = portId;
@@ -37,7 +37,7 @@ public final class ArrivalCreated extends DomainEvent {
 
     @Override
     public String eventName() {
-        return "arrival.created";
+        return "portEvent.created";
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class ArrivalCreated extends DomainEvent {
     @Override
     public DomainEvent fromPrimitives(String aggregateId, HashMap<String, Serializable> body, String eventId,
                                       String occurredOn) {
-        return new ArrivalCreated(
+        return new PortEventCreated(
             aggregateId,
             eventId,
             occurredOn,
@@ -65,8 +65,8 @@ public final class ArrivalCreated extends DomainEvent {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ArrivalCreated)) return false;
-        ArrivalCreated that = (ArrivalCreated) o;
+        if (!(o instanceof PortEventCreated)) return false;
+        PortEventCreated that = (PortEventCreated) o;
         return Objects.equals(portId, that.portId) && Objects.equals(shipId, that.shipId) && Objects.equals(date,
             that.date);
     }
