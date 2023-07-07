@@ -11,18 +11,18 @@ public final class Port extends AggregateRoot {
     private final PortName name;
     private final Locode locode;
     private final Coordinates coordinates;
-    private PortTotalDepartures totalDepartures;
+    private PortTotalEvents totalEvents;
 
-    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, PortTotalDepartures totalDepartures) {
+    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, PortTotalEvents totalEvents) {
         this.id = id;
         this.name = name;
         this.locode = locode;
         this.coordinates = coordinates;
-        this.totalDepartures = totalDepartures;
+        this.totalEvents = totalEvents;
     }
 
     public static Port create(PortId id, PortName name, Locode locode, Coordinates coordinates) {
-        Port port = new Port(id, name, locode, coordinates, PortTotalDepartures.initialize());
+        Port port = new Port(id, name, locode, coordinates, PortTotalEvents.initialize());
 
         port.record(new PortCreatedEvent(
             id.value(),
@@ -51,12 +51,12 @@ public final class Port extends AggregateRoot {
         return coordinates;
     }
 
-    public PortTotalDepartures totalDepartures() {
-        return totalDepartures;
+    public PortTotalEvents totalEvents() {
+        return totalEvents;
     }
 
-    public void incrementDepartures() {
-        totalDepartures = totalDepartures.increment();
+    public void incrementEvents() {
+        totalEvents = totalEvents.increment();
     }
 
     @Override
@@ -65,11 +65,11 @@ public final class Port extends AggregateRoot {
         if (!(o instanceof Port)) return false;
         Port port = (Port) o;
         return Objects.equals(id, port.id) && Objects.equals(name, port.name) && Objects.equals(locode, port.locode)
-            && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalDepartures, port.totalDepartures);
+            && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalEvents, port.totalEvents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, locode, coordinates, totalDepartures);
+        return Objects.hash(id, name, locode, coordinates, totalEvents);
     }
 }

@@ -12,7 +12,7 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalDepartures.initialize()
+            PortTotalEvents.initialize()
         );
     }
 
@@ -22,7 +22,7 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalDeparturesMother.random()
+            PortTotalEventsMother.random()
         );
     }
 
@@ -32,17 +32,17 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalDeparturesMother.random()
+            PortTotalEventsMother.random()
         );
     }
 
-    public static Port incrementingDepartures(Port port) {
+    public static Port incrementingEvents(Port port) {
         return new Port(
             port.id(),
             port.name(),
             port.locode(),
             port.coordinates(),
-            new PortTotalDepartures(port.totalDepartures().value() + 1)
+            new PortTotalEvents(port.totalEvents().value() + 1)
         );
     }
 }

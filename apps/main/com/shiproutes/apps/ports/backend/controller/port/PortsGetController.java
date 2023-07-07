@@ -35,7 +35,7 @@ public final class PortsGetController extends ApiController {
                 "locode", port.locode(),
                 "longitude", port.longitude(),
                 "latitude", port.latitude(),
-                "total_departures", port.totalDepartures()
+                "total_events", port.totalEvents()
             )).collect(Collectors.toSet());
 
         return ResponseEntity.ok().body(ports);
