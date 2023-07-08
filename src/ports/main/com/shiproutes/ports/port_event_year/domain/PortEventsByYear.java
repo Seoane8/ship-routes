@@ -1,4 +1,4 @@
-package com.shiproutes.ports.year_port_event.domain;
+package com.shiproutes.ports.port_event_year.domain;
 
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.shared.domain.Coordinates;
@@ -6,9 +6,9 @@ import com.shiproutes.shared.domain.PortId;
 
 import java.util.Objects;
 
-public final class YearPortEvent {
+public final class PortEventsByYear {
 
-    private final YearPortEventId id;
+    private final PortEventsByYearId id;
     private final PortEventType type;
     private final PortId portId;
     private final Coordinates coordinates;
@@ -16,8 +16,8 @@ public final class YearPortEvent {
     private final TotalDepartures departures;
     private final TotalArrivals arrivals;
 
-    public YearPortEvent(YearPortEventId id, PortEventType type, PortId portId, Coordinates coordinates, Year year,
-                         TotalDepartures departures, TotalArrivals arrivals) {
+    public PortEventsByYear(PortEventsByYearId id, PortEventType type, PortId portId, Coordinates coordinates, Year year,
+                            TotalDepartures departures, TotalArrivals arrivals) {
         this.id = id;
         this.type = type;
         this.portId = portId;
@@ -27,7 +27,7 @@ public final class YearPortEvent {
         this.arrivals = arrivals;
     }
 
-    public YearPortEventId id() {
+    public PortEventsByYearId id() {
         return id;
     }
 
@@ -58,8 +58,8 @@ public final class YearPortEvent {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof YearPortEvent)) return false;
-        YearPortEvent that = (YearPortEvent) o;
+        if (!(o instanceof PortEventsByYear)) return false;
+        PortEventsByYear that = (PortEventsByYear) o;
         return Objects.equals(id, that.id) && type == that.type && Objects.equals(portId, that.portId)
             && Objects.equals(coordinates, that.coordinates) && Objects.equals(year, that.year)
             && Objects.equals(departures, that.departures) && Objects.equals(arrivals, that.arrivals);

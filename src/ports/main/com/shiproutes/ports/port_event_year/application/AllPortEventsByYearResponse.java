@@ -1,4 +1,4 @@
-package com.shiproutes.ports.year_port_event.application;
+package com.shiproutes.ports.port_event_year.application;
 
 import com.shiproutes.shared.domain.bus.query.Response;
 

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS port_events
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS year_port_events
+CREATE TABLE IF NOT EXISTS port_events_year
 (
     id         CHAR(36) NOT NULL,
     type       CHAR(16) NOT NULL,

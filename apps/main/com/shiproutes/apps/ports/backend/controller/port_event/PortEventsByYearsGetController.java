@@ -1,7 +1,7 @@
 package com.shiproutes.apps.ports.backend.controller.port_event;
 
-import com.shiproutes.ports.year_port_event.application.AllPortEventsByYearResponse;
-import com.shiproutes.ports.year_port_event.application.search_all.SearchAllPortEventsByYearQuery;
+import com.shiproutes.ports.port_event_year.application.AllPortEventsByYearResponse;
+import com.shiproutes.ports.port_event_year.application.search_all.SearchAllPortEventsByYearQuery;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;

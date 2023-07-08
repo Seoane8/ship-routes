@@ -1,6 +1,6 @@
-package com.shiproutes.ports.year_port_event.application.search_all;
+package com.shiproutes.ports.port_event_year.application.search_all;
 
-import com.shiproutes.ports.year_port_event.application.AllPortEventsByYearResponse;
+import com.shiproutes.ports.port_event_year.application.AllPortEventsByYearResponse;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.query.QueryHandler;
 
@@ -8,9 +8,9 @@ import com.shiproutes.shared.domain.bus.query.QueryHandler;
 public final class SearchAllPortEventsByYearQueryHandler
     implements QueryHandler<SearchAllPortEventsByYearQuery, AllPortEventsByYearResponse> {
 
-    private final AllYearPortEventsSearcher searcher;
+    private final AllPortEventsByYearSearcher searcher;
 
-    public SearchAllPortEventsByYearQueryHandler(AllYearPortEventsSearcher searcher) {
+    public SearchAllPortEventsByYearQueryHandler(AllPortEventsByYearSearcher searcher) {
         this.searcher = searcher;
     }
 

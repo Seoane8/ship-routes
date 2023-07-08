@@ -1,4 +1,4 @@
-package com.shiproutes.ports.year_port_event.domain;
+package com.shiproutes.ports.port_event_year.domain;
 
 import com.shiproutes.ports.shared.domain.TotalEvents;
 

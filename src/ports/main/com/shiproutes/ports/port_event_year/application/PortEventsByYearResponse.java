@@ -1,6 +1,6 @@
-package com.shiproutes.ports.year_port_event.application;
+package com.shiproutes.ports.port_event_year.application;
 
-import com.shiproutes.ports.year_port_event.domain.YearPortEvent;
+import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.shared.domain.bus.query.Response;
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class PortEventsByYearResponse implements Response {
         this.events = events;
     }
 
-    public static PortEventsByYearResponse from(YearPortEvent entity) {
+    public static PortEventsByYearResponse from(PortEventsByYear entity) {
         PortEventsByYearResponse response = new PortEventsByYearResponse(entity.portId().value(),
             entity.coordinates().longitude().value(), entity.coordinates().latitude().value(), new HashSet<>());
         response.addEvents(entity);
@@ -43,7 +43,7 @@ public class PortEventsByYearResponse implements Response {
         return events;
     }
 
-    public void addEvents(YearPortEvent events) {
+    public void addEvents(PortEventsByYear events) {
         this.events.add(EventsResponse.fromEntity(events));
     }
 
@@ -58,7 +58,7 @@ public class PortEventsByYearResponse implements Response {
             this.arrivals = arrivals;
         }
 
-        public static EventsResponse fromEntity(YearPortEvent entity) {
+        public static EventsResponse fromEntity(PortEventsByYear entity) {
             return new EventsResponse(entity.year().value(), entity.departures().value(), entity.arrivals().value());
         }
 
