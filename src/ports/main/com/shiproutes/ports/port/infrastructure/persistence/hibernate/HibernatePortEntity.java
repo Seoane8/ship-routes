@@ -3,7 +3,7 @@ package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortName;
-import com.shiproutes.ports.port.domain.PortTotalEvents;
+import com.shiproutes.ports.shared.domain.TotalEvents;
 import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.ports.shared.domain.Latitude;
 import com.shiproutes.ports.shared.domain.Longitude;
@@ -46,6 +46,6 @@ public final class HibernatePortEntity {
                 new Latitude(this.latitude),
                 new Longitude(this.longitude)
             ),
-            new PortTotalEvents(this.totalEvents));
+            new TotalEvents(this.totalEvents));
     }
 }

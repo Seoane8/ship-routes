@@ -2,6 +2,8 @@ package com.shiproutes.ports.port.domain;
 
 import com.shiproutes.ports.shared.domain.CoordinatesMother;
 import com.shiproutes.ports.shared.domain.PortIdMother;
+import com.shiproutes.ports.shared.domain.TotalEvents;
+import com.shiproutes.ports.shared.domain.TotalEventsMother;
 import com.shiproutes.shared.domain.PortId;
 
 public final class PortMother {
@@ -12,7 +14,7 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalEvents.initialize()
+            TotalEvents.initialize()
         );
     }
 
@@ -22,7 +24,7 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalEventsMother.random()
+            TotalEventsMother.random()
         );
     }
 
@@ -32,7 +34,7 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            PortTotalEventsMother.random()
+            TotalEventsMother.random()
         );
     }
 
@@ -42,7 +44,7 @@ public final class PortMother {
             port.name(),
             port.locode(),
             port.coordinates(),
-            new PortTotalEvents(port.totalEvents().value() + 1)
+            new TotalEvents(port.totalEvents().value() + 1)
         );
     }
 }

@@ -1,6 +1,7 @@
 package com.shiproutes.ports.port.domain;
 
 import com.shiproutes.ports.shared.domain.Coordinates;
+import com.shiproutes.ports.shared.domain.TotalEvents;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.PortId;
 
@@ -11,9 +12,9 @@ public final class Port extends AggregateRoot {
     private final PortName name;
     private final Locode locode;
     private final Coordinates coordinates;
-    private PortTotalEvents totalEvents;
+    private TotalEvents totalEvents;
 
-    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, PortTotalEvents totalEvents) {
+    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, TotalEvents totalEvents) {
         this.id = id;
         this.name = name;
         this.locode = locode;
@@ -22,7 +23,7 @@ public final class Port extends AggregateRoot {
     }
 
     public static Port create(PortId id, PortName name, Locode locode, Coordinates coordinates) {
-        Port port = new Port(id, name, locode, coordinates, PortTotalEvents.initialize());
+        Port port = new Port(id, name, locode, coordinates, TotalEvents.initialize());
 
         port.record(new PortCreatedEvent(
             id.value(),
@@ -51,7 +52,7 @@ public final class Port extends AggregateRoot {
         return coordinates;
     }
 
-    public PortTotalEvents totalEvents() {
+    public TotalEvents totalEvents() {
         return totalEvents;
     }
 
