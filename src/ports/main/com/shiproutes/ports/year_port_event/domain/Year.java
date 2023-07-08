@@ -10,8 +10,8 @@ public class Year {
         this.value = java.time.Year.of(value);
     }
 
-    public java.time.Year value() {
-        return value;
+    public Integer value() {
+        return value.getValue();
     }
 
     @Override

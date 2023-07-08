@@ -34,7 +34,7 @@ public class HibernateYearPortEventEntity {
         this.portId = yearPortEvent.portId().value();
         this.latitude = yearPortEvent.coordinates().latitude().value();
         this.longitude = yearPortEvent.coordinates().longitude().value();
-        this.year = yearPortEvent.year().value().getValue();
+        this.year = yearPortEvent.year().value();
         this.departures = yearPortEvent.departures().value();
         this.arrivals = yearPortEvent.arrivals().value();
     }
