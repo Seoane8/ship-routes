@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 
 @Repository
 @Transactional("ports-transaction_manager")
-public class MySqlPortEventsByRepository
+public class MySqlPortEventsByYearRepository
     extends HibernateRepository<HibernatePortEventsByYearEntity>
     implements PortEventsByYearRepository {
 
-    public MySqlPortEventsByRepository(SessionFactory sessionFactory) {
+    public MySqlPortEventsByYearRepository(SessionFactory sessionFactory) {
         super(sessionFactory, HibernatePortEventsByYearEntity.class);
     }
 
