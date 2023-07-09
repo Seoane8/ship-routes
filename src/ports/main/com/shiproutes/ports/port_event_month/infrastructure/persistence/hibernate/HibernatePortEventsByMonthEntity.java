@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "portEventByMonth")
+@Entity(name = "portEventsByMonth")
 @Table(name = "port_events_month")
 public class HibernatePortEventsByMonthEntity {
 
