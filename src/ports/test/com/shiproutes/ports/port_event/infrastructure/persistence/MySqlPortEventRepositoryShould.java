@@ -6,10 +6,12 @@ import com.shiproutes.ports.port_event.domain.PortEventIdMother;
 import com.shiproutes.ports.port_event.domain.PortEventMother;
 import org.junit.jupiter.api.Test;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Transactional
 class MySqlPortEventRepositoryShould extends PortEventModuleInfrastructureTestCase {
 
     @Test
