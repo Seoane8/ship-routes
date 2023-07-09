@@ -1,7 +1,7 @@
 package com.shiproutes.apps.ports.backend.controller.port_event;
 
 import com.shiproutes.ports.port_event_month.application.AllPortEventsByMonthResponse;
-import com.shiproutes.ports.port_event_year.application.search_all.SearchAllPortEventsByYearQuery;
+import com.shiproutes.ports.port_event_month.application.search_all.SearchAllPortEventsByMonthQuery;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
@@ -26,7 +26,7 @@ public final class PortEventsByMonthsGetController extends ApiController {
 
     @GetMapping("/event/months")
     public ResponseEntity<Set<Map<String, Serializable>>> handle() {
-        AllPortEventsByMonthResponse response = ask(new SearchAllPortEventsByYearQuery());
+        AllPortEventsByMonthResponse response = ask(new SearchAllPortEventsByMonthQuery());
 
         Set<Map<String, Serializable>> ports = response.ports().stream()
             .map(portEvent -> Map.of(
