@@ -3,10 +3,7 @@ package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortName;
-import com.shiproutes.ports.shared.domain.TotalEvents;
-import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.ports.shared.domain.Latitude;
-import com.shiproutes.ports.shared.domain.Longitude;
+import com.shiproutes.ports.shared.domain.*;
 import com.shiproutes.shared.domain.PortId;
 
 import javax.persistence.Entity;
@@ -23,7 +20,8 @@ public final class HibernatePortEntity {
     private String locode;
     private Double latitude;
     private Double longitude;
-    private Long totalEvents;
+    private Long departures;
+    private Long arrivals;
 
     public HibernatePortEntity() {
     }
@@ -34,7 +32,8 @@ public final class HibernatePortEntity {
         this.locode = port.locode().value();
         this.latitude = port.coordinates().latitude().value();
         this.longitude = port.coordinates().longitude().value();
-        this.totalEvents = port.totalEvents().value();
+        this.departures = port.totalDepartures().value();
+        this.arrivals = port.totalArrivals().value();
     }
 
     public Port toEntity() {
@@ -46,6 +45,8 @@ public final class HibernatePortEntity {
                 new Latitude(this.latitude),
                 new Longitude(this.longitude)
             ),
-            new TotalEvents(this.totalEvents));
+            new TotalDepartures(this.departures),
+            new TotalArrivals(this.arrivals)
+        );
     }
 }

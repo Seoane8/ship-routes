@@ -1,9 +1,6 @@
 package com.shiproutes.ports.port.domain;
 
-import com.shiproutes.ports.shared.domain.CoordinatesMother;
-import com.shiproutes.ports.shared.domain.PortIdMother;
-import com.shiproutes.ports.shared.domain.TotalEvents;
-import com.shiproutes.ports.shared.domain.TotalEventsMother;
+import com.shiproutes.ports.shared.domain.*;
 import com.shiproutes.shared.domain.PortId;
 
 public final class PortMother {
@@ -14,8 +11,8 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            TotalEvents.initialize()
-        );
+            TotalDepartures.initialize(),
+            TotalArrivals.initialize());
     }
 
     public static Port random() {
@@ -24,8 +21,8 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            TotalEventsMother.random()
-        );
+            TotalDeparturesMother.random(),
+            TotalArrivalsMother.random());
     }
 
     public static Port fromId(PortId portId) {
@@ -34,17 +31,27 @@ public final class PortMother {
             PortNameMother.random(),
             LocodeMother.random(),
             CoordinatesMother.random(),
-            TotalEventsMother.random()
-        );
+            TotalDeparturesMother.random(),
+            TotalArrivalsMother.random());
     }
 
-    public static Port incrementingEvents(Port port) {
+    public static Port incrementingDepartures(Port port) {
         return new Port(
             port.id(),
             port.name(),
             port.locode(),
             port.coordinates(),
-            new TotalEvents(port.totalEvents().value() + 1)
-        );
+            new TotalDepartures(port.totalDepartures().value() + 1),
+            port.totalArrivals());
+    }
+
+    public static Port incrementingArrivals(Port port) {
+        return new Port(
+            port.id(),
+            port.name(),
+            port.locode(),
+            port.coordinates(),
+            port.totalDepartures(),
+            new TotalArrivals(port.totalArrivals().value() + 1));
     }
 }

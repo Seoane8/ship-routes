@@ -1,7 +1,8 @@
 package com.shiproutes.ports.port.domain;
 
+import com.shiproutes.ports.shared.domain.TotalArrivals;
+import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.ports.shared.domain.TotalEvents;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.PortId;
 
@@ -12,18 +13,21 @@ public final class Port extends AggregateRoot {
     private final PortName name;
     private final Locode locode;
     private final Coordinates coordinates;
-    private TotalEvents totalEvents;
+    private TotalDepartures totalDepartures;
+    private TotalArrivals totalArrivals;
 
-    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates, TotalEvents totalEvents) {
+    public Port(PortId id, PortName name, Locode locode, Coordinates coordinates,
+                TotalDepartures totalDepartures, TotalArrivals totalArrivals) {
         this.id = id;
         this.name = name;
         this.locode = locode;
         this.coordinates = coordinates;
-        this.totalEvents = totalEvents;
+        this.totalDepartures = totalDepartures;
+        this.totalArrivals = totalArrivals;
     }
 
     public static Port create(PortId id, PortName name, Locode locode, Coordinates coordinates) {
-        Port port = new Port(id, name, locode, coordinates, TotalEvents.initialize());
+        Port port = new Port(id, name, locode, coordinates, TotalDepartures.initialize(), TotalArrivals.initialize());
 
         port.record(new PortCreatedEvent(
             id.value(),
@@ -52,12 +56,20 @@ public final class Port extends AggregateRoot {
         return coordinates;
     }
 
-    public TotalEvents totalEvents() {
-        return totalEvents;
+    public TotalDepartures totalDepartures() {
+        return totalDepartures;
     }
 
-    public void incrementEvents() {
-        totalEvents = totalEvents.increment();
+    public void incrementDepartures() {
+        totalDepartures = totalDepartures.increment();
+    }
+
+    public TotalArrivals totalArrivals() {
+        return totalArrivals;
+    }
+
+    public void incrementArrivals() {
+        totalArrivals = totalArrivals.increment();
     }
 
     @Override
@@ -66,11 +78,12 @@ public final class Port extends AggregateRoot {
         if (!(o instanceof Port)) return false;
         Port port = (Port) o;
         return Objects.equals(id, port.id) && Objects.equals(name, port.name) && Objects.equals(locode, port.locode)
-            && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalEvents, port.totalEvents);
+            && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalDepartures, port.totalDepartures)
+            && Objects.equals(totalArrivals, port.totalArrivals);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, locode, coordinates, totalEvents);
+        return Objects.hash(id, name, locode, coordinates, totalDepartures, totalArrivals);
     }
 }

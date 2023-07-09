@@ -32,7 +32,8 @@ class PortsGetControllerShould extends PortApplicationTestCase {
             "\"locode\": \"FRDKK\", " +
             "\"latitude\": 51.0455, " +
             "\"longitude\": 2.1543," +
-            "\"total_events\": 0" +
+            "\"departures\": 0," +
+            "\"arrivals\": 0" +
             "}]");
     }
 }

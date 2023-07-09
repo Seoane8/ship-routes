@@ -1,11 +1,12 @@
 package com.shiproutes.ports;
 
-import com.shiproutes.ports.shared.domain.TotalEventsMother;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.ports.shared.application.TeusResponse;
 import com.shiproutes.ports.shared.domain.Coordinates;
+import com.shiproutes.ports.shared.domain.TotalArrivalsMother;
+import com.shiproutes.ports.shared.domain.TotalDeparturesMother;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Teus;
@@ -23,7 +24,9 @@ public class PortsContextUnitTestCase extends UnitTestCase {
                 WordMother.random(),
                 coordinates.longitude().value(),
                 coordinates.latitude().value(),
-                TotalEventsMother.random().value())
+                TotalDeparturesMother.random().value(),
+                TotalArrivalsMother.random().value()
+            )
         );
     }
 

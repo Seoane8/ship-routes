@@ -10,22 +10,24 @@ public final class PortResponse implements Response {
     private final String locode;
     private final Double longitude;
     private final Double latitude;
-    private final Long totalEvents;
+    private final Long totalDepartures;
+    private final Long totalArrivals;
 
     public PortResponse(String id, String name, String locode, Double longitude, Double latitude,
-                        Long totalEvents) {
+                        Long totalDepartures, Long totalArrivals) {
         this.id = id;
         this.name = name;
         this.locode = locode;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.totalEvents = totalEvents;
+        this.totalDepartures = totalDepartures;
+        this.totalArrivals = totalArrivals;
     }
 
     public static PortResponse from(Port port) {
         return new PortResponse(port.id().value(), port.name().value(), port.locode().value(),
             port.coordinates().longitude().value(), port.coordinates().latitude().value(),
-            port.totalEvents().value());
+            port.totalDepartures().value(), port.totalArrivals().value());
     }
 
     public String id() {
@@ -48,7 +50,11 @@ public final class PortResponse implements Response {
         return latitude;
     }
 
-    public Long totalEvents() {
-        return totalEvents;
+    public Long totalDepartures() {
+        return totalDepartures;
+    }
+
+    public Long totalArrivals() {
+        return totalArrivals;
     }
 }

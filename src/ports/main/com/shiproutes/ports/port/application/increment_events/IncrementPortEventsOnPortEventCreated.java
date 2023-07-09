@@ -1,6 +1,7 @@
 package com.shiproutes.ports.port.application.increment_events;
 
 import com.shiproutes.ports.port_event.domain.PortEventCreated;
+import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
@@ -19,8 +20,9 @@ public final class IncrementPortEventsOnPortEventCreated {
     @EventListener
     public void on(PortEventCreated event) {
         PortId portId = new PortId(event.portId());
+        PortEventType type = PortEventType.valueOf(event.type());
 
-        incrementer.increment(portId);
+        incrementer.increment(portId, type);
     }
 
 }

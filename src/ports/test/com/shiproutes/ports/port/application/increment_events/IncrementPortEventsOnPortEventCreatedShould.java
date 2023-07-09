@@ -4,8 +4,10 @@ import com.shiproutes.ports.port.PortModuleUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortMother;
 import com.shiproutes.ports.port.domain.PortNotExist;
+import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.ports.port_event.domain.PortEventCreatedMother;
+import com.shiproutes.ports.port_event.domain.PortEventMother;
 import com.shiproutes.shared.domain.PortId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,15 +29,29 @@ class IncrementPortEventsOnPortEventCreatedShould extends PortModuleUnitTestCase
     }
 
     @Test
-    void increment_events_of_existent_port() {
-        PortEventCreated event = PortEventCreatedMother.random();
+    void incrementing_departures_of_existent_port() {
+        PortEvent portEvent = PortEventMother.randomDeparture();
+        PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
 
-        PortId portId = new PortId(event.portId());
-        Port port = PortMother.fromId(portId);
-        Port expectedPortToSave = PortMother.incrementingEvents(port);
+        Port port = PortMother.fromId(portEvent.portId());
+        Port expectedPortToSave = PortMother.incrementingDepartures(port);
         shouldExists(port);
 
-        subscriber.on(event);
+        subscriber.on(domainEvent);
+
+        shouldHaveSaved(expectedPortToSave);
+    }
+
+    @Test
+    void increment_arrivals_of_existent_port() {
+        PortEvent portEvent = PortEventMother.randomArrival();
+        PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
+
+        Port port = PortMother.fromId(portEvent.portId());
+        Port expectedPortToSave = PortMother.incrementingArrivals(port);
+        shouldExists(port);
+
+        subscriber.on(domainEvent);
 
         shouldHaveSaved(expectedPortToSave);
     }
