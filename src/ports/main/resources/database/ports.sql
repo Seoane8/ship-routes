@@ -29,6 +29,22 @@ CREATE TABLE IF NOT EXISTS port_events
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS port_events_month
+(
+    id         CHAR(36) NOT NULL,
+    portId     CHAR(36) NOT NULL,
+    latitude   DOUBLE,
+    longitude  DOUBLE,
+    year       INT      NOT NULL,
+    month      INT      NOT NULL,
+    departures BIGINT   NOT NULL,
+    arrivals   BIGINT   NOT NULL,
+    PRIMARY KEY (id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS port_events_year
 (
     id         CHAR(36) NOT NULL,
