@@ -15,7 +15,7 @@ public class Month {
     public static Month fromInstant(Instant instant) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(Date.from(instant));
-        return new Month(cal.get(Calendar.MONTH));
+        return new Month(cal.get(Calendar.MONTH) + 1);
     }
 
     public Integer value() {

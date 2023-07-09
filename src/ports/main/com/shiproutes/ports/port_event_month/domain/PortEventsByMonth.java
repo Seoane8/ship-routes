@@ -29,6 +29,12 @@ public class PortEventsByMonth {
         this.arrivals = arrivals;
     }
 
+    public static PortEventsByMonth create(PortEventsByMonthId id, PortId portId, Coordinates coordinates,
+                                           Year year, Month month) {
+        return new PortEventsByMonth(id, portId, coordinates, year, month,
+            TotalDepartures.initialize(), TotalArrivals.initialize());
+    }
+
     public PortEventsByMonthId id() {
         return id;
     }
