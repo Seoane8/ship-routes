@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS port_events
 CREATE TABLE IF NOT EXISTS port_events_year
 (
     id         CHAR(36) NOT NULL,
-    type       CHAR(16) NOT NULL,
     portId     CHAR(36) NOT NULL,
     latitude   DOUBLE,
     longitude  DOUBLE,

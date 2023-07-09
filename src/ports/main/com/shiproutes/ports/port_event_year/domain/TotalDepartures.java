@@ -1,9 +1,17 @@
 package com.shiproutes.ports.port_event_year.domain;
 
-import com.shiproutes.ports.shared.domain.TotalEvents;
+import com.shiproutes.shared.domain.LongValueObject;
 
-public class TotalDepartures extends TotalEvents {
+public class TotalDepartures extends LongValueObject {
     public TotalDepartures(Long value) {
         super(value);
+    }
+
+    public static TotalDepartures initialize() {
+        return new TotalDepartures(0L);
+    }
+
+    public TotalDepartures increment() {
+        return new TotalDepartures(value() + 1);
     }
 }

@@ -1,5 +1,8 @@
 package com.shiproutes.ports.port_event_year.domain;
 
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Year {
@@ -8,6 +11,12 @@ public class Year {
 
     public Year(Integer value) {
         this.value = java.time.Year.of(value);
+    }
+
+    public static Year fromInstant(Instant instant) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(Date.from(instant));
+        return new Year(cal.get(Calendar.YEAR));
     }
 
     public Integer value() {

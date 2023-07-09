@@ -1,6 +1,5 @@
 package com.shiproutes.ports.port_event_year.domain;
 
-import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.shared.domain.PortId;
 
@@ -9,17 +8,15 @@ import java.util.Objects;
 public final class PortEventsByYear {
 
     private final PortEventsByYearId id;
-    private final PortEventType type;
     private final PortId portId;
     private final Coordinates coordinates;
     private final Year year;
-    private final TotalDepartures departures;
-    private final TotalArrivals arrivals;
+    private TotalDepartures departures;
+    private TotalArrivals arrivals;
 
-    public PortEventsByYear(PortEventsByYearId id, PortEventType type, PortId portId, Coordinates coordinates, Year year,
+    public PortEventsByYear(PortEventsByYearId id, PortId portId, Coordinates coordinates, Year year,
                             TotalDepartures departures, TotalArrivals arrivals) {
         this.id = id;
-        this.type = type;
         this.portId = portId;
         this.coordinates = coordinates;
         this.year = year;
@@ -27,12 +24,13 @@ public final class PortEventsByYear {
         this.arrivals = arrivals;
     }
 
-    public PortEventsByYearId id() {
-        return id;
+    public static PortEventsByYear create(PortEventsByYearId id, PortId portId, Coordinates coordinates, Year year) {
+        return new PortEventsByYear(id, portId, coordinates, year,
+            TotalDepartures.initialize(), TotalArrivals.initialize());
     }
 
-    public PortEventType type() {
-        return type;
+    public PortEventsByYearId id() {
+        return id;
     }
 
     public PortId portId() {
@@ -51,8 +49,16 @@ public final class PortEventsByYear {
         return departures;
     }
 
+    public void incrementDepartures() {
+        departures = departures.increment();
+    }
+
     public TotalArrivals arrivals() {
         return arrivals;
+    }
+
+    public void incrementArrivals() {
+        arrivals = arrivals.increment();
     }
 
     @Override
@@ -60,13 +66,13 @@ public final class PortEventsByYear {
         if (this == o) return true;
         if (!(o instanceof PortEventsByYear)) return false;
         PortEventsByYear that = (PortEventsByYear) o;
-        return Objects.equals(id, that.id) && type == that.type && Objects.equals(portId, that.portId)
+        return Objects.equals(id, that.id) && Objects.equals(portId, that.portId)
             && Objects.equals(coordinates, that.coordinates) && Objects.equals(year, that.year)
             && Objects.equals(departures, that.departures) && Objects.equals(arrivals, that.arrivals);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, portId, coordinates, year, departures, arrivals);
+        return Objects.hash(id, portId, coordinates, year, departures, arrivals);
     }
 }

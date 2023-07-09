@@ -48,6 +48,14 @@ public final class PortEventCreated extends DomainEvent {
         return portId;
     }
 
+    public String type() {
+        return type;
+    }
+
+    public Instant date() {
+        return date;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{

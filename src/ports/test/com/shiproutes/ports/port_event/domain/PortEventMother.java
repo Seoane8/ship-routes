@@ -19,4 +19,27 @@ public final class PortEventMother {
         );
     }
 
+    public static PortEvent randomDeparture() {
+        return new PortEvent(
+            PortEventIdMother.random(),
+            PortEventType.DEPARTURE,
+            PortIdMother.random(),
+            CoordinatesMother.random(),
+            IMOMother.random(),
+            TeusMother.random(),
+            PortEventDateMother.random()
+        );
+    }
+
+    public static PortEvent randomArrival() {
+        return new PortEvent(
+            PortEventIdMother.random(),
+            PortEventType.ARRIVAL,
+            PortIdMother.random(),
+            CoordinatesMother.random(),
+            IMOMother.random(),
+            TeusMother.random(),
+            PortEventDateMother.random()
+        );
+    }
 }
