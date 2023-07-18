@@ -21,10 +21,8 @@ public class PortEventsByMonthResponse implements Response {
     }
 
     public static PortEventsByMonthResponse from(PortEventsByMonth entity) {
-        PortEventsByMonthResponse response = new PortEventsByMonthResponse(entity.portId().value(),
+        return new PortEventsByMonthResponse(entity.portId().value(),
             entity.coordinates().longitude().value(), entity.coordinates().latitude().value(), new HashSet<>());
-        response.addEvents(entity);
-        return response;
     }
 
     public String portId() {
