@@ -8,4 +8,15 @@ public final class PortEventDateMother {
         return new PortEventDate(InstantMother.random());
     }
 
+    public static PortEventDate now() {
+        return new PortEventDate(InstantMother.now());
+    }
+
+    public static PortEventDate before(PortEventDate endDate) {
+        return new PortEventDate(InstantMother.randomBefore(endDate.value()));
+    }
+
+    public static PortEventDate between(PortEventDate startDate, PortEventDate endDate) {
+        return new PortEventDate(InstantMother.randomBetween(startDate.value(), endDate.value()));
+    }
 }

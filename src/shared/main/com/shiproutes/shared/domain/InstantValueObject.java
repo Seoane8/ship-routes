@@ -15,6 +15,10 @@ public abstract class InstantValueObject {
         return value;
     }
 
+    public boolean isAfter(InstantValueObject that) {
+        return this.value.isAfter(that.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
