@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
 
-@Entity(name = "port_event")
+@Entity(name = "portEvent")
 @Table(name = "port_events")
 public final class HibernatePortEventEntity {
 
