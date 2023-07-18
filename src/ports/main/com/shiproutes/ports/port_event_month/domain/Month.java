@@ -1,8 +1,7 @@
 package com.shiproutes.ports.port_event_month.domain;
 
 import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 public class Month {
@@ -13,9 +12,7 @@ public class Month {
     }
 
     public static Month fromInstant(Instant instant) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(Date.from(instant));
-        return new Month(cal.get(Calendar.MONTH) + 1);
+        return new Month(instant.atOffset(ZoneOffset.UTC).getMonthValue());
     }
 
     public Integer value() {
