@@ -1,10 +1,12 @@
 package com.shiproutes.routes.route.domain;
 
+import com.shiproutes.shared.domain.AggregateRoot;
+import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Objects;
 
-public final class Route {
+public final class Route extends AggregateRoot {
     private final RouteId id;
     private final PortId departurePort;
     private final PortId arrivalPort;
@@ -17,6 +19,11 @@ public final class Route {
         this.path = path;
     }
 
+    public static Route create(RouteId id, PortId originPort, PortId destinationPort, RoutePath path) {
+
+        return new Route(id, originPort, destinationPort, path);
+    }
+
     public RouteId id() {
         return id;
     }
@@ -25,8 +32,16 @@ public final class Route {
         return departurePort;
     }
 
+    public Coordinates departureCoordinates() {
+        return path.origin();
+    }
+
     public PortId arrivalPort() {
         return arrivalPort;
+    }
+
+    public Coordinates arrivalCoordinates() {
+        return path.destination();
     }
 
     public RoutePath path() {

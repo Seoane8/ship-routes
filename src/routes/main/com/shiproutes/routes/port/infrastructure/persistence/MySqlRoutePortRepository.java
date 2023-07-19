@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-@Transactional("ports-transaction_manager")
+@Transactional("routes-transaction_manager")
 public class MySqlRoutePortRepository
     extends HibernateRepository<HibernateRoutePortEntity>
     implements RoutePortRepository {
