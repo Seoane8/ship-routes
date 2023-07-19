@@ -1,7 +1,7 @@
 package com.shiproutes.ports.port.domain;
 
 import com.shiproutes.shared.domain.DomainError;
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
 
 public final class PortNotExist extends DomainError {
     public PortNotExist(PortId id) {

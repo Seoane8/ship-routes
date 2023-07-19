@@ -5,7 +5,7 @@ import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthRepository;
 import com.shiproutes.ports.port_event_month.infrastructure.persistence.hibernate.HibernatePortEventsByMonthEntity;
 import com.shiproutes.ports.port_event_year.domain.Year;
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;

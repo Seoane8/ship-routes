@@ -4,7 +4,7 @@ import com.shiproutes.ports.port_event_year.PortEventsByYearModuleInfrastructure
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearMother;
 import com.shiproutes.ports.port_event_year.domain.YearMother;
-import com.shiproutes.shared.domain.PortIdMother;
+import com.shiproutes.shared.domain.ports.PortIdMother;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 

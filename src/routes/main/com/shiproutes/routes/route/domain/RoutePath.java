@@ -1,6 +1,6 @@
 package com.shiproutes.routes.route.domain;
 
-import com.shiproutes.shared.domain.coordinates.Coordinates;
+import com.shiproutes.shared.domain.ports.Coordinates;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

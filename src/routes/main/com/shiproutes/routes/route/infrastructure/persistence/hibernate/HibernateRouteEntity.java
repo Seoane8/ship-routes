@@ -3,10 +3,10 @@ package com.shiproutes.routes.route.infrastructure.persistence.hibernate;
 import com.shiproutes.routes.route.domain.Route;
 import com.shiproutes.routes.route.domain.RouteId;
 import com.shiproutes.routes.route.domain.RoutePath;
-import com.shiproutes.shared.domain.PortId;
-import com.shiproutes.shared.domain.coordinates.Coordinates;
-import com.shiproutes.shared.domain.coordinates.Latitude;
-import com.shiproutes.shared.domain.coordinates.Longitude;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
+import com.shiproutes.shared.domain.ports.PortId;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;

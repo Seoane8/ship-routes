@@ -1,4 +1,6 @@
-package com.shiproutes.shared.domain;
+package com.shiproutes.shared.domain.ports;
+
+import com.shiproutes.shared.domain.Identifier;
 
 public final class PortId extends Identifier {
 

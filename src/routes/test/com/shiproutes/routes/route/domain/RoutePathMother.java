@@ -1,7 +1,7 @@
 package com.shiproutes.routes.route.domain;
 
 import com.shiproutes.shared.domain.MotherCreator;
-import com.shiproutes.shared.domain.coordinates.CoordinatesMother;
+import com.shiproutes.shared.domain.ports.CoordinatesMother;
 
 import java.util.stream.IntStream;
 

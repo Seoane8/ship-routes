@@ -1,4 +1,6 @@
-package com.shiproutes.shared.domain;
+package com.shiproutes.shared.domain.ports;
+
+import com.shiproutes.shared.domain.UuidMother;
 
 public final class PortIdMother {
     public static PortId random() {

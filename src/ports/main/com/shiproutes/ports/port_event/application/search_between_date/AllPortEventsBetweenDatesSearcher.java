@@ -6,8 +6,8 @@ import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventDate;
 import com.shiproutes.ports.port_event.domain.PortEventRepository;
 import com.shiproutes.ports.port_event.domain.StartDateAfterEndDate;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,8 +4,8 @@ import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortNotExist;
 import com.shiproutes.ports.port.domain.PortRepository;
 import com.shiproutes.ports.port_event.domain.PortEventType;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public final class PortEventsIncrementer {

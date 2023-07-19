@@ -5,11 +5,11 @@ import com.shiproutes.ports.port_event.domain.PortEventDate;
 import com.shiproutes.ports.port_event.domain.PortEventId;
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.shared.domain.IMO;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Teus;
-import com.shiproutes.shared.domain.coordinates.Coordinates;
-import com.shiproutes.shared.domain.coordinates.Latitude;
-import com.shiproutes.shared.domain.coordinates.Longitude;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
+import com.shiproutes.shared.domain.ports.PortId;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

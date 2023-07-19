@@ -1,6 +1,6 @@
 package com.shiproutes.ports.port.domain;
 
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;
 import java.util.Set;

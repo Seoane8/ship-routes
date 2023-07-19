@@ -1,4 +1,4 @@
-package com.shiproutes.shared.domain.coordinates;
+package com.shiproutes.shared.domain.ports;
 
 import com.shiproutes.shared.domain.MotherCreator;
 

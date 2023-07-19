@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port.domain;
+package com.shiproutes.shared.domain.ports;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -46,7 +46,7 @@ public final class PortCreatedEvent extends DomainEvent {
 
     @Override
     public HashMap<String, Serializable> toPrimitives() {
-        return new HashMap<>(){{
+        return new HashMap<>() {{
             put("name", name);
             put("locode", locode);
             put("latitude", latitude);
