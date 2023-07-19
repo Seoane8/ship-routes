@@ -1,10 +1,7 @@
 package com.shiproutes.routes.route.application.create;
 
 import com.shiproutes.routes.route.RouteModuleUnitTestCase;
-import com.shiproutes.routes.route.domain.PortNotExist;
-import com.shiproutes.routes.route.domain.Route;
-import com.shiproutes.routes.route.domain.RouteAlreadyExists;
-import com.shiproutes.routes.route.domain.RouteMother;
+import com.shiproutes.routes.route.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +41,20 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
         creator.create(route.id(), route.originPort(), route.destinationPort());
 
         shouldHaveSaved(route);
+    }
+
+    @Test
+    void publish_route_created_event() {
+        Route route = RouteMother.random();
+        RouteCreatedEvent event = RouteCreatedEventMother.fromRoute(route);
+        shouldNotExists(route);
+        shouldNotExists(RouteMother.reverse(route));
+        shouldExistRoutePorts(route);
+        shouldGeneratePath(route.path());
+
+        creator.create(route.id(), route.originPort(), route.destinationPort());
+
+        shouldHavePublished(event);
     }
 
     @Test

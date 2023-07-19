@@ -4,7 +4,9 @@ import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class Route extends AggregateRoot {
     private final RouteId id;
@@ -20,8 +22,18 @@ public final class Route extends AggregateRoot {
     }
 
     public static Route create(RouteId id, PortId originPort, PortId destinationPort, RoutePath path) {
+        Route route = new Route(id, originPort, destinationPort, path);
 
-        return new Route(id, originPort, destinationPort, path);
+        route.record(new RouteCreatedEvent(
+            id.value(),
+            originPort.value(),
+            destinationPort.value(),
+            path.stream()
+                .map(coordinates -> List.of(coordinates.latitude().value(), coordinates.longitude().value()))
+                .collect(Collectors.toList())
+        ));
+
+        return route;
     }
 
     public RouteId id() {
