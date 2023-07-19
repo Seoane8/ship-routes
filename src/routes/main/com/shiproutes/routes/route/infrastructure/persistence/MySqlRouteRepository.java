@@ -33,10 +33,10 @@ public class MySqlRouteRepository extends HibernateRepository<HibernateRouteEnti
 
     @Override
     public Optional<Route> search(PortId originPort, PortId destinationPort) {
-        var sql = "SELECT r FROM route r WHERE r.departurePort = :origin_port AND r.arrivalPort = :destination_port";
+        var sql = "SELECT r FROM route r WHERE r.originPort = :originPort AND r.destinationPort = :destinationPort";
         return sessionFactory.getCurrentSession().createQuery(sql, this.aggregateClass)
-            .setParameter("origin_port", originPort.value())
-            .setParameter("destination_port", destinationPort.value())
+            .setParameter("originPort", originPort.value())
+            .setParameter("destinationPort", destinationPort.value())
             .uniqueResultOptional()
             .map(HibernateRouteEntity::toEntity);
     }

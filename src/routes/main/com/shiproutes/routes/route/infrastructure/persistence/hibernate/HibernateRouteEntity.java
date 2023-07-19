@@ -21,8 +21,8 @@ public final class HibernateRouteEntity {
 
     @Id
     private String id;
-    private String departurePort;
-    private String arrivalPort;
+    private String originPort;
+    private String destinationPort;
     @Convert(converter = RoutePathConverter.class)
     private List<Double[]> path;
 
@@ -31,8 +31,8 @@ public final class HibernateRouteEntity {
 
     public HibernateRouteEntity(Route route) {
         this.id = route.id().value();
-        this.departurePort = route.departurePort().value();
-        this.arrivalPort = route.arrivalPort().value();
+        this.originPort = route.originPort().value();
+        this.destinationPort = route.destinationPort().value();
         this.path = route.path().stream().map(coordinates -> new Double[]{
             coordinates.latitude().value(),
             coordinates.longitude().value()
@@ -43,8 +43,8 @@ public final class HibernateRouteEntity {
     public Route toEntity() {
         return new Route(
             new RouteId(this.id),
-            new PortId(this.departurePort),
-            new PortId(this.arrivalPort),
+            new PortId(this.originPort),
+            new PortId(this.destinationPort),
             this.path.stream().map(coordinates -> new Coordinates(
                 new Latitude(coordinates[0]),
                 new Longitude(coordinates[1])

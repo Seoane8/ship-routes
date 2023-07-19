@@ -30,7 +30,7 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
         shouldExistRoutePorts(route);
         shouldGeneratePath(route.path());
 
-        creator.create(route.id(), route.departurePort(), route.arrivalPort());
+        creator.create(route.id(), route.originPort(), route.destinationPort());
 
         shouldHaveSaved(route);
     }
@@ -41,7 +41,7 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
         shouldNotExists(route);
         shouldExists(RouteMother.reverse(route));
 
-        creator.create(route.id(), route.departurePort(), route.arrivalPort());
+        creator.create(route.id(), route.originPort(), route.destinationPort());
 
         shouldHaveSaved(route);
     }
@@ -52,7 +52,7 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
             Route route = RouteMother.random();
             shouldExists(route);
 
-            creator.create(route.id(), route.departurePort(), route.arrivalPort());
+            creator.create(route.id(), route.originPort(), route.destinationPort());
         });
     }
 
@@ -65,7 +65,7 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
             shouldNotExistAnyRoutePort(route);
             shouldGeneratePath(route.path());
 
-            creator.create(route.id(), route.departurePort(), route.arrivalPort());
+            creator.create(route.id(), route.originPort(), route.destinationPort());
         });
     }
 

@@ -8,14 +8,14 @@ import java.util.Objects;
 
 public final class Route extends AggregateRoot {
     private final RouteId id;
-    private final PortId departurePort;
-    private final PortId arrivalPort;
+    private final PortId originPort;
+    private final PortId destinationPort;
     private final RoutePath path;
 
-    public Route(RouteId id, PortId departurePort, PortId arrivalPort, RoutePath path) {
+    public Route(RouteId id, PortId originPort, PortId destinationPort, RoutePath path) {
         this.id = id;
-        this.departurePort = departurePort;
-        this.arrivalPort = arrivalPort;
+        this.originPort = originPort;
+        this.destinationPort = destinationPort;
         this.path = path;
     }
 
@@ -28,19 +28,19 @@ public final class Route extends AggregateRoot {
         return id;
     }
 
-    public PortId departurePort() {
-        return departurePort;
+    public PortId originPort() {
+        return originPort;
     }
 
-    public Coordinates departureCoordinates() {
+    public Coordinates originCoordinates() {
         return path.origin();
     }
 
-    public PortId arrivalPort() {
-        return arrivalPort;
+    public PortId destinationPort() {
+        return destinationPort;
     }
 
-    public Coordinates arrivalCoordinates() {
+    public Coordinates destinationCoordinates() {
         return path.destination();
     }
 
@@ -54,13 +54,13 @@ public final class Route extends AggregateRoot {
         if (!(o instanceof Route)) return false;
         Route route = (Route) o;
         return Objects.equals(id, route.id)
-            && Objects.equals(departurePort, route.departurePort)
-            && Objects.equals(arrivalPort, route.arrivalPort)
+            && Objects.equals(originPort, route.originPort)
+            && Objects.equals(destinationPort, route.destinationPort)
             && Objects.equals(path, route.path);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, departurePort, arrivalPort, path);
+        return Objects.hash(id, originPort, destinationPort, path);
     }
 }

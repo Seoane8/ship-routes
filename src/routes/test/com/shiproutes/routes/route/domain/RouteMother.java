@@ -16,8 +16,8 @@ public class RouteMother {
     public static Route reverse(Route route) {
         return new Route(
             route.id(),
-            route.arrivalPort(),
-            route.departurePort(),
+            route.destinationPort(),
+            route.originPort(),
             route.path().reverse()
         );
     }

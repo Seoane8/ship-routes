@@ -35,25 +35,25 @@ public abstract class RouteModuleUnitTestCase extends UnitTestCase {
 
     protected void shouldExists(Route route) {
         when(repository.search(route.id())).thenReturn(Optional.of(route));
-        when(repository.search(route.departurePort(), route.arrivalPort())).thenReturn(Optional.of(route));
+        when(repository.search(route.originPort(), route.destinationPort())).thenReturn(Optional.of(route));
     }
 
     protected void shouldNotExists(Route route) {
         when(repository.search(route.id())).thenReturn(Optional.empty());
-        when(repository.search(route.departurePort(), route.arrivalPort())).thenReturn(Optional.empty());
+        when(repository.search(route.originPort(), route.destinationPort())).thenReturn(Optional.empty());
     }
 
     protected void shouldExistRoutePorts(Route route) {
-        shouldExistPortWithCoordinates(route.departurePort(), route.departureCoordinates());
-        shouldExistPortWithCoordinates(route.arrivalPort(), route.arrivalCoordinates());
+        shouldExistPortWithCoordinates(route.originPort(), route.originCoordinates());
+        shouldExistPortWithCoordinates(route.destinationPort(), route.destinationCoordinates());
     }
 
     protected void shouldNotExistAnyRoutePort(Route route) {
         shouldFailOnAsk(
-            new FindCoordinatesQuery(route.departurePort().value()),
-            new PortNotExist(route.departurePort())
+            new FindCoordinatesQuery(route.originPort().value()),
+            new PortNotExist(route.originPort())
         );
-        shouldExistPortWithCoordinates(route.arrivalPort(), route.arrivalCoordinates());
+        shouldExistPortWithCoordinates(route.destinationPort(), route.destinationCoordinates());
     }
 
     private void shouldExistPortWithCoordinates(PortId portId, Coordinates coordinates) {

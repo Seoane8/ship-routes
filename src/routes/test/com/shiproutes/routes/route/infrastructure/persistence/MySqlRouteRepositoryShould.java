@@ -39,6 +39,6 @@ class MySqlRouteRepositoryShould extends RouteModuleInfrastructureTestCase {
         Route route = RouteMother.random();
         mySqlRouteRepository.save(route);
 
-        assertEquals(Optional.of(route), mySqlRouteRepository.search(route.departurePort(), route.arrivalPort()));
+        assertEquals(Optional.of(route), mySqlRouteRepository.search(route.originPort(), route.destinationPort()));
     }
 }
