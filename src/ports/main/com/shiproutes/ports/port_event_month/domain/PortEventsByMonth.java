@@ -1,10 +1,10 @@
 package com.shiproutes.ports.port_event_month.domain;
 
 import com.shiproutes.ports.port_event_year.domain.Year;
-import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.coordinates.Coordinates;
 
 import java.util.Objects;
 

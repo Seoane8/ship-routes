@@ -1,4 +1,4 @@
-package com.shiproutes.ports.shared.domain;
+package com.shiproutes.shared.domain.coordinates;
 
 import com.shiproutes.shared.domain.DoubleValueObject;
 

@@ -2,9 +2,9 @@ package com.shiproutes.ports.port.domain;
 
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
-import com.shiproutes.ports.shared.domain.Coordinates;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.coordinates.Coordinates;
 
 import java.util.Objects;
 
