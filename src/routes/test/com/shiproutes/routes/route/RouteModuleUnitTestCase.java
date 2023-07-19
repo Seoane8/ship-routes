@@ -2,10 +2,7 @@ package com.shiproutes.routes.route;
 
 import com.shiproutes.routes.port.application.find_coordinates.CoordinatesResponse;
 import com.shiproutes.routes.port.application.find_coordinates.FindCoordinatesQuery;
-import com.shiproutes.routes.route.domain.PathGenerator;
-import com.shiproutes.routes.route.domain.Route;
-import com.shiproutes.routes.route.domain.RoutePath;
-import com.shiproutes.routes.route.domain.RouteRepository;
+import com.shiproutes.routes.route.domain.*;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.infrastructure.UnitTestCase;
@@ -48,6 +45,14 @@ public abstract class RouteModuleUnitTestCase extends UnitTestCase {
 
     protected void shouldExistRoutePorts(Route route) {
         shouldExistPortWithCoordinates(route.departurePort(), route.departureCoordinates());
+        shouldExistPortWithCoordinates(route.arrivalPort(), route.arrivalCoordinates());
+    }
+
+    protected void shouldNotExistAnyRoutePort(Route route) {
+        shouldFailOnAsk(
+            new FindCoordinatesQuery(route.departurePort().value()),
+            new PortNotExist(route.departurePort())
+        );
         shouldExistPortWithCoordinates(route.arrivalPort(), route.arrivalCoordinates());
     }
 

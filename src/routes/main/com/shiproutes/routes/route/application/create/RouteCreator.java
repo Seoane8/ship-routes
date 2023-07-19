@@ -26,8 +26,8 @@ public class RouteCreator {
         this.eventBus = eventBus;
     }
 
-    public void create(RouteId id, PortId originPort, PortId destinationPort) {
-        if (repository.search(originPort, destinationPort).isPresent()) return;
+    public void create(RouteId id, PortId originPort, PortId destinationPort) throws RouteAlreadyExists, PortNotExist {
+        ensureRouteDoesNotExist(originPort, destinationPort);
 
         RoutePath path = repository.search(destinationPort, originPort).map(Route::path).map(RoutePath::reverse)
             .orElseGet(() -> searchPath(originPort, destinationPort));
@@ -38,15 +38,25 @@ public class RouteCreator {
         eventBus.publish(route.pullDomainEvents());
     }
 
+    private void ensureRouteDoesNotExist(PortId originPort, PortId destinationPort) throws RouteAlreadyExists {
+        if (repository.search(originPort, destinationPort).isPresent()) {
+            throw new RouteAlreadyExists(originPort, destinationPort);
+        }
+    }
+
     private RoutePath searchPath(PortId originPort, PortId destinationPort) {
         return pathGenerator.generate(findCoordinates(originPort), findCoordinates(destinationPort));
     }
 
     private Coordinates findCoordinates(PortId portId) {
-        CoordinatesResponse response = queryBus.ask(new FindCoordinatesQuery(portId.value()));
-        return new Coordinates(
-            new Latitude(response.latitude()),
-            new Longitude(response.longitude())
-        );
+        try {
+            CoordinatesResponse response = queryBus.ask(new FindCoordinatesQuery(portId.value()));
+            return new Coordinates(
+                new Latitude(response.latitude()),
+                new Longitude(response.longitude())
+            );
+        } catch (Exception e) {
+            throw new PortNotExist(portId);
+        }
     }
 }
