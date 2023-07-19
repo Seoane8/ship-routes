@@ -27,6 +27,6 @@ public class MySqlRouteRepository extends HibernateRepository<HibernateRouteEnti
 
     @Override
     public Optional<Route> search(RouteId id) {
-        return byId(id).map(HibernateRouteEntity::toEntity);
+        return byId(id.value()).map(HibernateRouteEntity::toEntity);
     }
 }

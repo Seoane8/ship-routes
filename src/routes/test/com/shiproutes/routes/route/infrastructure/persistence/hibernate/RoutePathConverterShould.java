@@ -15,7 +15,7 @@ class RoutePathConverterShould {
     private static Object[] params() {
         return new Object[]{
             new Object[]{"[]", List.of()},
-            new Object[]{"[[1.0,2.0],[3.0,4.0]]", List.of(new Double[]{1.0, 2.0}, new Double[]{3.0, 4.0})}
+            new Object[]{"[[1.0, 2.0], [3.0, 4.0]]", List.of(new Double[]{1.0, 2.0}, new Double[]{3.0, 4.0})}
         };
     }
 
