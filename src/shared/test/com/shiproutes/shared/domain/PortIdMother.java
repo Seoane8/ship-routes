@@ -1,4 +1,4 @@
-package com.shiproutes.ports.shared.domain;
+package com.shiproutes.shared.domain;
 
 import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.UuidMother;
