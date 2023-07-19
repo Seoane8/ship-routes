@@ -1,7 +1,9 @@
 package com.shiproutes.ports.port.domain;
 
 import com.shiproutes.ports.shared.domain.*;
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.PortIdMother;
+import com.shiproutes.shared.domain.ports.CoordinatesMother;
 
 public final class PortMother {
 

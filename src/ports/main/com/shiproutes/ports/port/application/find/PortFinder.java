@@ -3,8 +3,8 @@ package com.shiproutes.ports.port.application.find;
 import com.shiproutes.ports.port.domain.PortNotExist;
 import com.shiproutes.ports.port.domain.PortRepository;
 import com.shiproutes.ports.shared.application.PortResponse;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public final class PortFinder {

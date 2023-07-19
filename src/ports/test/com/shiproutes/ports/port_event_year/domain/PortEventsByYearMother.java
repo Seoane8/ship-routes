@@ -2,12 +2,12 @@ package com.shiproutes.ports.port_event_year.domain;
 
 import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventType;
-import com.shiproutes.ports.shared.domain.CoordinatesMother;
-import com.shiproutes.ports.shared.domain.PortIdMother;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.LongMother;
 import com.shiproutes.shared.domain.UuidMother;
+import com.shiproutes.shared.domain.ports.CoordinatesMother;
+import com.shiproutes.shared.domain.ports.PortIdMother;
 
 public class PortEventsByYearMother {
 

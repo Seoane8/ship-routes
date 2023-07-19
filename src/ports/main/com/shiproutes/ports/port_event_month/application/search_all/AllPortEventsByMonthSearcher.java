@@ -4,8 +4,8 @@ import com.shiproutes.ports.port_event_month.application.AllPortEventsByMonthRes
 import com.shiproutes.ports.port_event_month.application.PortEventsByMonthResponse;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthRepository;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package com.shiproutes.ports.port_event.domain;
 
-import com.shiproutes.ports.shared.domain.CoordinatesMother;
-import com.shiproutes.ports.shared.domain.PortIdMother;
 import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.shared.domain.TeusMother;
+import com.shiproutes.shared.domain.ports.CoordinatesMother;
+import com.shiproutes.shared.domain.ports.PortIdMother;
 
 public final class PortEventMother {
 

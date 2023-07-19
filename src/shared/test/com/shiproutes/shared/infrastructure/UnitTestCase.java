@@ -1,5 +1,6 @@
 package com.shiproutes.shared.infrastructure;
 
+import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.UuidGenerator;
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 import com.shiproutes.shared.domain.bus.event.EventBus;
@@ -46,5 +47,9 @@ public abstract class UnitTestCase {
 
     public void shouldAsk(Query query, Response response) {
         when(queryBus.ask(query)).thenReturn(response);
+    }
+
+    public void shouldFailOnAsk(Query query, DomainError error) {
+        when(queryBus.ask(query)).thenThrow(error);
     }
 }

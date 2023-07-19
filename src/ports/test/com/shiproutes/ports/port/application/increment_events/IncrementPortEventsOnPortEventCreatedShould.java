@@ -8,7 +8,7 @@ import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.ports.port_event.domain.PortEventCreatedMother;
 import com.shiproutes.ports.port_event.domain.PortEventMother;
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

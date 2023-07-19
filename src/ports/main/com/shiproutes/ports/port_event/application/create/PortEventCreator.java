@@ -5,15 +5,15 @@ import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.ports.shared.application.TeusResponse;
-import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.ports.shared.domain.Latitude;
-import com.shiproutes.ports.shared.domain.Longitude;
 import com.shiproutes.shared.domain.IMO;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public final class PortEventCreator {

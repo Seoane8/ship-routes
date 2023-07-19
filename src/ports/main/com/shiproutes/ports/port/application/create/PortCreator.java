@@ -1,10 +1,10 @@
 package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.domain.*;
-import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public final class PortCreator {

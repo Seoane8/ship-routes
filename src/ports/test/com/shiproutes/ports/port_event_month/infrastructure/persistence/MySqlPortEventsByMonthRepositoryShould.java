@@ -5,7 +5,7 @@ import com.shiproutes.ports.port_event_month.domain.MonthMother;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthMother;
 import com.shiproutes.ports.port_event_year.domain.YearMother;
-import com.shiproutes.ports.shared.domain.PortIdMother;
+import com.shiproutes.shared.domain.ports.PortIdMother;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

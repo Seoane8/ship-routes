@@ -2,12 +2,12 @@ package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port.domain.PortName;
-import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.ports.shared.domain.Latitude;
-import com.shiproutes.ports.shared.domain.Longitude;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.command.CommandHandler;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public final class CreatePortCommandHandler implements CommandHandler<CreatePortCommand> {

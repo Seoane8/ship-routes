@@ -2,9 +2,9 @@ package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.PortModuleUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
-import com.shiproutes.ports.port.domain.PortCreatedEvent;
 import com.shiproutes.ports.port.domain.PortCreatedEventMother;
 import com.shiproutes.ports.port.domain.PortMother;
+import com.shiproutes.shared.domain.ports.PortCreatedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

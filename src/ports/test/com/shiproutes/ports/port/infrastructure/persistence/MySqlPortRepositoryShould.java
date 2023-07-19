@@ -3,7 +3,7 @@ package com.shiproutes.ports.port.infrastructure.persistence;
 import com.shiproutes.ports.port.PortModuleInfrastructureTestCase;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortMother;
-import com.shiproutes.ports.shared.domain.PortIdMother;
+import com.shiproutes.shared.domain.ports.PortIdMother;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,19 +1,19 @@
 package com.shiproutes.ports.port_event_year.application.increment_events;
 
+import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearId;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearRepository;
 import com.shiproutes.ports.port_event_year.domain.Year;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
-import com.shiproutes.ports.shared.domain.Coordinates;
-import com.shiproutes.ports.shared.domain.Latitude;
-import com.shiproutes.ports.shared.domain.Longitude;
-import com.shiproutes.ports.port_event.domain.PortEventType;
-import com.shiproutes.shared.domain.PortId;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.UuidGenerator;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
+import com.shiproutes.shared.domain.ports.PortId;
 
 @Service
 public class PortEventsByYearIncrementer {

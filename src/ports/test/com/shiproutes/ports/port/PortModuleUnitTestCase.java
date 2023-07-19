@@ -3,7 +3,7 @@ package com.shiproutes.ports.port;
 import com.shiproutes.ports.PortsContextUnitTestCase;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortRepository;
-import com.shiproutes.shared.domain.PortId;
+import com.shiproutes.shared.domain.ports.PortId;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Optional;
