@@ -8,13 +8,13 @@ public final class Route {
     private final RouteId id;
     private final PortId departurePort;
     private final PortId arrivalPort;
-    private final RouteDistance distance;
+    private final RoutePath path;
 
-    public Route(RouteId id, PortId departurePort, PortId arrivalPort, RouteDistance distance) {
+    public Route(RouteId id, PortId departurePort, PortId arrivalPort, RoutePath path) {
         this.id = id;
         this.departurePort = departurePort;
         this.arrivalPort = arrivalPort;
-        this.distance = distance;
+        this.path = path;
     }
 
     public RouteId id() {
@@ -29,8 +29,8 @@ public final class Route {
         return arrivalPort;
     }
 
-    public RouteDistance distance() {
-        return distance;
+    public RoutePath path() {
+        return path;
     }
 
     @Override
@@ -38,12 +38,14 @@ public final class Route {
         if (this == o) return true;
         if (!(o instanceof Route)) return false;
         Route route = (Route) o;
-        return Objects.equals(id, route.id) && Objects.equals(departurePort, route.departurePort)
-            && Objects.equals(arrivalPort, route.arrivalPort) && Objects.equals(distance, route.distance);
+        return Objects.equals(id, route.id)
+            && Objects.equals(departurePort, route.departurePort)
+            && Objects.equals(arrivalPort, route.arrivalPort)
+            && Objects.equals(path, route.path);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, departurePort, arrivalPort, distance);
+        return Objects.hash(id, departurePort, arrivalPort, path);
     }
 }

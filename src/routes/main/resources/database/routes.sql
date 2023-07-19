@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS routes
     id            CHAR(36) NOT NULL,
     departurePort CHAR(36) NOT NULL,
     arrivalPort   CHAR(36) NOT NULL,
-    distance      INT      NOT NULL,
+    path          JSON     NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
