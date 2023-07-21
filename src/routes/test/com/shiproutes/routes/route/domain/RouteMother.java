@@ -1,5 +1,6 @@
 package com.shiproutes.routes.route.domain;
 
+import com.shiproutes.routes.shared.domain.RoutePathMother;
 import com.shiproutes.shared.domain.ports.PortIdMother;
 
 public class RouteMother {

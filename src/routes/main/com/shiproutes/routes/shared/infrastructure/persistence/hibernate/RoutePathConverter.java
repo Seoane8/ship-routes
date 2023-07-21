@@ -1,4 +1,4 @@
-package com.shiproutes.routes.route.infrastructure.persistence.hibernate;
+package com.shiproutes.routes.shared.infrastructure.persistence.hibernate;
 
 import javax.persistence.AttributeConverter;
 import java.util.ArrayList;
