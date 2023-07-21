@@ -15,11 +15,19 @@ public class RouteMother {
 
     public static Route reverse(Route route) {
         return new Route(
-            route.id(),
+            RouteIdMother.random(),
             route.destinationPort(),
             route.originPort(),
             route.path().reverse()
         );
     }
 
+    public static Route updatePath(Route existentRoute) {
+        return new Route(
+            existentRoute.id(),
+            existentRoute.originPort(),
+            existentRoute.destinationPort(),
+            RoutePathMother.update(existentRoute.path())
+        );
+    }
 }

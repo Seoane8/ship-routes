@@ -13,4 +13,18 @@ public class RoutePathMother {
             .collect(RoutePath.collector());
     }
 
+    public static RoutePath update(RoutePath path) {
+        RoutePath newPath = RoutePathMother.random();
+        newPath.add(0, path.origin());
+        newPath.add(path.destination());
+        return newPath;
+    }
+
+    public static RoutePath mismatch(RoutePath path) {
+        RoutePath newPath;
+        do {
+            newPath = RoutePathMother.random();
+        } while (newPath.origin().equals(path.origin()) && newPath.destination().equals(path.destination()));
+        return newPath;
+    }
 }

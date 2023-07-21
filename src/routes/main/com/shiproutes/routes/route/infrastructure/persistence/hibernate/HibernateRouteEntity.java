@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity(name = "route")
 @Table(name = "routes")
@@ -24,7 +23,7 @@ public final class HibernateRouteEntity {
     private String originPort;
     private String destinationPort;
     @Convert(converter = RoutePathConverter.class)
-    private List<Double[]> path;
+    private List<List<Double>> path;
 
     public HibernateRouteEntity() {
     }
@@ -33,10 +32,7 @@ public final class HibernateRouteEntity {
         this.id = route.id().value();
         this.originPort = route.originPort().value();
         this.destinationPort = route.destinationPort().value();
-        this.path = route.path().stream().map(coordinates -> new Double[]{
-            coordinates.latitude().value(),
-            coordinates.longitude().value()
-        }).collect(Collectors.toList());
+        this.path = route.path().toPrimitives();
 
     }
 
@@ -46,8 +42,8 @@ public final class HibernateRouteEntity {
             new PortId(this.originPort),
             new PortId(this.destinationPort),
             this.path.stream().map(coordinates -> new Coordinates(
-                new Latitude(coordinates[0]),
-                new Longitude(coordinates[1])
+                new Latitude(coordinates.get(0)),
+                new Longitude(coordinates.get(1))
             )).collect(RoutePath.collector())
         );
     }
