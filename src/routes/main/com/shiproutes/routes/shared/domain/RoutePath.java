@@ -15,6 +15,10 @@ public class RoutePath extends ArrayList<Coordinates> {
         super(c);
     }
 
+    public static RoutePath empty() {
+        return new RoutePath(Collections.emptyList());
+    }
+
     public static Collector<Coordinates, Object, RoutePath> collector() {
         return Collectors.collectingAndThen(Collectors.toList(), RoutePath::new);
     }

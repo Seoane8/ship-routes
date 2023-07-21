@@ -23,14 +23,10 @@ public abstract class Identifier implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Identifier)) return false;
         Identifier that = (Identifier) o;
-        return value.equals(that.value);
+        return Objects.equals(value, that.value);
     }
 
     @Override
