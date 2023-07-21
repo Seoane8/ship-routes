@@ -4,15 +4,13 @@ import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public final class Route extends AggregateRoot {
     private final RouteId id;
     private final PortId originPort;
     private final PortId destinationPort;
-    private final RoutePath path;
+    private RoutePath path;
 
     public Route(RouteId id, PortId originPort, PortId destinationPort, RoutePath path) {
         this.id = id;
@@ -28,9 +26,7 @@ public final class Route extends AggregateRoot {
             id.value(),
             originPort.value(),
             destinationPort.value(),
-            path.stream()
-                .map(coordinates -> List.of(coordinates.latitude().value(), coordinates.longitude().value()))
-                .collect(Collectors.toList())
+            path.toPrimitives()
         ));
 
         return route;
@@ -58,6 +54,16 @@ public final class Route extends AggregateRoot {
 
     public RoutePath path() {
         return path;
+    }
+
+    public void updatePath(RoutePath path) {
+        this.path = path;
+        this.record(new RouteUpdatedEvent(
+            id.value(),
+            originPort.value(),
+            destinationPort.value(),
+            path.toPrimitives()
+        ));
     }
 
     @Override

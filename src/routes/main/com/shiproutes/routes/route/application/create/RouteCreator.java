@@ -11,41 +11,45 @@ import com.shiproutes.shared.domain.ports.Latitude;
 import com.shiproutes.shared.domain.ports.Longitude;
 import com.shiproutes.shared.domain.ports.PortId;
 
+import java.util.Optional;
+
 @Service
 public class RouteCreator {
 
     private final RouteRepository repository;
-    private final PathGenerator pathGenerator;
     private final QueryBus queryBus;
     private final EventBus eventBus;
 
-    public RouteCreator(RouteRepository repository, PathGenerator pathGenerator, QueryBus queryBus, EventBus eventBus) {
+    public RouteCreator(RouteRepository repository, QueryBus queryBus, EventBus eventBus) {
         this.repository = repository;
-        this.pathGenerator = pathGenerator;
         this.queryBus = queryBus;
         this.eventBus = eventBus;
     }
 
-    public void create(RouteId id, PortId originPort, PortId destinationPort) throws RouteAlreadyExists, PortNotExist {
-        ensureRouteDoesNotExist(originPort, destinationPort);
+    public void create(RouteId id, PortId originPort, PortId destinationPort, RoutePath path)
+        throws PortNotExist, RoutePathMismatch {
+        ensurePathIsCorrect(originPort, destinationPort, path);
 
-        RoutePath path = repository.search(destinationPort, originPort).map(Route::path).map(RoutePath::reverse)
-            .orElseGet(() -> searchPath(originPort, destinationPort));
-
-        Route route = Route.create(id, originPort, destinationPort, path);
+        Optional<Route> existentRoute = repository.search(originPort, destinationPort);
+        Route route;
+        if (existentRoute.isPresent()) {
+            route = existentRoute.get();
+            route.updatePath(path);
+        } else {
+            route = Route.create(id, originPort, destinationPort, path);
+        }
 
         repository.save(route);
         eventBus.publish(route.pullDomainEvents());
     }
 
-    private void ensureRouteDoesNotExist(PortId originPort, PortId destinationPort) throws RouteAlreadyExists {
-        if (repository.search(originPort, destinationPort).isPresent()) {
-            throw new RouteAlreadyExists(originPort, destinationPort);
+    private void ensurePathIsCorrect(PortId originPort, PortId destinationPort, RoutePath path)
+        throws PortNotExist, RoutePathMismatch {
+        Coordinates origin = findCoordinates(originPort);
+        Coordinates destination = findCoordinates(destinationPort);
+        if (!path.origin().equals(origin) || !path.destination().equals(destination)) {
+            throw new RoutePathMismatch(origin, destination, path);
         }
-    }
-
-    private RoutePath searchPath(PortId originPort, PortId destinationPort) {
-        return pathGenerator.generate(findCoordinates(originPort), findCoordinates(destinationPort));
     }
 
     private Coordinates findCoordinates(PortId portId) {

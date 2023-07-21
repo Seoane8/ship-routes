@@ -20,6 +20,11 @@ public final class Coordinates {
     }
 
     @Override
+    public String toString() {
+        return String.format("[%s, %s]", latitude, longitude);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Coordinates)) return false;

@@ -22,4 +22,12 @@ public class RouteMother {
         );
     }
 
+    public static Route updatePath(Route existentRoute) {
+        return new Route(
+            existentRoute.id(),
+            existentRoute.originPort(),
+            existentRoute.destinationPort(),
+            RoutePathMother.update(existentRoute.path())
+        );
+    }
 }

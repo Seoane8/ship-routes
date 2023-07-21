@@ -1,17 +1,17 @@
 package com.shiproutes.routes.route.domain;
 
 import com.shiproutes.shared.domain.ports.Coordinates;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class RoutePath extends ArrayList<Coordinates> {
 
-    public RoutePath(@NotNull Collection<? extends Coordinates> c) {
+    public RoutePath(Collection<? extends Coordinates> c) {
         super(c);
     }
 
@@ -31,5 +31,11 @@ public class RoutePath extends ArrayList<Coordinates> {
         RoutePath reversedPath = new RoutePath(this);
         Collections.reverse(reversedPath);
         return reversedPath;
+    }
+
+    public List<List<Double>> toPrimitives() {
+        return this.stream()
+            .map(coordinates -> List.of(coordinates.latitude().value(), coordinates.longitude().value()))
+            .collect(Collectors.toList());
     }
 }

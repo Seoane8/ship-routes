@@ -2,7 +2,7 @@ package com.shiproutes.apps.routes.backend.controller.route;
 
 import com.shiproutes.routes.route.application.create.CreateRouteCommand;
 import com.shiproutes.routes.route.domain.PortNotExist;
-import com.shiproutes.routes.route.domain.RouteAlreadyExists;
+import com.shiproutes.routes.route.domain.RoutePathMismatch;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
@@ -30,7 +30,7 @@ public class RoutePostController extends ApiController {
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
         return new HashMap<>() {{
-            put(RouteAlreadyExists.class, HttpStatus.CONFLICT);
+            put(RoutePathMismatch.class, HttpStatus.BAD_REQUEST);
             put(PortNotExist.class, HttpStatus.BAD_REQUEST);
         }};
     }

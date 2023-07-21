@@ -15,7 +15,7 @@ class RoutePathConverterShould {
     private static Object[] params() {
         return new Object[]{
             new Object[]{"[]", List.of()},
-            new Object[]{"[[1.0, 2.0], [3.0, 4.0]]", List.of(new Double[]{1.0, 2.0}, new Double[]{3.0, 4.0})}
+            new Object[]{"[[1.0, 2.0], [3.0, 4.0]]", List.of(List.of(1.0, 2.0), List.of(3.0, 4.0))}
         };
     }
 
@@ -26,20 +26,16 @@ class RoutePathConverterShould {
 
     @ParameterizedTest
     @MethodSource("params")
-    void convert_from_list_to_json_array_string(String expected, List<Double[]> attribute) {
+    void convert_from_list_to_json_array_string(String expected, List<List<Double>> attribute) {
         String actual = converter.convertToDatabaseColumn(attribute);
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @MethodSource("params")
-    void convert_from_json_array_string_to_list(String dbData, List<Double[]> expected) {
-        List<Double[]> actual = converter.convertToEntityAttribute(dbData);
-        assertEquals(expected.size(), actual.size());
-        for (var i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i)[0], actual.get(i)[0]);
-            assertEquals(expected.get(i)[1], actual.get(i)[1]);
-        }
+    void convert_from_json_array_string_to_list(String dbData, List<List<Double>> expected) {
+        List<List<Double>> actual = converter.convertToEntityAttribute(dbData);
+        assertEquals(expected, actual);
     }
 
 

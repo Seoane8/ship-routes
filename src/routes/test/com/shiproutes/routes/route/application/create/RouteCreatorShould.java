@@ -16,68 +16,83 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
     public void setUp() {
         super.setUp();
 
-        creator = new RouteCreator(repository, pathGenerator, queryBus, eventBus);
+        creator = new RouteCreator(repository, queryBus, eventBus);
     }
 
     @Test
     void create_a_new_route() {
         Route route = RouteMother.random();
-        shouldNotExists(route);
-        shouldNotExists(RouteMother.reverse(route));
         shouldExistRoutePorts(route);
-        shouldGeneratePath(route.path());
+        shouldNotExists(route);
 
-        creator.create(route.id(), route.originPort(), route.destinationPort());
+        creator.create(route.id(), route.originPort(), route.destinationPort(), route.path());
 
         shouldHaveSaved(route);
     }
 
     @Test
-    void create_a_new_route_using_existent_reversed_path() {
-        Route route = RouteMother.random();
-        shouldNotExists(route);
-        shouldExists(RouteMother.reverse(route));
+    void update_existing_route_path() {
+        Route existentRoute = RouteMother.random();
+        Route updatedRoute = RouteMother.updatePath(existentRoute);
+        shouldExistRoutePorts(existentRoute);
+        shouldExists(existentRoute);
 
-        creator.create(route.id(), route.originPort(), route.destinationPort());
+        creator.create(existentRoute.id(), updatedRoute.originPort(), updatedRoute.destinationPort(),
+            updatedRoute.path());
 
-        shouldHaveSaved(route);
+        shouldHaveSaved(updatedRoute);
     }
 
     @Test
     void publish_route_created_event() {
         Route route = RouteMother.random();
         RouteCreatedEvent event = RouteCreatedEventMother.fromRoute(route);
-        shouldNotExists(route);
-        shouldNotExists(RouteMother.reverse(route));
         shouldExistRoutePorts(route);
-        shouldGeneratePath(route.path());
+        shouldNotExists(route);
 
-        creator.create(route.id(), route.originPort(), route.destinationPort());
+        creator.create(route.id(), route.originPort(), route.destinationPort(), route.path());
 
         shouldHavePublished(event);
     }
 
     @Test
-    void fail_when_route_already_exists() {
-        assertThrows(RouteAlreadyExists.class, () -> {
-            Route route = RouteMother.random();
-            shouldExists(route);
+    void publish_route_updated_event() {
+        Route existentRoute = RouteMother.random();
+        Route updatedRoute = RouteMother.updatePath(existentRoute);
+        RouteUpdatedEvent event = new RouteUpdatedEvent(
+            updatedRoute.id().value(),
+            updatedRoute.originPort().value(),
+            updatedRoute.destinationPort().value(),
+            updatedRoute.path().toPrimitives()
+        );
+        shouldExistRoutePorts(existentRoute);
+        shouldExists(existentRoute);
 
-            creator.create(route.id(), route.originPort(), route.destinationPort());
-        });
+        creator.create(existentRoute.id(), updatedRoute.originPort(), updatedRoute.destinationPort(),
+            updatedRoute.path());
+
+        shouldHavePublished(event);
     }
 
     @Test
     void fail_when_port_not_exist() {
         assertThrows(PortNotExist.class, () -> {
             Route route = RouteMother.random();
-            shouldNotExists(route);
-            shouldNotExists(RouteMother.reverse(route));
             shouldNotExistAnyRoutePort(route);
-            shouldGeneratePath(route.path());
 
-            creator.create(route.id(), route.originPort(), route.destinationPort());
+            creator.create(route.id(), route.originPort(), route.destinationPort(), route.path());
         });
     }
 
+    @Test
+    void fail_when_route_path_mismatch() {
+        assertThrows(RoutePathMismatch.class, () -> {
+            Route route = RouteMother.random();
+            RoutePath path = RoutePathMother.mismatch(route.path());
+            shouldExistRoutePorts(route);
+            shouldNotExists(route);
+
+            creator.create(route.id(), route.originPort(), route.destinationPort(), path);
+        });
+    }
 }
