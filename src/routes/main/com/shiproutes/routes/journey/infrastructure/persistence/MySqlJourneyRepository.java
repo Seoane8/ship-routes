@@ -1,9 +1,11 @@
 package com.shiproutes.routes.journey.infrastructure.persistence;
 
+import com.shiproutes.routes.journey.domain.DepartureDate;
 import com.shiproutes.routes.journey.domain.Journey;
 import com.shiproutes.routes.journey.domain.JourneyId;
 import com.shiproutes.routes.journey.domain.JourneyRepository;
 import com.shiproutes.routes.journey.infrastructure.persistence.hibernate.HibernateJourneyEntity;
+import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -28,5 +30,22 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
     @Override
     public Optional<Journey> search(JourneyId id) {
         return byId(id.value()).map(HibernateJourneyEntity::toEntity);
+    }
+
+    @Override
+    public Optional<Journey> searchJourneyArrival(IMO shipId, DepartureDate departureDate) {
+        var sql = "SELECT j FROM journey j WHERE j.shipId = :shipId AND " +
+            "j.arrivalDate > :departureDate AND (j.departureDate < :departureDate OR j.departureDate IS NULL)";
+        return sessionFactory.getCurrentSession()
+            .createQuery(sql, HibernateJourneyEntity.class)
+            .setParameter("shipId", shipId.value())
+            .setParameter("departureDate", departureDate.value())
+            .uniqueResultOptional()
+            .map(HibernateJourneyEntity::toEntity);
+    }
+
+    @Override
+    public void remove(Journey journey) {
+        remove(new HibernateJourneyEntity(journey));
     }
 }

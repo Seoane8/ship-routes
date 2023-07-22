@@ -27,6 +27,16 @@ public class Journey {
         this.path = path;
     }
 
+    public static Journey create(JourneyId id, IMO shipId, PortId originPort, PortId destinationPort,
+                                 DepartureDate departureDate, ArrivalDate arrivalDate, RoutePath path) {
+        return new Journey(id, shipId, originPort, destinationPort, departureDate, arrivalDate, path);
+    }
+
+    public static Journey departure(JourneyId journeyId, IMO shipId, PortId originPort, DepartureDate departureDate) {
+        return new Journey(journeyId, shipId, originPort, PortId.empty(), departureDate, ArrivalDate.empty(),
+            RoutePath.empty());
+    }
+
     public JourneyId id() {
         return id;
     }

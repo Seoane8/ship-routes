@@ -1,9 +1,7 @@
 package com.shiproutes.routes.journey.infrastructure.persistence;
 
 import com.shiproutes.routes.journey.JourneyModuleInfrastructureTestCase;
-import com.shiproutes.routes.journey.domain.Journey;
-import com.shiproutes.routes.journey.domain.JourneyIdMother;
-import com.shiproutes.routes.journey.domain.JourneyMother;
+import com.shiproutes.routes.journey.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -30,5 +28,62 @@ class MySqlJourneyRepositoryShould extends JourneyModuleInfrastructureTestCase {
     @Test
     void not_return_a_non_existent_journey() {
         assertEquals(Optional.empty(), mySqlJourneyRepository.search(JourneyIdMother.random()));
+    }
+
+    @Test
+    void should_remove_a_journey() {
+        Journey journey = JourneyMother.random();
+        mySqlJourneyRepository.save(journey);
+
+        mySqlJourneyRepository.remove(journey);
+        assertEquals(Optional.empty(), mySqlJourneyRepository.search(journey.id()));
+    }
+
+    @Test
+    void should_return_an_incomplete_journey_arrival() {
+        Journey journey = JourneyMother.randomArrival();
+        mySqlJourneyRepository.save(journey);
+        DepartureDate departureDate = DepartureDateMother.randomBefore(journey.arrivalDate());
+
+        assertEquals(
+            Optional.of(journey),
+            mySqlJourneyRepository.searchJourneyArrival(journey.shipId(), departureDate)
+        );
+    }
+
+    @Test
+    void should_return_a_complete_journey_arrival() {
+        Journey journey = JourneyMother.random();
+        mySqlJourneyRepository.save(journey);
+        DepartureDate departureDate = DepartureDateMother.randomBetween(journey.departureDate(), journey.arrivalDate());
+
+        assertEquals(
+            Optional.of(journey),
+            mySqlJourneyRepository.searchJourneyArrival(journey.shipId(), departureDate)
+        );
+    }
+
+    @Test
+    void not_return_an_incomplete_journey_arrival_when_departure_date_not_match() {
+        Journey journey = JourneyMother.randomArrival();
+        mySqlJourneyRepository.save(journey);
+        DepartureDate departureDate = DepartureDateMother.randomAfter(journey.arrivalDate());
+
+        assertEquals(
+            Optional.empty(),
+            mySqlJourneyRepository.searchJourneyArrival(journey.shipId(), departureDate)
+        );
+    }
+
+    @Test
+    void not_return_a_complete_journey_arrival_when_departure_date_not_match() {
+        Journey journey = JourneyMother.random();
+        mySqlJourneyRepository.save(journey);
+        DepartureDate departureDate = DepartureDateMother.randomBefore(journey.departureDate());
+
+        assertEquals(
+            Optional.empty(),
+            mySqlJourneyRepository.searchJourneyArrival(journey.shipId(), departureDate)
+        );
     }
 }
