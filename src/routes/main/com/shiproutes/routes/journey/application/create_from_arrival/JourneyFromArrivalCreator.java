@@ -10,10 +10,8 @@ import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.UuidGenerator;
+import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;
@@ -24,11 +22,14 @@ public class JourneyFromArrivalCreator {
     private final JourneyRepository repository;
     private final UuidGenerator uuidGenerator;
     private final QueryBus queryBus;
+    private final EventBus eventBus;
 
-    public JourneyFromArrivalCreator(JourneyRepository repository, UuidGenerator uuidGenerator, QueryBus queryBus) {
+    public JourneyFromArrivalCreator(JourneyRepository repository, UuidGenerator uuidGenerator,
+                                     QueryBus queryBus, EventBus eventBus) {
         this.repository = repository;
         this.uuidGenerator = uuidGenerator;
         this.queryBus = queryBus;
+        this.eventBus = eventBus;
     }
 
     public void create(IMO shipId, PortId destinationPort, ArrivalDate arrivalDate) {
@@ -51,8 +52,11 @@ public class JourneyFromArrivalCreator {
         repository.remove(journeyDeparture);
         repository.save(journey);
         if (journeyDeparture.isComplete()) {
-            this.create(shipId, journeyDeparture.destinationPort(), journeyDeparture.arrivalDate());
+            journeyDeparture.recordRemovedEvent();
+            journeyDeparture.recordUnlinkedArrivalEvent();
         }
+        eventBus.publish(journey.pullDomainEvents());
+        eventBus.publish(journeyDeparture.pullDomainEvents());
     }
 
     public RoutePath getPath(PortId originPort, PortId destinationPort) {

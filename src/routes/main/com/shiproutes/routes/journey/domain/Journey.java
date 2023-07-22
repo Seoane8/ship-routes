@@ -1,12 +1,13 @@
 package com.shiproutes.routes.journey.domain;
 
 import com.shiproutes.routes.shared.domain.RoutePath;
+import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Objects;
 
-public class Journey {
+public class Journey extends AggregateRoot {
 
     private final JourneyId id;
     private final IMO shipId;
@@ -29,7 +30,18 @@ public class Journey {
 
     public static Journey create(JourneyId id, IMO shipId, PortId originPort, PortId destinationPort,
                                  DepartureDate departureDate, ArrivalDate arrivalDate, RoutePath path) {
-        return new Journey(id, shipId, originPort, destinationPort, departureDate, arrivalDate, path);
+        Journey journey = new Journey(id, shipId, originPort, destinationPort, departureDate, arrivalDate, path);
+
+        journey.record(new JourneyCreatedEvent(
+            id.value(),
+            shipId.value(),
+            originPort.value(),
+            destinationPort.value(),
+            departureDate.value(),
+            arrivalDate.value())
+        );
+
+        return journey;
     }
 
     public static Journey departure(JourneyId journeyId, IMO shipId, PortId originPort, DepartureDate departureDate) {
@@ -74,16 +86,46 @@ public class Journey {
         return !arrivalDate.isEmpty() && !departureDate.isEmpty() && !path.isEmpty();
     }
 
+    public void recordRemovedEvent() {
+        this.record(new JourneyRemovedEvent(
+            id.value(),
+            shipId.value(),
+            originPort.value(),
+            destinationPort.value(),
+            departureDate.value(),
+            arrivalDate.value()
+        ));
+    }
+
+    public void recordUnlinkedDepartureEvent() {
+        this.record(new JourneyUnlinkedEvent(
+            id.value(),
+            shipId.value(),
+            originPort.value(),
+            departureDate.value(),
+            "DEPARTURE"
+        ));
+    }
+
+    public void recordUnlinkedArrivalEvent() {
+        this.record(new JourneyUnlinkedEvent(
+            id.value(),
+            shipId.value(),
+            destinationPort.value(),
+            arrivalDate.value(),
+            "ARRIVAL"
+        ));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Journey)) return false;
-        Journey journey = (Journey) o;
-        return Objects.equals(id, journey.id) && Objects.equals(shipId, journey.shipId)
-            && Objects.equals(originPort, journey.originPort)
-            && Objects.equals(destinationPort, journey.destinationPort)
-            && Objects.equals(departureDate, journey.departureDate) && Objects.equals(arrivalDate, journey.arrivalDate)
-            && Objects.equals(path, journey.path);
+        Journey that = (Journey) o;
+        return Objects.equals(id, that.id) && Objects.equals(shipId, that.shipId)
+            && Objects.equals(originPort, that.originPort) && Objects.equals(destinationPort, that.destinationPort)
+            && Objects.equals(departureDate, that.departureDate) && Objects.equals(arrivalDate, that.arrivalDate)
+            && Objects.equals(path, that.path);
     }
 
     @Override

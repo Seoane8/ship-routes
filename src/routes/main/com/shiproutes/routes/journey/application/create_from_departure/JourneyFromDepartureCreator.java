@@ -10,10 +10,8 @@ import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.UuidGenerator;
+import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;
@@ -24,11 +22,14 @@ public class JourneyFromDepartureCreator {
     private final JourneyRepository repository;
     private final UuidGenerator uuidGenerator;
     private final QueryBus queryBus;
+    private final EventBus eventBus;
 
-    public JourneyFromDepartureCreator(JourneyRepository repository, UuidGenerator uuidGenerator, QueryBus queryBus) {
+    public JourneyFromDepartureCreator(JourneyRepository repository, UuidGenerator uuidGenerator,
+                                       QueryBus queryBus, EventBus eventBus) {
         this.repository = repository;
         this.uuidGenerator = uuidGenerator;
         this.queryBus = queryBus;
+        this.eventBus = eventBus;
     }
 
     public void create(IMO shipId, PortId originPort, DepartureDate departureDate) {
@@ -36,7 +37,7 @@ public class JourneyFromDepartureCreator {
 
         Optional<Journey> optionalJourney = repository.searchJourneyArrival(shipId, departureDate);
 
-        if (optionalJourney.isEmpty()){
+        if (optionalJourney.isEmpty()) {
             Journey newJourney = Journey.departure(journeyId, shipId, originPort, departureDate);
             repository.save(newJourney);
             return;
@@ -51,12 +52,15 @@ public class JourneyFromDepartureCreator {
         repository.remove(journeyArrival);
         repository.save(journey);
         if (journeyArrival.isComplete()) {
-            this.create(shipId, journeyArrival.originPort(), journeyArrival.departureDate());
+            journeyArrival.recordRemovedEvent();
+            journeyArrival.recordUnlinkedDepartureEvent();
         }
+        eventBus.publish(journey.pullDomainEvents());
+        eventBus.publish(journeyArrival.pullDomainEvents());
     }
 
     public RoutePath getPath(PortId originPort, PortId destinationPort) {
-        RoutePathResponse response =  queryBus.ask(new FindRoutePathQuery(originPort.value(), destinationPort.value()));
+        RoutePathResponse response = queryBus.ask(new FindRoutePathQuery(originPort.value(), destinationPort.value()));
         return RoutePath.fromPrimitives(response.path());
     }
 
