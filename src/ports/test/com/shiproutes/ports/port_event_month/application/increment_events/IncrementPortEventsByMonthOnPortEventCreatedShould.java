@@ -1,12 +1,12 @@
 package com.shiproutes.ports.port_event_month.application.increment_events;
 
 import com.shiproutes.ports.port_event.domain.PortEvent;
-import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.ports.port_event.domain.PortEventCreatedMother;
 import com.shiproutes.ports.port_event.domain.PortEventMother;
 import com.shiproutes.ports.port_event_month.PortEventsByMonthModuleUnitTestCase;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthMother;
+import com.shiproutes.shared.domain.ports.PortEventCreated;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

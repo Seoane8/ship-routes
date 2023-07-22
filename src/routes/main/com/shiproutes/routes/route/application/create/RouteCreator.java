@@ -3,6 +3,7 @@ package com.shiproutes.routes.route.application.create;
 import com.shiproutes.routes.port.application.find_coordinates.CoordinatesResponse;
 import com.shiproutes.routes.port.application.find_coordinates.FindCoordinatesQuery;
 import com.shiproutes.routes.route.domain.*;
+import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;

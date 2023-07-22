@@ -1,6 +1,8 @@
-package com.shiproutes.routes.route.domain;
+package com.shiproutes.routes.shared.domain;
 
 import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.Latitude;
+import com.shiproutes.shared.domain.ports.Longitude;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +15,17 @@ public class RoutePath extends ArrayList<Coordinates> {
 
     public RoutePath(Collection<? extends Coordinates> c) {
         super(c);
+    }
+
+    public static RoutePath empty() {
+        return new RoutePath(Collections.emptyList());
+    }
+
+    public static RoutePath fromPrimitives(List<List<Double>> primitives) {
+        return primitives.stream().map(coordinates -> new Coordinates(
+            new Latitude(coordinates.get(0)),
+            new Longitude(coordinates.get(1))
+        )).collect(RoutePath.collector());
     }
 
     public static Collector<Coordinates, Object, RoutePath> collector() {

@@ -1,5 +1,7 @@
 package com.shiproutes.routes.route.application.find_path;
 
+import com.shiproutes.routes.shared.application.FindRoutePathQuery;
+import com.shiproutes.routes.shared.application.RoutePathResponse;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.query.QueryHandler;
 import com.shiproutes.shared.domain.ports.PortId;

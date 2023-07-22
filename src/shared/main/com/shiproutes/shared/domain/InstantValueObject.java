@@ -1,6 +1,7 @@
 package com.shiproutes.shared.domain;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public abstract class InstantValueObject {
@@ -17,6 +18,21 @@ public abstract class InstantValueObject {
 
     public boolean isAfter(InstantValueObject that) {
         return this.value.isAfter(that.value);
+    }
+
+    public boolean isBefore(InstantValueObject that) {
+        return this.value.isBefore(that.value);
+    }
+
+    protected Instant startOfDayInstant() {
+        return this.value.truncatedTo(ChronoUnit.DAYS);
+    }
+
+    protected Instant endOfDayInstant() {
+        return this.value
+            .truncatedTo(ChronoUnit.DAYS)
+            .plus(1, ChronoUnit.DAYS)
+            .minus(1, ChronoUnit.MILLIS);
     }
 
     @Override

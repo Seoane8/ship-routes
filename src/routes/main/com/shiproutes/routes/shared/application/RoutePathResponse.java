@@ -1,6 +1,6 @@
-package com.shiproutes.routes.route.application.find_path;
+package com.shiproutes.routes.shared.application;
 
-import com.shiproutes.routes.route.domain.RoutePath;
+import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.bus.query.Response;
 
 import java.util.List;

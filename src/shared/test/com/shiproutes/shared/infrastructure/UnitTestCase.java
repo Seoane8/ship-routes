@@ -37,6 +37,10 @@ public abstract class UnitTestCase {
         shouldHavePublished(Collections.singletonList(domainEvent));
     }
 
+    public void shouldNotHavePublished(List<DomainEvent> domainEvents) {
+        verify(eventBus, never()).publish(domainEvents);
+    }
+
     public void shouldGenerateUuid(String uuid) {
         when(uuidGenerator.generate()).thenReturn(uuid);
     }

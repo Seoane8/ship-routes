@@ -21,4 +21,8 @@ public final class InstantMother {
     public static Instant randomBetween(Instant startDate, Instant endDate) {
         return MotherCreator.random().date().between(Date.from(startDate), Date.from(endDate)).toInstant();
     }
+
+    public static Instant randomAfter(Instant value) {
+        return MotherCreator.random().date().future(2000, TimeUnit.DAYS, Date.from(value)).toInstant();
+    }
 }

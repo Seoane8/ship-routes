@@ -2,7 +2,11 @@ package com.shiproutes.routes.route;
 
 import com.shiproutes.routes.port.application.find_coordinates.CoordinatesResponse;
 import com.shiproutes.routes.port.application.find_coordinates.FindCoordinatesQuery;
-import com.shiproutes.routes.route.domain.*;
+import com.shiproutes.routes.route.domain.PathGenerator;
+import com.shiproutes.routes.route.domain.PortNotExist;
+import com.shiproutes.routes.route.domain.Route;
+import com.shiproutes.routes.route.domain.RouteRepository;
+import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.infrastructure.UnitTestCase;

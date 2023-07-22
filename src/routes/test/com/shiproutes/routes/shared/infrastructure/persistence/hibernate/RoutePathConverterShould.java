@@ -1,4 +1,4 @@
-package com.shiproutes.routes.route.infrastructure.persistence.hibernate;
+package com.shiproutes.routes.shared.infrastructure.persistence.hibernate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

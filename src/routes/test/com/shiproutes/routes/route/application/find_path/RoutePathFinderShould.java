@@ -2,6 +2,7 @@ package com.shiproutes.routes.route.application.find_path;
 
 import com.shiproutes.routes.route.RouteModuleUnitTestCase;
 import com.shiproutes.routes.route.domain.*;
+import com.shiproutes.routes.shared.application.RoutePathResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

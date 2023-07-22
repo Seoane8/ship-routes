@@ -1,7 +1,7 @@
 package com.shiproutes.routes.route.infrastructure;
 
 import com.shiproutes.routes.route.domain.PathGenerator;
-import com.shiproutes.routes.route.domain.RoutePath;
+import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.Latitude;
