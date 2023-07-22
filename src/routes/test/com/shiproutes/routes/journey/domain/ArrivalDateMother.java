@@ -16,4 +16,8 @@ public class ArrivalDateMother {
     public static ArrivalDate randomAfter(InstantValueObject instant) {
         return new ArrivalDate(InstantMother.randomAfter(instant.value()));
     }
+
+    public static ArrivalDate randomBetween(DepartureDate departureDate, ArrivalDate arrivalDate) {
+        return new ArrivalDate(InstantMother.randomBetween(departureDate.value(), arrivalDate.value()));
+    }
 }

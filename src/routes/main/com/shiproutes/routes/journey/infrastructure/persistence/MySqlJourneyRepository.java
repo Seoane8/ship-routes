@@ -1,9 +1,6 @@
 package com.shiproutes.routes.journey.infrastructure.persistence;
 
-import com.shiproutes.routes.journey.domain.DepartureDate;
-import com.shiproutes.routes.journey.domain.Journey;
-import com.shiproutes.routes.journey.domain.JourneyId;
-import com.shiproutes.routes.journey.domain.JourneyRepository;
+import com.shiproutes.routes.journey.domain.*;
 import com.shiproutes.routes.journey.infrastructure.persistence.hibernate.HibernateJourneyEntity;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
@@ -40,6 +37,18 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
             .createQuery(sql, HibernateJourneyEntity.class)
             .setParameter("shipId", shipId.value())
             .setParameter("departureDate", departureDate.value())
+            .uniqueResultOptional()
+            .map(HibernateJourneyEntity::toEntity);
+    }
+
+    @Override
+    public Optional<Journey> searchJourneyDeparture(IMO shipId, ArrivalDate arrivalDate) {
+        var sql = "SELECT j FROM journey j WHERE j.shipId = :shipId AND " +
+            "j.departureDate < :arrivalDate AND (j.arrivalDate > :arrivalDate OR j.arrivalDate IS NULL)";
+        return sessionFactory.getCurrentSession()
+            .createQuery(sql, HibernateJourneyEntity.class)
+            .setParameter("shipId", shipId.value())
+            .setParameter("arrivalDate", arrivalDate.value())
             .uniqueResultOptional()
             .map(HibernateJourneyEntity::toEntity);
     }

@@ -37,6 +37,11 @@ public class Journey {
             RoutePath.empty());
     }
 
+    public static Journey arrival(JourneyId journeyId, IMO shipId, PortId destinationPort, ArrivalDate arrivalDate) {
+        return new Journey(journeyId, shipId, PortId.empty(), destinationPort, DepartureDate.empty(), arrivalDate,
+            RoutePath.empty());
+    }
+
     public JourneyId id() {
         return id;
     }

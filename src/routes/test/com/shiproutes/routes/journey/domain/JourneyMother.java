@@ -57,6 +57,18 @@ public class JourneyMother {
         );
     }
 
+    public static Journey incompleteMatchOfArrival(Journey journey) {
+        return new Journey(
+            JourneyIdMother.random(),
+            journey.shipId(),
+            journey.originPort(),
+            PortId.empty(),
+            journey.departureDate(),
+            ArrivalDate.empty(),
+            RoutePath.empty()
+        );
+    }
+
     public static Journey completeMatchOfDeparture(Journey journey) {
         return new Journey(
             JourneyIdMother.random(),
@@ -65,6 +77,18 @@ public class JourneyMother {
             journey.destinationPort(),
             DepartureDateMother.randomBefore(journey.departureDate()),
             journey.arrivalDate(),
+            RoutePathMother.random()
+        );
+    }
+
+    public static Journey completeMatchOfArrival(Journey journey) {
+        return new Journey(
+            JourneyIdMother.random(),
+            journey.shipId(),
+            journey.originPort(),
+            PortIdMother.random(),
+            journey.departureDate(),
+            ArrivalDateMother.randomAfter(journey.arrivalDate()),
             RoutePathMother.random()
         );
     }
@@ -81,6 +105,18 @@ public class JourneyMother {
         );
     }
 
+    public static Journey incompleteUnmatchOfArrival(Journey journey) {
+        return new Journey(
+            JourneyIdMother.random(),
+            journey.shipId(),
+            PortIdMother.random(),
+            PortId.empty(),
+            DepartureDateMother.randomAfter(journey.arrivalDate()),
+            ArrivalDate.empty(),
+            RoutePath.empty()
+        );
+    }
+
     public static Journey completeUnmatchOfDeparture(Journey journey) {
         return new Journey(
             JourneyIdMother.random(),
@@ -89,6 +125,18 @@ public class JourneyMother {
             PortIdMother.random(),
             DepartureDateMother.randomAfter(journey.departureDate()),
             ArrivalDateMother.randomAfter(journey.departureDate()),
+            RoutePathMother.random()
+        );
+    }
+
+    public static Journey completeUnmatchOfArrival(Journey journey) {
+        return new Journey(
+            JourneyIdMother.random(),
+            journey.shipId(),
+            PortIdMother.random(),
+            PortIdMother.random(),
+            DepartureDateMother.randomBefore(journey.arrivalDate()),
+            ArrivalDateMother.randomBefore(journey.arrivalDate()),
             RoutePathMother.random()
         );
     }

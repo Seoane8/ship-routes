@@ -12,6 +12,8 @@ public interface JourneyRepository {
 
     Optional<Journey> searchJourneyArrival(IMO shipId, DepartureDate departureDate);
 
+    Optional<Journey> searchJourneyDeparture(IMO shipId, ArrivalDate arrivalDate);
+
     void remove(Journey journey);
 
 }
