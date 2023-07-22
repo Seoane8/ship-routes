@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port_event.domain;
+package com.shiproutes.shared.domain.ports;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -50,6 +50,10 @@ public final class PortEventCreated extends DomainEvent {
 
     public String type() {
         return type;
+    }
+
+    public String shipId() {
+        return shipId;
     }
 
     public Instant date() {

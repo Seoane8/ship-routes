@@ -1,4 +1,4 @@
-package com.shiproutes.routes.journey.application.create_from_arrival;
+package com.shiproutes.routes.journey.application.create;
 
 import com.shiproutes.routes.journey.JourneyModuleUnitTestCase;
 import com.shiproutes.routes.journey.domain.*;

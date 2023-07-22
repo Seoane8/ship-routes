@@ -1,7 +1,7 @@
 package com.shiproutes.apps.ports.backend.controller.port_event;
 
 import com.shiproutes.apps.ports.backend.controller.PortApplicationTestCase;
-import com.shiproutes.ports.port_event.domain.PortEventCreated;
+import com.shiproutes.shared.domain.ports.PortEventCreated;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;

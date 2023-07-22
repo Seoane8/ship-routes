@@ -1,4 +1,4 @@
-package com.shiproutes.routes.journey.application.create_from_departure;
+package com.shiproutes.routes.journey.application.create;
 
 import com.shiproutes.routes.journey.domain.DepartureDate;
 import com.shiproutes.routes.journey.domain.Journey;

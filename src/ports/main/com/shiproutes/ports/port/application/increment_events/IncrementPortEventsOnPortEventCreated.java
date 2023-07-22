@@ -1,9 +1,9 @@
 package com.shiproutes.ports.port.application.increment_events;
 
-import com.shiproutes.ports.port_event.domain.PortEventCreated;
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
+import com.shiproutes.shared.domain.ports.PortEventCreated;
 import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 

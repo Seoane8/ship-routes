@@ -44,6 +44,22 @@ public class JourneyUnlinkedEvent extends DomainEvent {
         return "journey.unlinked";
     }
 
+    public String shipId() {
+        return shipId;
+    }
+
+    public String portId() {
+        return portId;
+    }
+
+    public Instant date() {
+        return date;
+    }
+
+    public String type() {
+        return type;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{

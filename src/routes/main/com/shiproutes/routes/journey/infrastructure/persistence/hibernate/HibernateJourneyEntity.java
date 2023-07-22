@@ -7,9 +7,6 @@ import com.shiproutes.routes.journey.domain.JourneyId;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePathConverter;
 import com.shiproutes.shared.domain.IMO;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import javax.persistence.Convert;

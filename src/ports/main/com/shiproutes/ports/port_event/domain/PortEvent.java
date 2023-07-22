@@ -4,6 +4,7 @@ import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.ports.Coordinates;
+import com.shiproutes.shared.domain.ports.PortEventCreated;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Objects;

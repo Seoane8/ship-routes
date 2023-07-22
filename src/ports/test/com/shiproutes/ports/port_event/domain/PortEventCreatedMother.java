@@ -1,5 +1,7 @@
 package com.shiproutes.ports.port_event.domain;
 
+import com.shiproutes.shared.domain.ports.PortEventCreated;
+
 public final class PortEventCreatedMother {
 
     public static PortEventCreated fromPortEvent(PortEvent portEvent) {
