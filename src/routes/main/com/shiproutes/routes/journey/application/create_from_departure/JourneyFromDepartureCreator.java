@@ -57,10 +57,7 @@ public class JourneyFromDepartureCreator {
 
     public RoutePath getPath(PortId originPort, PortId destinationPort) {
         RoutePathResponse response =  queryBus.ask(new FindRoutePathQuery(originPort.value(), destinationPort.value()));
-        return response.path().stream().map(coordinates -> new Coordinates(
-            new Latitude(coordinates.get(0)),
-            new Longitude(coordinates.get(1))
-        )).collect(RoutePath.collector());
+        return RoutePath.fromPrimitives(response.path());
     }
 
 }

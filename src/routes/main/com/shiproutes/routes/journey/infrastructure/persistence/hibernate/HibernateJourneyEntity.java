@@ -54,10 +54,7 @@ public class HibernateJourneyEntity {
             destinationPort == null ? PortId.empty() : new PortId(this.destinationPort),
             new DepartureDate(this.departureDate),
             new ArrivalDate(this.arrivalDate),
-            this.path.stream().map(coordinates -> new Coordinates(
-                new Latitude(coordinates.get(0)),
-                new Longitude(coordinates.get(1))
-            )).collect(RoutePath.collector())
+            RoutePath.fromPrimitives(this.path)
         );
     }
 }

@@ -42,10 +42,7 @@ public final class HibernateRouteEntity {
             new RouteId(this.id),
             new PortId(this.originPort),
             new PortId(this.destinationPort),
-            this.path.stream().map(coordinates -> new Coordinates(
-                new Latitude(coordinates.get(0)),
-                new Longitude(coordinates.get(1))
-            )).collect(RoutePath.collector())
+            RoutePath.fromPrimitives(this.path)
         );
     }
 }
