@@ -3,6 +3,7 @@ package com.shiproutes.routes.journey.application.create;
 import com.shiproutes.routes.journey.JourneyModuleUnitTestCase;
 import com.shiproutes.routes.journey.domain.*;
 import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
+import com.shiproutes.routes.shared.domain.JourneyRemovedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

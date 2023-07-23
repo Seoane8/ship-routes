@@ -1,4 +1,4 @@
-package com.shiproutes.routes.journey.domain;
+package com.shiproutes.routes.shared.domain;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 

@@ -1,6 +1,7 @@
 package com.shiproutes.routes.journey.domain;
 
 import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
+import com.shiproutes.routes.shared.domain.JourneyRemovedEvent;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
