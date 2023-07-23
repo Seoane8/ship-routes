@@ -8,7 +8,9 @@ import com.shiproutes.shared.domain.YearMother;
 import com.shiproutes.shared.domain.ports.PortIdMother;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,5 +50,20 @@ class MySqlJourneysByMonthRepositoryShould extends JourneysByMonthModuleInfrastr
                 YearMother.random()
             )
         );
+    }
+
+    @Test
+    void return_all_existent_journeys_by_month() {
+        JourneysByMonth firstEntity = JourneysByMonthMother.random();
+        JourneysByMonth secondEntity = JourneysByMonthMother.random();
+        mySqlJourneysByMonthRepository.save(firstEntity);
+        mySqlJourneysByMonthRepository.save(secondEntity);
+
+        assertEquals(Set.of(firstEntity, secondEntity), mySqlJourneysByMonthRepository.searchAll());
+    }
+
+    @Test
+    void return_empty_list_when_no_journeys_by_month_exist() {
+        assertEquals(Collections.emptySet(), mySqlJourneysByMonthRepository.searchAll());
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("routes-transaction_manager")
@@ -40,5 +42,10 @@ public class MySqlJourneysByMonthRepository
             .setParameter("year", year.value())
             .uniqueResultOptional()
             .map(HibernateJourneysByMonthEntity::toEntity);
+    }
+
+    @Override
+    public Set<JourneysByMonth> searchAll() {
+        return all().stream().map(HibernateJourneysByMonthEntity::toEntity).collect(Collectors.toSet());
     }
 }

@@ -5,6 +5,7 @@ import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface JourneysByMonthRepository {
 
@@ -12,4 +13,5 @@ public interface JourneysByMonthRepository {
 
     Optional<JourneysByMonth> search(PortId originPort, PortId destinationPort, Month month, Year year);
 
+    Set<JourneysByMonth> searchAll();
 }
