@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("routes-transaction_manager")
@@ -56,5 +58,18 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
     @Override
     public void remove(Journey journey) {
         remove(new HibernateJourneyEntity(journey));
+    }
+
+    @Override
+    public Set<Journey> searchBetweenDates(DepartureDate startDate, DepartureDate endDate) {
+        var sql = "SELECT j FROM journey j WHERE j.departureDate BETWEEN :startDate AND :endDate";
+        return sessionFactory.getCurrentSession()
+            .createQuery(sql, HibernateJourneyEntity.class)
+            .setParameter("startDate", startDate.value())
+            .setParameter("endDate", endDate.value())
+            .getResultList()
+            .stream()
+            .map(HibernateJourneyEntity::toEntity)
+            .collect(Collectors.toSet());
     }
 }

@@ -5,6 +5,7 @@ import com.shiproutes.routes.journey.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -132,6 +133,22 @@ class MySqlJourneyRepositoryShould extends JourneyModuleInfrastructureTestCase {
         assertEquals(
             Optional.empty(),
             mySqlJourneyRepository.searchJourneyDeparture(journey.shipId(), arrivalDate)
+        );
+    }
+
+    @Test
+    void return_existent_ports_between_two_dates() {
+        DepartureDate endDate = DepartureDateMother.random();
+        DepartureDate startDate = DepartureDateMother.randomBefore(endDate);
+        Journey expectedPortEvent = JourneyMother.randomWithDepartureDateBetween(startDate, endDate);
+        Journey discardedPortEvent = JourneyMother.randomDepartureBefore(startDate);
+
+        mySqlJourneyRepository.save(expectedPortEvent);
+        mySqlJourneyRepository.save(discardedPortEvent);
+
+        assertEquals(
+            Set.of(expectedPortEvent),
+            mySqlJourneyRepository.searchBetweenDates(startDate, endDate)
         );
     }
 }

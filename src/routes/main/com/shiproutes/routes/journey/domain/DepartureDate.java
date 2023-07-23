@@ -16,4 +16,12 @@ public class DepartureDate extends InstantValueObject {
     public boolean isEmpty() {
         return value() == null;
     }
+
+    public DepartureDate startOfDay() {
+        return new DepartureDate(super.startOfDayInstant());
+    }
+
+    public DepartureDate endOfDay() {
+        return new DepartureDate(super.endOfDayInstant());
+    }
 }

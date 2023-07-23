@@ -140,4 +140,28 @@ public class JourneyMother {
             RoutePathMother.random()
         );
     }
+
+    public static Journey randomWithDepartureDateBetween(DepartureDate startDate, DepartureDate endDate) {
+        return new Journey(
+            JourneyIdMother.random(),
+            IMOMother.random(),
+            PortIdMother.random(),
+            PortIdMother.random(),
+            DepartureDateMother.randomBetween(startDate, endDate),
+            ArrivalDateMother.randomAfter(endDate),
+            RoutePathMother.random()
+        );
+    }
+
+    public static Journey randomDepartureBefore(DepartureDate date) {
+        return new Journey(
+            JourneyIdMother.random(),
+            IMOMother.random(),
+            PortIdMother.random(),
+            PortIdMother.random(),
+            DepartureDateMother.randomBefore(date),
+            ArrivalDateMother.randomAfter(date),
+            RoutePathMother.random()
+        );
+    }
 }
