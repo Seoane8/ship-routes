@@ -1,8 +1,9 @@
 package com.shiproutes.ports.port_event_month.domain;
 
-import com.shiproutes.ports.port_event_year.domain.Year;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
+import com.shiproutes.shared.domain.Month;
+import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortId;
 

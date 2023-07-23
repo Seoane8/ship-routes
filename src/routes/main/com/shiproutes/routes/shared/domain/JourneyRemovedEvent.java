@@ -1,4 +1,4 @@
-package com.shiproutes.routes.journey.domain;
+package com.shiproutes.routes.shared.domain;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -47,6 +47,18 @@ public class JourneyRemovedEvent extends DomainEvent {
     @Override
     public String eventName() {
         return "journey.removed";
+    }
+
+    public String originPort() {
+        return originPort;
+    }
+
+    public String destinationPort() {
+        return destinationPort;
+    }
+
+    public Instant departureDate() {
+        return departureDate;
     }
 
     @Override

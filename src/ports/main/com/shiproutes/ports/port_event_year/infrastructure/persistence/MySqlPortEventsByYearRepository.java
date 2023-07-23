@@ -2,8 +2,8 @@ package com.shiproutes.ports.port_event_year.infrastructure.persistence;
 
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearRepository;
-import com.shiproutes.ports.port_event_year.domain.Year;
 import com.shiproutes.ports.port_event_year.infrastructure.persistence.hibernate.HibernatePortEventsByYearEntity;
+import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;

@@ -6,6 +6,8 @@ import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.LongMother;
 import com.shiproutes.shared.domain.UuidMother;
+import com.shiproutes.shared.domain.Year;
+import com.shiproutes.shared.domain.YearMother;
 import com.shiproutes.shared.domain.ports.CoordinatesMother;
 import com.shiproutes.shared.domain.ports.PortIdMother;
 

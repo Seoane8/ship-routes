@@ -1,5 +1,7 @@
 package com.shiproutes.routes.journey.domain;
 
+import com.shiproutes.routes.shared.domain.JourneyRemovedEvent;
+
 public class JourneyRemovedEventMother {
 
     public static JourneyRemovedEvent from(Journey journey) {
