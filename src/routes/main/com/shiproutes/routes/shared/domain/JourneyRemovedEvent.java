@@ -49,6 +49,18 @@ public class JourneyRemovedEvent extends DomainEvent {
         return "journey.removed";
     }
 
+    public String originPort() {
+        return originPort;
+    }
+
+    public String destinationPort() {
+        return destinationPort;
+    }
+
+    public Instant departureDate() {
+        return departureDate;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{

@@ -22,6 +22,18 @@ public class JourneysByMonthMother {
         );
     }
 
+    public static JourneysByMonth initialized(Journey journey) {
+        return new JourneysByMonth(
+            JourneysByMonthIdMother.random(),
+            journey.originPort(),
+            journey.destinationPort(),
+            journey.path(),
+            Month.fromInstant(journey.departureDate().value()),
+            Year.fromInstant(journey.departureDate().value()),
+            JourneysCounter.initialize()
+        );
+    }
+
     public static JourneysByMonth fromJourney(Journey journey) {
         return new JourneysByMonth(
             JourneysByMonthIdMother.random(),
@@ -46,15 +58,15 @@ public class JourneysByMonthMother {
         );
     }
 
-    public static JourneysByMonth firstFromJourney(Journey journey) {
+    public static JourneysByMonth decrementing(JourneysByMonth journeysByMonth) {
         return new JourneysByMonth(
-            JourneysByMonthIdMother.random(),
-            journey.originPort(),
-            journey.destinationPort(),
-            journey.path(),
-            Month.fromInstant(journey.departureDate().value()),
-            Year.fromInstant(journey.departureDate().value()),
-            new JourneysCounter(1L)
+            journeysByMonth.id(),
+            journeysByMonth.originPort(),
+            journeysByMonth.destinationPort(),
+            journeysByMonth.path(),
+            journeysByMonth.month(),
+            journeysByMonth.year(),
+            journeysByMonth.journeys().decrement()
         );
     }
 }
