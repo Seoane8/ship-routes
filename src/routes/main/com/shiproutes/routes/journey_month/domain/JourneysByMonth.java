@@ -1,5 +1,6 @@
 package com.shiproutes.routes.journey_month.domain;
 
+import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.Month;
 import com.shiproutes.shared.domain.Year;
