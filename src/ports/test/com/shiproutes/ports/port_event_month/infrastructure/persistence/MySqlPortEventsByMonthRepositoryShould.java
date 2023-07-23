@@ -1,10 +1,10 @@
 package com.shiproutes.ports.port_event_month.infrastructure.persistence;
 
 import com.shiproutes.ports.port_event_month.PortEventsByMonthModuleInfrastructureTestCase;
-import com.shiproutes.ports.port_event_month.domain.MonthMother;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthMother;
-import com.shiproutes.ports.port_event_year.domain.YearMother;
+import com.shiproutes.shared.domain.MonthMother;
+import com.shiproutes.shared.domain.YearMother;
 import com.shiproutes.shared.domain.ports.PortIdMother;
 import org.junit.jupiter.api.Test;
 

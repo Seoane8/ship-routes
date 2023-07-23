@@ -1,11 +1,11 @@
 package com.shiproutes.ports.port_event_month.infrastructure.persistence.hibernate;
 
-import com.shiproutes.ports.port_event_month.domain.Month;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthId;
-import com.shiproutes.ports.port_event_year.domain.Year;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
+import com.shiproutes.shared.domain.Month;
+import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.Latitude;
 import com.shiproutes.shared.domain.ports.Longitude;

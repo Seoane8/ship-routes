@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event_year.domain;
 
+import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;

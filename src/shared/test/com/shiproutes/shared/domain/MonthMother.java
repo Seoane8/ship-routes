@@ -1,6 +1,4 @@
-package com.shiproutes.ports.port_event_month.domain;
-
-import com.shiproutes.shared.domain.MotherCreator;
+package com.shiproutes.shared.domain;
 
 public class MonthMother {
     public static Month random() {

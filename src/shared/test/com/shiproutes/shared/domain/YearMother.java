@@ -1,6 +1,4 @@
-package com.shiproutes.ports.port_event_year.domain;
-
-import com.shiproutes.shared.domain.MotherCreator;
+package com.shiproutes.shared.domain;
 
 public class YearMother {
 

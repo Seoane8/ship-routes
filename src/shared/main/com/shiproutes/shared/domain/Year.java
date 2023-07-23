@@ -1,4 +1,4 @@
-package com.shiproutes.ports.port_event_year.domain;
+package com.shiproutes.shared.domain;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
