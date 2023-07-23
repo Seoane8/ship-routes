@@ -1,40 +1,37 @@
-package com.shiproutes.routes.journey_month.domain;
+package com.shiproutes.routes.journey_year.domain;
 
 import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.RoutePath;
-import com.shiproutes.shared.domain.Month;
 import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Objects;
 
-public class JourneysByMonth {
+public class JourneysByYear {
 
-    private final JourneysByMonthId id;
+    private final JourneysByYearId id;
     private final PortId originPort;
     private final PortId destinationPort;
     private final RoutePath path;
-    private final Month month;
     private final Year year;
     private JourneysCounter journeys;
 
-    public JourneysByMonth(JourneysByMonthId id, PortId originPort, PortId destinationPort, RoutePath path,
-                           Month month, Year year, JourneysCounter journeys) {
+    public JourneysByYear(JourneysByYearId id, PortId originPort, PortId destinationPort, RoutePath path,
+                          Year year, JourneysCounter journeys) {
         this.id = id;
         this.originPort = originPort;
         this.destinationPort = destinationPort;
         this.path = path;
-        this.month = month;
         this.year = year;
         this.journeys = journeys;
     }
 
-    public static JourneysByMonth create(JourneysByMonthId id, PortId originPort, PortId destinationPort,
-                                         RoutePath path, Month month, Year year) {
-        return new JourneysByMonth(id, originPort, destinationPort, path, month, year, JourneysCounter.initialize());
+    public static JourneysByYear create(JourneysByYearId id, PortId originPort, PortId destinationPort,
+                                        RoutePath path, Year year) {
+        return new JourneysByYear(id, originPort, destinationPort, path, year, JourneysCounter.initialize());
     }
 
-    public JourneysByMonthId id() {
+    public JourneysByYearId id() {
         return id;
     }
 
@@ -50,9 +47,6 @@ public class JourneysByMonth {
         return path;
     }
 
-    public Month month() {
-        return month;
-    }
 
     public Year year() {
         return year;
@@ -73,16 +67,16 @@ public class JourneysByMonth {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof JourneysByMonth)) return false;
-        JourneysByMonth that = (JourneysByMonth) o;
+        if (!(o instanceof JourneysByYear)) return false;
+        JourneysByYear that = (JourneysByYear) o;
         return Objects.equals(id, that.id) && Objects.equals(originPort, that.originPort)
             && Objects.equals(destinationPort, that.destinationPort) && Objects.equals(path, that.path)
-            && Objects.equals(month, that.month) && Objects.equals(year, that.year)
+            && Objects.equals(year, that.year)
             && Objects.equals(journeys, that.journeys);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, originPort, destinationPort, path, month, year, journeys);
+        return Objects.hash(id, originPort, destinationPort, path, year, journeys);
     }
 }

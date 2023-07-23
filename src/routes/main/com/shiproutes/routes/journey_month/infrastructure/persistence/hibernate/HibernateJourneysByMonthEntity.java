@@ -2,7 +2,7 @@ package com.shiproutes.routes.journey_month.infrastructure.persistence.hibernate
 
 import com.shiproutes.routes.journey_month.domain.JourneysByMonth;
 import com.shiproutes.routes.journey_month.domain.JourneysByMonthId;
-import com.shiproutes.routes.journey_month.domain.JourneysCounter;
+import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePathConverter;
 import com.shiproutes.shared.domain.Month;

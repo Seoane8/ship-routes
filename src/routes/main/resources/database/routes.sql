@@ -40,6 +40,20 @@ CREATE TABLE IF NOT EXISTS journeys_month
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS journeys_year
+(
+    id              CHAR(36) NOT NULL,
+    originPort      CHAR(36) NOT NULL,
+    destinationPort CHAR(36) NOT NULL,
+    path            JSON,
+    year            INT      NOT NULL,
+    journeys        BIGINT   NOT NULL,
+    PRIMARY KEY (id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS ports
 (
     id        CHAR(36) NOT NULL,
