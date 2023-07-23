@@ -1,5 +1,7 @@
 package com.shiproutes.routes.journey.domain;
 
+import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
+
 public class JourneyCreatedEventMother {
 
     public static JourneyCreatedEvent from(Journey journey) {
