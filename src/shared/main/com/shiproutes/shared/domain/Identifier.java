@@ -22,6 +22,11 @@ public abstract class Identifier implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return this.value();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Identifier)) return false;
