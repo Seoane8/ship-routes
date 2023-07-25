@@ -3,6 +3,7 @@ package com.shiproutes.routes.route.domain;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface RouteRepository {
 
@@ -11,5 +12,7 @@ public interface RouteRepository {
     Optional<Route> search(RouteId id);
 
     Optional<Route> search(PortId originPort, PortId destinationPort);
+
+    Set<Route> searchAll();
 
 }

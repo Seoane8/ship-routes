@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("routes-transaction_manager")
@@ -39,5 +41,10 @@ public class MySqlRouteRepository extends HibernateRepository<HibernateRouteEnti
             .setParameter("destinationPort", destinationPort.value())
             .uniqueResultOptional()
             .map(HibernateRouteEntity::toEntity);
+    }
+
+    @Override
+    public Set<Route> searchAll() {
+        return all().stream().map(HibernateRouteEntity::toEntity).collect(Collectors.toSet());
     }
 }
