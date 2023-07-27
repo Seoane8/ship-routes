@@ -23,7 +23,7 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
 
     @Test
     void create_a_new_route() {
-        Route route = RouteMother.random();
+        Route route = RouteMother.randomNew();
         shouldExistRoutePorts(route);
         shouldNotExists(route);
 

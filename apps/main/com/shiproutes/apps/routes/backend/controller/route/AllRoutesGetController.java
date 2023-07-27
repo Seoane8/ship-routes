@@ -32,6 +32,7 @@ public class AllRoutesGetController extends ApiController {
                     put("origin_port", route.originPort());
                     put("destination_port", route.destinationPort());
                     put("path", route.path().stream().map(ArrayList::new).collect(Collectors.toCollection(ArrayList::new)));
+                    put("journeys", route.journeys());
                 }}
             ).collect(Collectors.toCollection(HashSet::new));
 

@@ -43,7 +43,7 @@ public class JourneysBetweenDatesGetController extends ApiController {
                     .map(ArrayList::new)
                     .collect(Collectors.toCollection(ArrayList::new))
                 );
-                put("total", journey.journeys());
+                put("journeys", journey.journeys());
             }})
             .collect(Collectors.toCollection(HashSet::new));
 

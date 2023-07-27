@@ -10,7 +10,7 @@ import com.shiproutes.routes.shared.domain.JourneyRemovedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DecrementJourneysByMonthOnJourneyRemovedShould extends JourneysByMonthModuleUnitTestCase {
+class DecrementJourneysOnJourneyRemovedShould extends JourneysByMonthModuleUnitTestCase {
 
     DecrementJourneysByMonthOnJourneyRemoved listener;
 

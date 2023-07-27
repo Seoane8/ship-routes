@@ -79,7 +79,7 @@ class RoutePathFinderShould extends RouteModuleUnitTestCase {
     void create_new_route_when_exist_reversed_route() {
         Route reversedRoute = RouteMother.random();
         shouldExists(reversedRoute);
-        Route route = RouteMother.reverse(reversedRoute);
+        Route route = RouteMother.reverseNew(reversedRoute);
         shouldGenerateUuid(route.id().value());
 
         finder.find(route.originPort(), route.destinationPort());
@@ -102,7 +102,7 @@ class RoutePathFinderShould extends RouteModuleUnitTestCase {
 
     @Test
     void create_new_route() {
-        Route route = RouteMother.random();
+        Route route = RouteMother.randomNew();
         shouldNotExists(route);
         shouldExistRoutePorts(route);
         shouldGeneratePath(route.path());

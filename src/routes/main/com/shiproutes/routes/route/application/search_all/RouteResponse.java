@@ -11,12 +11,14 @@ public class RouteResponse implements Response {
     private final String originPort;
     private final String destinationPort;
     private final List<List<Double>> path;
+    private final Long journeys;
 
-    public RouteResponse(String id, String originPort, String destinationPort, List<List<Double>> path) {
+    public RouteResponse(String id, String originPort, String destinationPort, List<List<Double>> path, Long journeys) {
         this.id = id;
         this.originPort = originPort;
         this.destinationPort = destinationPort;
         this.path = path;
+        this.journeys = journeys;
     }
 
     public static RouteResponse from(Route entity) {
@@ -24,8 +26,8 @@ public class RouteResponse implements Response {
             entity.id().value(),
             entity.originPort().value(),
             entity.destinationPort().value(),
-            entity.path().toPrimitives()
-        );
+            entity.path().toPrimitives(),
+            entity.journeys().value());
     }
 
     public String id() {
@@ -44,16 +46,22 @@ public class RouteResponse implements Response {
         return path;
     }
 
+    public Long journeys() {
+        return journeys;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof RouteResponse)) return false;
         RouteResponse that = (RouteResponse) o;
-        return Objects.equals(id, that.id) && Objects.equals(originPort, that.originPort) && Objects.equals(destinationPort, that.destinationPort) && Objects.equals(path, that.path);
+        return Objects.equals(id, that.id) && Objects.equals(originPort, that.originPort)
+            && Objects.equals(destinationPort, that.destinationPort) && Objects.equals(path, that.path)
+            && Objects.equals(journeys, that.journeys);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, originPort, destinationPort, path);
+        return Objects.hash(id, originPort, destinationPort, path, journeys);
     }
 }

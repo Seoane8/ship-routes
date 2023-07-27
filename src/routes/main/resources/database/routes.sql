@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS routes
     originPort      CHAR(36) NOT NULL,
     destinationPort CHAR(36) NOT NULL,
     path            JSON     NOT NULL,
+    journeys        BIGINT   NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB

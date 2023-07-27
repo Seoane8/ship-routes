@@ -2,6 +2,7 @@ package com.shiproutes.routes.route.infrastructure.persistence.hibernate;
 
 import com.shiproutes.routes.route.domain.Route;
 import com.shiproutes.routes.route.domain.RouteId;
+import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePathConverter;
 import com.shiproutes.shared.domain.ports.PortId;
@@ -22,6 +23,7 @@ public final class HibernateRouteEntity {
     private String destinationPort;
     @Convert(converter = RoutePathConverter.class)
     private List<List<Double>> path;
+    private Long journeys;
 
     public HibernateRouteEntity() {
     }
@@ -31,7 +33,7 @@ public final class HibernateRouteEntity {
         this.originPort = route.originPort().value();
         this.destinationPort = route.destinationPort().value();
         this.path = route.path().toPrimitives();
-
+        this.journeys = route.journeys().value();
     }
 
     public Route toEntity() {
@@ -39,7 +41,7 @@ public final class HibernateRouteEntity {
             new RouteId(this.id),
             new PortId(this.originPort),
             new PortId(this.destinationPort),
-            RoutePath.fromPrimitives(this.path)
-        );
+            RoutePath.fromPrimitives(this.path),
+            new JourneysCounter(this.journeys));
     }
 }

@@ -10,7 +10,7 @@ import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class IncrementJourneysByMonthOnJourneyCreatedShould extends JourneysByMonthModuleUnitTestCase {
+class IncrementJourneysOnJourneyCreatedShould extends JourneysByMonthModuleUnitTestCase {
 
     IncrementJourneysByMonthOnJourneyCreated listener;
 
