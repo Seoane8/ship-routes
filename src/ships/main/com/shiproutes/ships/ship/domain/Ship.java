@@ -2,6 +2,7 @@ package com.shiproutes.ships.ship.domain;
 
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.ShipCreatedEvent;
 import com.shiproutes.shared.domain.Teus;
 
 import java.util.Objects;

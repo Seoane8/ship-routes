@@ -1,5 +1,6 @@
 package com.shiproutes.ships.ship.application.create;
 
+import com.shiproutes.shared.domain.ShipCreatedEvent;
 import com.shiproutes.ships.ship.ShipModuleUnitTestCase;
 import com.shiproutes.ships.ship.domain.*;
 import org.junit.jupiter.api.BeforeEach;
