@@ -47,6 +47,10 @@ public final class PortCreatedEvent extends DomainEvent {
         return longitude;
     }
 
+    public String locode() {
+        return locode;
+    }
+
     @Override
     public String eventName() {
         return "port.created";
