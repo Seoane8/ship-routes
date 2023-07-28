@@ -1,5 +1,6 @@
 package com.shiproutes.apps;
 
+import com.shiproutes.apps.ingest.backend.IngestApplication;
 import com.shiproutes.apps.ports.backend.PortsApplication;
 import com.shiproutes.apps.routes.backend.RoutesApplication;
 import com.shiproutes.apps.ships.backend.ShipsApplication;
@@ -65,18 +66,20 @@ public class Starter {
     }
 
     private static HashMap<String, Class<?>> applications() {
-        return new HashMap<>(){{
+        return new HashMap<>() {{
             put("ships", ShipsApplication.class);
             put("ports", PortsApplication.class);
             put("routes", RoutesApplication.class);
+            put("ingest", IngestApplication.class);
         }};
     }
 
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
-        return new HashMap<>(){{
+        return new HashMap<>() {{
             put("ships", ShipsApplication.commands());
             put("ports", PortsApplication.commands());
             put("routes", RoutesApplication.commands());
+            put("ingest", IngestApplication.commands());
         }};
     }
 

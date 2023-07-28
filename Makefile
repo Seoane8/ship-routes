@@ -35,3 +35,6 @@ start-ports:
 .PHONY: start-routes
 start-routes:
 	@./gradlew bootRun --args='routes server'
+.PHONY: start-ingest
+start-ingest:
+	@./gradlew bootRun --args='ingest server'
