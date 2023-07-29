@@ -15,7 +15,7 @@ public final class PortShipCreator {
         this.repository = repository;
     }
 
-    public void crate(IMO imo, Teus teus) {
+    public void create(IMO imo, Teus teus) {
         if (repository.search(imo).isPresent()) return;
 
         PortShip ship = new PortShip(imo, teus);

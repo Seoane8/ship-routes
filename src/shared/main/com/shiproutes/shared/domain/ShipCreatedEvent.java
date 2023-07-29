@@ -34,6 +34,10 @@ public final class ShipCreatedEvent extends DomainEvent {
         return "ship.created";
     }
 
+    public Integer teus() {
+        return teus;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
