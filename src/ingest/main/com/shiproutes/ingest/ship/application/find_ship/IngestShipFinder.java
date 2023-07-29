@@ -1,6 +1,7 @@
 package com.shiproutes.ingest.ship.application.find_ship;
 
 import com.shiproutes.ingest.ship.domain.IngestShipRepository;
+import com.shiproutes.ingest.ship.domain.ShipNotExist;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 
@@ -14,6 +15,6 @@ public final class IngestShipFinder {
     }
 
     public IngestShipResponse find(IMO imo) {
-        return repository.search(imo).map(IngestShipResponse::from).orElseThrow();
+        return repository.search(imo).map(IngestShipResponse::from).orElseThrow(() -> new ShipNotExist(imo));
     }
 }
