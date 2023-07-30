@@ -18,16 +18,12 @@ public final class PortCreator {
     }
 
     public void create(PortId id, PortName name, Locode locode, Coordinates coordinates) throws PortAlreadyExists {
-        ensurePortNotExist(id);
+        if (repository.search(id).isPresent()) return;
 
         Port port = Port.create(id, name, locode, coordinates);
 
         repository.save(port);
         eventBus.publish(port.pullDomainEvents());
-    }
-
-    private void ensurePortNotExist(PortId id) throws PortAlreadyExists {
-        if (repository.search(id).isPresent()) throw new PortAlreadyExists(id);
     }
 
 

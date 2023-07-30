@@ -41,13 +41,11 @@ class PortCreatorShould extends PortModuleUnitTestCase {
     }
 
     @Test
-    void throw_exception_when_port_already_exists() {
-        assertThrows(Exception.class, () -> {
-            Port port = PortMother.randomNew();
+    void do_nothing_when_port_already_exists() {
+        Port port = PortMother.randomNew();
 
-            shouldExists(port);
+        shouldExists(port);
 
-            creator.create(port.id(), port.name(), port.locode(), port.coordinates());
-        });
+        creator.create(port.id(), port.name(), port.locode(), port.coordinates());
     }
 }

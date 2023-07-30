@@ -36,7 +36,7 @@ class PortPostControllerShould extends PortApplicationTestCase {
     }
 
     @Test
-    void fail_when_port_already_exists() throws Exception {
+    void do_nothing_when_port_already_exists() throws Exception {
         String port = "{" +
             "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
             "\"name\": \"Dunkerque\", " +
@@ -47,7 +47,7 @@ class PortPostControllerShould extends PortApplicationTestCase {
 
         givenThenIsAExistentPort(port);
 
-        assertRequestWithBody("POST", "/ports", port, 409);
+        assertRequestWithBody("POST", "/ports", port, 201);
     }
 
 
