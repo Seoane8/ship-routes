@@ -2,7 +2,7 @@ package com.shiproutes.ingest.port_event.application.ingest;
 
 import com.shiproutes.ingest.port_event.PortEventModuleUnitTestCase;
 import com.shiproutes.ingest.port_event.domain.IngestPortEventCommandMother;
-import com.shiproutes.ingest.port_event.domain.PortEventIngestedEvent;
+import com.shiproutes.shared.domain.PortEventIngestedEvent;
 import com.shiproutes.ingest.port_event.domain.PortEventIngestedEventMother;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.ports.Coordinates;

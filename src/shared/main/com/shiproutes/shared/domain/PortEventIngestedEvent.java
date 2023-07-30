@@ -1,4 +1,4 @@
-package com.shiproutes.ingest.port_event.domain;
+package com.shiproutes.shared.domain;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 

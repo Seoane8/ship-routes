@@ -3,7 +3,7 @@ package com.shiproutes.ingest.port_event.application.ingest;
 import com.shiproutes.ingest.port.application.find_id.FindIngestPortIdQuery;
 import com.shiproutes.ingest.port.application.find_id.IngestPortIdResponse;
 import com.shiproutes.ingest.port_event.domain.PortCreator;
-import com.shiproutes.ingest.port_event.domain.PortEventIngestedEvent;
+import com.shiproutes.shared.domain.PortEventIngestedEvent;
 import com.shiproutes.ingest.port_event.domain.PortEventType;
 import com.shiproutes.ingest.port_event.domain.ShipCreator;
 import com.shiproutes.ingest.ship.application.find_ship.FindIngestShipQuery;
