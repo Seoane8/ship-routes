@@ -64,7 +64,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         PortId portId = new PortId(event.portId());
         shouldNotExistShip(imo);
         shouldExistPort(portId, command.locode());
-        shouldGenerateUuids(imo.value(), event.aggregateId());
+        shouldGenerateUuids(event.aggregateId());
 
         handler.handle(command);
 
@@ -79,7 +79,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         PortId portId = new PortId(event.portId());
         shouldNotExistShip(imo);
         shouldNotExistPort(command.locode());
-        shouldGenerateUuids(imo.value(), portId.value(), event.aggregateId());
+        shouldGenerateUuids(portId.value(), event.aggregateId());
 
         handler.handle(command);
 
@@ -110,7 +110,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         PortId portId = new PortId(event.portId());
         shouldNotExistShip(imo);
         shouldExistPort(portId, command.locode());
-        shouldGenerateUuids(imo.value(), event.aggregateId());
+        shouldGenerateUuids(event.aggregateId());
 
         handler.handle(command);
 

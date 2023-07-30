@@ -1,11 +1,13 @@
 package com.shiproutes.ingest.port_event.application.ingest;
 
 import com.shiproutes.ingest.port_event.domain.PortEventType;
+import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.command.CommandHandler;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.Latitude;
 import com.shiproutes.shared.domain.ports.Longitude;
 
+@Service
 public class IngestPortEventCommandHandler implements CommandHandler<IngestPortEventCommand> {
 
     private final PortEventIngestor ingestor;

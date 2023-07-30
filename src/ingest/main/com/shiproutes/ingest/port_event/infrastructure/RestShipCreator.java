@@ -2,6 +2,7 @@ package com.shiproutes.ingest.port_event.infrastructure;
 
 import com.shiproutes.ingest.port_event.domain.ShipCreator;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.infrastructure.config.Parameter;
 import com.shiproutes.shared.infrastructure.config.ParameterNotExist;
 import org.springframework.web.client.RestTemplate;
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.Serializable;
 import java.util.HashMap;
 
+@Service
 public class RestShipCreator implements ShipCreator {
 
     private final RestTemplate restTemplate;

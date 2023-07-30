@@ -42,7 +42,7 @@ public class PortEventIngestor {
                        String imo, String shipName, Integer teus, Instant timestamp, PortEventType eventType) {
 
         IMO shipId = searchIMO(imo).orElseGet(() -> {
-            IMO newImo = new IMO(uuidGenerator.generate());
+            IMO newImo = new IMO(imo);
             shipCreator.create(newImo, shipName, teus);
             return newImo;
         });
