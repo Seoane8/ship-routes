@@ -10,8 +10,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({JourneyUnlinkedEvent.class})
-public class CreateJourneyOnJourneyUnlinked {
+public class CreateJourneyOnJourneyUnlinked implements DomainEventSubscriber<JourneyUnlinkedEvent> {
 
     private final JourneyFromArrivalCreator fromArrivalCreator;
     private final JourneyFromDepartureCreator fromDepartureCreator;

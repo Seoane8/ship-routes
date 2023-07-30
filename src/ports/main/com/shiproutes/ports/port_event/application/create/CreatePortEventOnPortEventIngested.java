@@ -11,8 +11,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({PortEventIngestedEvent.class})
-public class CreatePortEventOnPortEventIngested {
+public class CreatePortEventOnPortEventIngested implements DomainEventSubscriber<PortEventIngestedEvent> {
 
     private final PortEventCreator creator;
 

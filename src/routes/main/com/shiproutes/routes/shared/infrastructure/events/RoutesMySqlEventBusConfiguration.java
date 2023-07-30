@@ -1,4 +1,4 @@
-package com.shiproutes.ships.shared.infrastructure.persistence;
+package com.shiproutes.routes.shared.infrastructure.events;
 
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventsInformation;
 import com.shiproutes.shared.infrastructure.bus.event.mysql.MySqlDomainEventsConsumer;
@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ShipsMySqlEventBusConfiguration {
+public class RoutesMySqlEventBusConfiguration {
     private final SessionFactory sessionFactory;
     private final DomainEventsInformation domainEventsInformation;
     private final SpringApplicationEventBus bus;
 
-    public ShipsMySqlEventBusConfiguration(
-        @Qualifier("ships-session_factory") SessionFactory sessionFactory,
+    public RoutesMySqlEventBusConfiguration(
+        @Qualifier("routes-session_factory") SessionFactory sessionFactory,
         DomainEventsInformation domainEventsInformation,
         SpringApplicationEventBus bus
     ) {
@@ -26,12 +26,12 @@ public class ShipsMySqlEventBusConfiguration {
     }
 
     @Bean
-    public MySqlEventBus shipsMysqlEventBus() {
+    public MySqlEventBus routesMysqlEventBus() {
         return new MySqlEventBus(sessionFactory);
     }
 
     @Bean
-    public MySqlDomainEventsConsumer shipsMySqlDomainEventsConsumer() {
+    public MySqlDomainEventsConsumer routesMySqlDomainEventsConsumer() {
         return new MySqlDomainEventsConsumer(sessionFactory, domainEventsInformation, bus);
     }
 }

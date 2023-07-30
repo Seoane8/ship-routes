@@ -65,7 +65,7 @@ public class PortEventIngestedEvent extends DomainEvent {
         return new HashMap<>() {{
             put("portId", portId);
             put("shipId", shipId);
-            put("date", date);
+            put("date", date.toString());
             put("type", type);
 
         }};
@@ -80,7 +80,7 @@ public class PortEventIngestedEvent extends DomainEvent {
             occurredOn,
             (String) body.get("portId"),
             (String) body.get("shipId"),
-            (Instant) body.get("date"),
+            Instant.parse(body.get("date").toString()),
             (String) body.get("type")
         );
     }

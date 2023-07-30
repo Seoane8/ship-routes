@@ -66,7 +66,7 @@ public final class PortEventCreated extends DomainEvent {
             put("portId", portId);
             put("type", type);
             put("shipId", shipId);
-            put("date", date);
+            put("date", date.toString());
         }};
     }
 
@@ -80,7 +80,7 @@ public final class PortEventCreated extends DomainEvent {
             (String) body.get("portId"),
             (String) body.get("type"),
             (String) body.get("shipId"),
-            (Instant) body.get("date")
+            Instant.parse(body.get("date").toString())
         );
     }
 

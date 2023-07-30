@@ -2,6 +2,7 @@ package com.shiproutes.apps;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 import com.shiproutes.shared.domain.bus.event.EventBus;
+import com.shiproutes.shared.infrastructure.bus.event.spring.SpringApplicationEventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +27,7 @@ public abstract class ApplicationTestCase {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private EventBus eventBus;
+    private SpringApplicationEventBus eventBus;
 
     protected void assertResponse(
         String endpoint,

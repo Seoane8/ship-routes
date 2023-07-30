@@ -10,8 +10,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({PortEventCreated.class})
-public class IncrementPortEventsByMonthOnPortEventCreated {
+public class IncrementPortEventsByMonthOnPortEventCreated implements DomainEventSubscriber<PortEventCreated> {
 
     private final PortEventsByMonthIncrementer incrementer;
 

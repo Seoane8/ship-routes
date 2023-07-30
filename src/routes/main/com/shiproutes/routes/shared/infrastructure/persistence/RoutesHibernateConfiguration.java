@@ -1,4 +1,4 @@
-package com.shiproutes.ports.shared.infrastructure;
+package com.shiproutes.routes.shared.infrastructure.persistence;
 
 import com.shiproutes.shared.infrastructure.config.Parameter;
 import com.shiproutes.shared.infrastructure.config.ParameterNotExist;
@@ -14,34 +14,34 @@ import java.io.IOException;
 
 @Configuration
 @EnableTransactionManagement
-public class PortsHibernateConfiguration {
+public class RoutesHibernateConfiguration {
     private final HibernateConfigurationFactory factory;
     private final Parameter config;
-    private final String CONTEXT_NAME = "ports";
+    private final String CONTEXT_NAME = "routes";
 
-    public PortsHibernateConfiguration(HibernateConfigurationFactory factory, Parameter config) {
+    public RoutesHibernateConfiguration(HibernateConfigurationFactory factory, Parameter config) {
         this.factory = factory;
         this.config = config;
     }
 
-    @Bean("ports-transaction_manager")
+    @Bean("routes-transaction_manager")
     public PlatformTransactionManager hibernateTransactionManager() throws IOException, ParameterNotExist {
         return factory.hibernateTransactionManager(sessionFactory());
     }
 
-    @Bean("ports-session_factory")
+    @Bean("routes-session_factory")
     public LocalSessionFactoryBean sessionFactory() throws IOException, ParameterNotExist {
         return factory.sessionFactory(CONTEXT_NAME, dataSource());
     }
 
-    @Bean("ports-data_source")
+    @Bean("routes-data_source")
     public DataSource dataSource() throws IOException, ParameterNotExist {
         return factory.dataSource(
-            config.get("PORTS_DATABASE_HOST"),
-            config.getInt("PORTS_DATABASE_PORT"),
-            config.get("PORTS_DATABASE_NAME"),
-            config.get("PORTS_DATABASE_USER"),
-            config.get("PORTS_DATABASE_PASSWORD")
+            config.get("ROUTES_DATABASE_HOST"),
+            config.getInt("ROUTES_DATABASE_PORT"),
+            config.get("ROUTES_DATABASE_NAME"),
+            config.get("ROUTES_DATABASE_USER"),
+            config.get("ROUTES_DATABASE_PASSWORD")
         );
     }
 }

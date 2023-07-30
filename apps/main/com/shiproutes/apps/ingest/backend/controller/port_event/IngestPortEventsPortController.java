@@ -61,7 +61,7 @@ public class IngestPortEventsPortController extends ApiController {
     }
 
     public Job job(Resource resource) {
-        return new JobBuilder("eventsIngestionJob")
+        return new JobBuilder("eventsIngestionJob-" + Instant.now().toString())
             .repository(jobRepository)
             .start(step(resource))
             .build();

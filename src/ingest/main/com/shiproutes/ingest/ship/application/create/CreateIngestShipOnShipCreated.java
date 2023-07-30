@@ -7,8 +7,7 @@ import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({ShipCreatedEvent.class})
-public class CreateIngestShipOnShipCreated {
+public class CreateIngestShipOnShipCreated implements DomainEventSubscriber<ShipCreatedEvent> {
 
     private final IngestShipCreator creator;
 

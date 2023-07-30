@@ -1,39 +1,36 @@
 package com.shiproutes.shared.infrastructure.bus.event;
 
-import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.bus.event.DomainEvent;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
+import com.shiproutes.shared.domain.bus.query.Query;
 import org.reflections.Reflections;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
+import java.lang.reflect.ParameterizedType;
+import java.util.*;
 
-@Service
 public final class DomainEventSubscribersInformation {
-    HashMap<Class<?>, DomainEventSubscriberInformation> information;
+    HashMap<String, DomainEventSubscriberInformation> information;
 
-    public DomainEventSubscribersInformation(HashMap<Class<?>, DomainEventSubscriberInformation> information) {
+    public DomainEventSubscribersInformation(String packageName) {
+        this(scanDomainEventSubscribers(packageName));
+    }
+
+    public DomainEventSubscribersInformation(HashMap<String, DomainEventSubscriberInformation> information) {
         this.information = information;
     }
 
-    public DomainEventSubscribersInformation() {
-        this(scanDomainEventSubscribers());
-    }
+    private static HashMap<String, DomainEventSubscriberInformation> scanDomainEventSubscribers(String packageName) {
+        Reflections reflections = new Reflections(packageName);
+        Set<Class<? extends DomainEventSubscriber>> subscribers = reflections.getSubTypesOf(DomainEventSubscriber.class);
 
-    private static HashMap<Class<?>, DomainEventSubscriberInformation> scanDomainEventSubscribers() {
-        Reflections reflections = new Reflections("com.shiproutes");
-        Set<Class<?>> subscribers = reflections.getTypesAnnotatedWith(DomainEventSubscriber.class);
+        HashMap<String, DomainEventSubscriberInformation> subscribersInformation = new HashMap<>();
 
-        HashMap<Class<?>, DomainEventSubscriberInformation> subscribersInformation = new HashMap<>();
+        for (Class<? extends DomainEventSubscriber> subscriberClass : subscribers) {
+            ParameterizedType paramType = (ParameterizedType) subscriberClass.getGenericInterfaces()[0];
+            Class<? extends DomainEvent> domainEventClass = (Class<? extends DomainEvent>) paramType.getActualTypeArguments()[0];
+            DomainEventSubscriberInformation subscriberInformation = new DomainEventSubscriberInformation(subscriberClass, Collections.singletonList(domainEventClass));
 
-        for (Class<?> subscriberClass : subscribers) {
-            DomainEventSubscriber annotation = subscriberClass.getAnnotation(DomainEventSubscriber.class);
-
-            subscribersInformation.put(
-                subscriberClass,
-                new DomainEventSubscriberInformation(subscriberClass, Arrays.asList(annotation.value()))
-            );
+            subscribersInformation.put(subscriberInformation.formatRabbitMqQueueName(), subscriberInformation);
         }
 
         return subscribersInformation;
@@ -41,6 +38,16 @@ public final class DomainEventSubscribersInformation {
 
     public Collection<DomainEventSubscriberInformation> all() {
         return information.values();
+    }
+
+    public DomainEventSubscriberInformation searchRabbitMqQueue(String queue) throws Exception {
+        DomainEventSubscriberInformation subscriberInformation = information.get(queue);
+
+        if (subscriberInformation == null) {
+            throw new Exception(String.format("There are not registered subscribers for <%s> queue", queue));
+        }
+
+        return subscriberInformation;
     }
 
     public String[] rabbitMqFormattedNames() {
