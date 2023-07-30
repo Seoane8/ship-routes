@@ -24,12 +24,12 @@ class ShipPostControllerShould extends ShipApplicationTestCase {
     }
 
     @Test
-    void fail_when_ship_already_exists() throws Exception {
+    void do_nothing_when_ship_already_exists() throws Exception {
         String ship = "{\"imo\": \"7052363\", \"name\": \"ASTRON\", \"teus\": 113}";
 
         givenThereIsAExistentShip(ship);
 
-        assertRequestWithBody("POST", "/ships", ship, 409);
+        assertRequestWithBody("POST", "/ships", ship, 201);
     }
 
     private void givenThereIsAExistentShip(String ship) throws Exception {

@@ -20,7 +20,7 @@ public final class ShipCreator {
     }
 
     public void create(IMO imo, ShipName name, Teus teus) throws ShipAlreadyExists {
-        ensureShipNotExists(imo);
+        if (repository.search(imo).isPresent()) return;
 
         Ship ship = Ship.create(imo, name, teus);
 
@@ -28,9 +28,4 @@ public final class ShipCreator {
         eventBus.publish(ship.pullDomainEvents());
     }
 
-    private void ensureShipNotExists(IMO imo) throws ShipAlreadyExists {
-        if (repository.search(imo).isPresent()) {
-            throw new ShipAlreadyExists(imo);
-        }
-    }
 }
