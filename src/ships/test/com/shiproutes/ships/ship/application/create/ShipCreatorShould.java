@@ -1,11 +1,12 @@
 package com.shiproutes.ships.ship.application.create;
 
+import com.shiproutes.shared.domain.ShipCreatedEvent;
 import com.shiproutes.ships.ship.ShipModuleUnitTestCase;
-import com.shiproutes.ships.ship.domain.*;
+import com.shiproutes.ships.ship.domain.Ship;
+import com.shiproutes.ships.ship.domain.ShipCreatedEventMother;
+import com.shiproutes.ships.ship.domain.ShipMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ShipCreatorShould extends ShipModuleUnitTestCase {
 
@@ -38,14 +39,12 @@ class ShipCreatorShould extends ShipModuleUnitTestCase {
     }
 
     @Test
-    void throw_an_exception_when_the_ship_already_exists() {
-        assertThrows(ShipAlreadyExists.class, () -> {
-            Ship ship = ShipMother.random();
+    void do_nothing_when_the_ship_already_exists() {
+        Ship ship = ShipMother.random();
 
-            shouldExists(ship);
+        shouldExists(ship);
 
-            creator.create(ship.imo(), ship.name(), ship.teus());
-        });
+        creator.create(ship.imo(), ship.name(), ship.teus());
     }
 
 }

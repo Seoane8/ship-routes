@@ -6,6 +6,7 @@ import com.shiproutes.shared.domain.bus.event.DomainEvent;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.Query;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.domain.bus.query.QueryHandlerExecutionError;
 import com.shiproutes.shared.domain.bus.query.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.test.context.ActiveProfiles;
@@ -54,6 +55,6 @@ public abstract class UnitTestCase {
     }
 
     public void shouldFailOnAsk(Query query, DomainError error) {
-        when(queryBus.ask(query)).thenThrow(error);
+        when(queryBus.ask(query)).thenThrow(new QueryHandlerExecutionError(error));
     }
 }

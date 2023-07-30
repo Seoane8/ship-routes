@@ -1,4 +1,4 @@
-package com.shiproutes.routes.shared.infrastructure;
+package com.shiproutes.routes.shared.infrastructure.persistence;
 
 import com.shiproutes.shared.infrastructure.config.Parameter;
 import com.shiproutes.shared.infrastructure.config.ParameterNotExist;

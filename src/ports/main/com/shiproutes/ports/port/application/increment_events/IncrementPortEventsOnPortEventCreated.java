@@ -8,8 +8,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({PortEventCreated.class})
-public final class IncrementPortEventsOnPortEventCreated {
+public final class IncrementPortEventsOnPortEventCreated implements DomainEventSubscriber<PortEventCreated> {
 
     private final PortEventsIncrementer incrementer;
 

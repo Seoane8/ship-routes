@@ -1,4 +1,4 @@
-package com.shiproutes.ships.ship.domain;
+package com.shiproutes.shared.domain;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -32,6 +32,10 @@ public final class ShipCreatedEvent extends DomainEvent {
     @Override
     public String eventName() {
         return "ship.created";
+    }
+
+    public Integer teus() {
+        return teus;
     }
 
     @Override

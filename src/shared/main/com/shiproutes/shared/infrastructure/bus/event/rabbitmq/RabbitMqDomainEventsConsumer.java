@@ -1,9 +1,10 @@
 package com.shiproutes.shared.infrastructure.bus.event.rabbitmq;
 
 import com.shiproutes.shared.domain.Service;
-import com.shiproutes.shared.domain.Utils;
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
+import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventJsonDeserializer;
+import com.shiproutes.shared.infrastructure.bus.event.DomainEventSubscriberInformation;
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventSubscribersInformation;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
@@ -25,7 +26,7 @@ public final class RabbitMqDomainEventsConsumer {
     private final DomainEventJsonDeserializer deserializer;
     private final ApplicationContext context;
     private final RabbitMqPublisher publisher;
-    private final HashMap<String, Object> domainEventSubscribers = new HashMap<>();
+    private final HashMap<String, DomainEventSubscriber> domainEventSubscribers = new HashMap<>();
     RabbitListenerEndpointRegistry registry;
     private DomainEventSubscribersInformation information;
 
@@ -53,22 +54,20 @@ public final class RabbitMqDomainEventsConsumer {
         container.start();
     }
 
-    @RabbitListener(id = CONSUMER_NAME, autoStartup = "false")
+    @RabbitListener(id = CONSUMER_NAME, autoStartup = "true", queues = "#{domainEventSubscribersInformation.rabbitMqFormattedNames()}")
     public void consumer(Message message) throws Exception {
         String serializedMessage = new String(message.getBody());
         DomainEvent domainEvent = deserializer.deserialize(serializedMessage);
 
         String queue = message.getMessageProperties().getConsumerQueue();
 
-        Object subscriber = domainEventSubscribers.containsKey(queue)
+        DomainEventSubscriber subscriber = domainEventSubscribers.containsKey(queue)
             ? domainEventSubscribers.get(queue)
             : subscriberFor(queue);
 
-        Method subscriberOnMethod = subscriber.getClass().getMethod("on", domainEvent.getClass());
-
         try {
-            subscriberOnMethod.invoke(subscriber, domainEvent);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException error) {
+            subscriber.on(domainEvent);
+        } catch (IllegalArgumentException error) {
             throw new Exception(String.format(
                 "The subscriber <%s> should implement a method `on` listening the domain event <%s>",
                 queue,
@@ -118,17 +117,11 @@ public final class RabbitMqDomainEventsConsumer {
         return (int) message.getMessageProperties().getHeaders().getOrDefault("redelivery_count", 0) >= MAX_RETRIES;
     }
 
-    private Object subscriberFor(String queue) throws Exception {
-        String[] queueParts = queue.split("\\.");
-        String subscriberName = Utils.toCamelFirstLower(queueParts[queueParts.length - 1]);
+    private DomainEventSubscriber subscriberFor(String queue) throws Exception {
+        DomainEventSubscriberInformation subscriberInformation = information.searchRabbitMqQueue(queue);
+        DomainEventSubscriber subscriber = context.getBean(subscriberInformation.subscriberClass());
+        domainEventSubscribers.put(queue, subscriber);
 
-        try {
-            Object subscriber = context.getBean(subscriberName);
-            domainEventSubscribers.put(queue, subscriber);
-
-            return subscriber;
-        } catch (Exception e) {
-            throw new Exception(String.format("There are not registered subscribers for <%s> queue", queue));
-        }
+        return subscriber;
     }
 }

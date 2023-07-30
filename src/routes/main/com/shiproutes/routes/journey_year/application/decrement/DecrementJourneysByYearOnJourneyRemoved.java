@@ -8,8 +8,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({JourneyRemovedEvent.class})
-public class DecrementJourneysByYearOnJourneyRemoved {
+public class DecrementJourneysByYearOnJourneyRemoved implements DomainEventSubscriber<JourneyRemovedEvent> {
 
     private final JourneysByYearDecrementer decrementer;
 

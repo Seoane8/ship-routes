@@ -1,10 +1,7 @@
 package com.shiproutes.shared.domain.bus.event;
 
-import java.lang.annotation.*;
+public interface DomainEventSubscriber<T extends DomainEvent> {
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface DomainEventSubscriber {
-    Class<? extends DomainEvent>[] value();
+    void on(T event);
+
 }

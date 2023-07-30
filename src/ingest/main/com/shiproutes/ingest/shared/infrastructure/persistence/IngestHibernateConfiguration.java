@@ -1,4 +1,4 @@
-package com.shiproutes.ports.shared.infrastructure;
+package com.shiproutes.ingest.shared.infrastructure.persistence;
 
 import com.shiproutes.shared.infrastructure.config.Parameter;
 import com.shiproutes.shared.infrastructure.config.ParameterNotExist;
@@ -14,34 +14,34 @@ import java.io.IOException;
 
 @Configuration
 @EnableTransactionManagement
-public class PortsHibernateConfiguration {
+public class IngestHibernateConfiguration {
     private final HibernateConfigurationFactory factory;
     private final Parameter config;
-    private final String CONTEXT_NAME = "ports";
+    private final String CONTEXT_NAME = "ingest";
 
-    public PortsHibernateConfiguration(HibernateConfigurationFactory factory, Parameter config) {
+    public IngestHibernateConfiguration(HibernateConfigurationFactory factory, Parameter config) {
         this.factory = factory;
         this.config = config;
     }
 
-    @Bean("ports-transaction_manager")
+    @Bean("ingest-transaction_manager")
     public PlatformTransactionManager hibernateTransactionManager() throws IOException, ParameterNotExist {
         return factory.hibernateTransactionManager(sessionFactory());
     }
 
-    @Bean("ports-session_factory")
+    @Bean("ingest-session_factory")
     public LocalSessionFactoryBean sessionFactory() throws IOException, ParameterNotExist {
         return factory.sessionFactory(CONTEXT_NAME, dataSource());
     }
 
-    @Bean("ports-data_source")
+    @Bean("ingest-data_source")
     public DataSource dataSource() throws IOException, ParameterNotExist {
         return factory.dataSource(
-            config.get("PORTS_DATABASE_HOST"),
-            config.getInt("PORTS_DATABASE_PORT"),
-            config.get("PORTS_DATABASE_NAME"),
-            config.get("PORTS_DATABASE_USER"),
-            config.get("PORTS_DATABASE_PASSWORD")
+            config.get("INGEST_DATABASE_HOST"),
+            config.getInt("INGEST_DATABASE_PORT"),
+            config.get("INGEST_DATABASE_NAME"),
+            config.get("INGEST_DATABASE_USER"),
+            config.get("INGEST_DATABASE_PASSWORD")
         );
     }
 }

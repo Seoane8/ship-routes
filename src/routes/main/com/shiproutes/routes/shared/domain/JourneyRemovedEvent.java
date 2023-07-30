@@ -67,8 +67,8 @@ public class JourneyRemovedEvent extends DomainEvent {
             put("shipId", shipId);
             put("originPort", originPort);
             put("destinationPort", destinationPort);
-            put("departureDate", departureDate);
-            put("arrivalDate", arrivalDate);
+            put("departureDate", departureDate.toString());
+            put("arrivalDate", arrivalDate.toString());
         }};
     }
 
@@ -81,8 +81,8 @@ public class JourneyRemovedEvent extends DomainEvent {
             (String) body.get("shipId"),
             (String) body.get("originPort"),
             (String) body.get("destinationPOrt"),
-            (Instant) body.get("departureDate"),
-            (Instant) body.get("arrivalDate")
+            Instant.parse(body.get("departureDate").toString()),
+            Instant.parse(body.get("arrivalDate").toString())
         );
     }
 

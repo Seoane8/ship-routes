@@ -9,8 +9,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({JourneyCreatedEvent.class})
-public class IncrementJourneysByMonthOnJourneyCreated {
+public class IncrementJourneysByMonthOnJourneyCreated implements DomainEventSubscriber<JourneyCreatedEvent> {
 
     private final JourneysByMonthIncrementer incrementer;
 

@@ -1,4 +1,4 @@
-package com.shiproutes.ships.shared.infrastructure.persistence;
+package com.shiproutes.ingest.shared.infrastructure.events;
 
 import com.shiproutes.shared.infrastructure.bus.event.mysql.MySqlEventBus;
 import com.shiproutes.shared.infrastructure.bus.event.rabbitmq.RabbitMqEventBus;
@@ -6,22 +6,24 @@ import com.shiproutes.shared.infrastructure.bus.event.rabbitmq.RabbitMqPublisher
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
-public class ShipsRabbitMqEventBusConfiguration {
+public class IngestRabbitMqEventBusConfiguration {
     private final RabbitMqPublisher publisher;
     private final MySqlEventBus failoverPublisher;
 
-    public ShipsRabbitMqEventBusConfiguration(
+    public IngestRabbitMqEventBusConfiguration(
         RabbitMqPublisher publisher,
-        @Qualifier("shipsMysqlEventBus") MySqlEventBus failoverPublisher
+        @Qualifier("ingestMysqlEventBus") MySqlEventBus failoverPublisher
     ) {
         this.publisher = publisher;
         this.failoverPublisher = failoverPublisher;
     }
 
     @Bean
-    public RabbitMqEventBus shipsRabbitMqEventBus() {
+    @Primary
+    public RabbitMqEventBus ingestRabbitMqEventBus() {
         return new RabbitMqEventBus(publisher, failoverPublisher);
     }
 }

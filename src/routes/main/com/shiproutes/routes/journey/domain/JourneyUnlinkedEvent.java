@@ -65,7 +65,7 @@ public class JourneyUnlinkedEvent extends DomainEvent {
         return new HashMap<>() {{
             put("shipId", shipId);
             put("portId", portId);
-            put("date", date);
+            put("date", date.toString());
             put("type", type);
         }};
     }
@@ -78,7 +78,7 @@ public class JourneyUnlinkedEvent extends DomainEvent {
             occurredOn,
             (String) body.get("shipId"),
             (String) body.get("portId"),
-            (Instant) body.get("date"),
+            Instant.parse(body.get("date").toString()),
             (String) body.get("type"));
     }
 

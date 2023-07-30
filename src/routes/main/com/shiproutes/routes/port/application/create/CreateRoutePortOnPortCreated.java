@@ -6,8 +6,7 @@ import com.shiproutes.shared.domain.ports.*;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({PortCreatedEvent.class})
-public class CreateRoutePortOnPortCreated {
+public class CreateRoutePortOnPortCreated implements DomainEventSubscriber<PortCreatedEvent> {
 
     private final RoutePortCreator creator;
 

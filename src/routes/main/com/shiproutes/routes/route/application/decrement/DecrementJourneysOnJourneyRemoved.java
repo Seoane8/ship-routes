@@ -7,8 +7,7 @@ import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
-@DomainEventSubscriber({JourneyRemovedEvent.class})
-public class DecrementJourneysOnJourneyRemoved {
+public class DecrementJourneysOnJourneyRemoved implements DomainEventSubscriber<JourneyRemovedEvent> {
 
     private final JourneysDecrementer decrementer;
 

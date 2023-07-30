@@ -2,22 +2,23 @@ package com.shiproutes.shared.infrastructure.bus.event;
 
 import com.shiproutes.shared.domain.Utils;
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
+import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 
 import java.util.List;
 
 public final class DomainEventSubscriberInformation {
-    private final Class<?> subscriberClass;
+    private final Class<? extends DomainEventSubscriber> subscriberClass;
     private final List<Class<? extends DomainEvent>> subscribedEvents;
 
     public DomainEventSubscriberInformation(
-        Class<?> subscriberClass,
+        Class<? extends DomainEventSubscriber> subscriberClass,
         List<Class<? extends DomainEvent>> subscribedEvents
     ) {
         this.subscriberClass = subscriberClass;
         this.subscribedEvents = subscribedEvents;
     }
 
-    public Class<?> subscriberClass() {
+    public Class<? extends DomainEventSubscriber> subscriberClass() {
         return subscriberClass;
     }
 
