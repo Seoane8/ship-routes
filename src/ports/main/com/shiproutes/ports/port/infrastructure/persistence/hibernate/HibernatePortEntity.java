@@ -5,10 +5,7 @@ import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
-import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,6 +23,7 @@ public final class HibernatePortEntity {
     private Double longitude;
     private Long departures;
     private Long arrivals;
+    private Integer teus;
 
     public HibernatePortEntity() {
     }
@@ -38,6 +36,7 @@ public final class HibernatePortEntity {
         this.longitude = port.coordinates().longitude().value();
         this.departures = port.totalDepartures().value();
         this.arrivals = port.totalArrivals().value();
+        this.teus = port.teus().value();
     }
 
     public Port toEntity() {
@@ -50,7 +49,8 @@ public final class HibernatePortEntity {
                 new Longitude(this.longitude)
             ),
             new TotalDepartures(this.departures),
-            new TotalArrivals(this.arrivals)
+            new TotalArrivals(this.arrivals),
+            new TeusCounter(this.teus)
         );
     }
 }

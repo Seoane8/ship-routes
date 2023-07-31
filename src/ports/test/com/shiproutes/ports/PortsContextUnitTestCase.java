@@ -8,6 +8,7 @@ import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.ports.shared.domain.TotalArrivalsMother;
 import com.shiproutes.ports.shared.domain.TotalDeparturesMother;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.IntegerMother;
 import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.WordMother;
 import com.shiproutes.shared.domain.ports.Coordinates;
@@ -26,7 +27,8 @@ public class PortsContextUnitTestCase extends UnitTestCase {
                 coordinates.longitude().value(),
                 coordinates.latitude().value(),
                 TotalDeparturesMother.random().value(),
-                TotalArrivalsMother.random().value()
+                TotalArrivalsMother.random().value(),
+                IntegerMother.random()
             )
         );
     }

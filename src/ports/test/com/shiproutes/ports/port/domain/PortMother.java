@@ -1,9 +1,16 @@
 package com.shiproutes.ports.port.domain;
 
-import com.shiproutes.ports.shared.domain.*;
+import com.shiproutes.ports.port_event.domain.PortEvent;
+import com.shiproutes.ports.port_event.domain.PortEventType;
+import com.shiproutes.ports.shared.domain.TotalArrivals;
+import com.shiproutes.ports.shared.domain.TotalArrivalsMother;
+import com.shiproutes.ports.shared.domain.TotalDepartures;
+import com.shiproutes.ports.shared.domain.TotalDeparturesMother;
+import com.shiproutes.shared.domain.IntegerMother;
+import com.shiproutes.shared.domain.ports.CoordinatesMother;
 import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.domain.ports.PortIdMother;
-import com.shiproutes.shared.domain.ports.CoordinatesMother;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 public final class PortMother {
 
@@ -14,7 +21,9 @@ public final class PortMother {
             LocodeMother.random(),
             CoordinatesMother.random(),
             TotalDepartures.initialize(),
-            TotalArrivals.initialize());
+            TotalArrivals.initialize(),
+            TeusCounter.initialize()
+        );
     }
 
     public static Port random() {
@@ -24,7 +33,9 @@ public final class PortMother {
             LocodeMother.random(),
             CoordinatesMother.random(),
             TotalDeparturesMother.random(),
-            TotalArrivalsMother.random());
+            TotalArrivalsMother.random(),
+            new TeusCounter(IntegerMother.random())
+        );
     }
 
     public static Port fromId(PortId portId) {
@@ -34,26 +45,21 @@ public final class PortMother {
             LocodeMother.random(),
             CoordinatesMother.random(),
             TotalDeparturesMother.random(),
-            TotalArrivalsMother.random());
+            TotalArrivalsMother.random(),
+            new TeusCounter(IntegerMother.random())
+        );
     }
 
-    public static Port incrementingDepartures(Port port) {
+    public static Port incrementing(Port port, PortEvent portEvent) {
         return new Port(
             port.id(),
             port.name(),
             port.locode(),
             port.coordinates(),
-            new TotalDepartures(port.totalDepartures().value() + 1),
-            port.totalArrivals());
+            portEvent.type() == PortEventType.DEPARTURE ? new TotalDepartures(port.totalDepartures().value() + 1) : port.totalDepartures(),
+            portEvent.type() == PortEventType.ARRIVAL ? new TotalArrivals(port.totalArrivals().value() + 1) : port.totalArrivals(),
+            port.teus().increment(portEvent.teus())
+        );
     }
 
-    public static Port incrementingArrivals(Port port) {
-        return new Port(
-            port.id(),
-            port.name(),
-            port.locode(),
-            port.coordinates(),
-            port.totalDepartures(),
-            new TotalArrivals(port.totalArrivals().value() + 1));
-    }
 }

@@ -33,7 +33,8 @@ class PortsGetControllerShould extends PortApplicationTestCase {
             "\"latitude\": 51.0455, " +
             "\"longitude\": 2.1543," +
             "\"departures\": 0," +
-            "\"arrivals\": 0" +
+            "\"arrivals\": 0," +
+            "\"teus\": 0" +
             "}]");
     }
 }

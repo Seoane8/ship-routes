@@ -2,6 +2,7 @@ package com.shiproutes.ports.port.application.increment_events;
 
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.domain.ports.PortEventCreated;
 import com.shiproutes.shared.domain.ports.PortId;
@@ -20,8 +21,9 @@ public final class IncrementPortEventsOnPortEventCreated implements DomainEventS
     public void on(PortEventCreated event) {
         PortId portId = new PortId(event.portId());
         PortEventType type = PortEventType.valueOf(event.type());
+        Teus teus = new Teus(event.teus());
 
-        incrementer.increment(portId, type);
+        incrementer.increment(portId, type, teus);
     }
 
 }

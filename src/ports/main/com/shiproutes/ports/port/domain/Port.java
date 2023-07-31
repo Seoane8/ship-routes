@@ -4,9 +4,11 @@ import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.AggregateRoot;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.PortCreatedEvent;
 import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 import java.util.Objects;
 
@@ -17,19 +19,22 @@ public final class Port extends AggregateRoot {
     private final Coordinates coordinates;
     private TotalDepartures totalDepartures;
     private TotalArrivals totalArrivals;
+    private TeusCounter teus;
 
     public Port(PortId id, PortName name, Locode locode, Coordinates coordinates,
-                TotalDepartures totalDepartures, TotalArrivals totalArrivals) {
+                TotalDepartures totalDepartures, TotalArrivals totalArrivals, TeusCounter teus) {
         this.id = id;
         this.name = name;
         this.locode = locode;
         this.coordinates = coordinates;
         this.totalDepartures = totalDepartures;
         this.totalArrivals = totalArrivals;
+        this.teus = teus;
     }
 
     public static Port create(PortId id, PortName name, Locode locode, Coordinates coordinates) {
-        Port port = new Port(id, name, locode, coordinates, TotalDepartures.initialize(), TotalArrivals.initialize());
+        Port port = new Port(id, name, locode, coordinates,
+            TotalDepartures.initialize(), TotalArrivals.initialize(), TeusCounter.initialize());
 
         port.record(new PortCreatedEvent(
             id.value(),
@@ -74,6 +79,14 @@ public final class Port extends AggregateRoot {
         totalArrivals = totalArrivals.increment();
     }
 
+    public TeusCounter teus() {
+        return teus;
+    }
+
+    public void incrementTeus(Teus teus) {
+        this.teus = this.teus.increment(teus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,11 +94,11 @@ public final class Port extends AggregateRoot {
         Port port = (Port) o;
         return Objects.equals(id, port.id) && Objects.equals(name, port.name) && Objects.equals(locode, port.locode)
             && Objects.equals(coordinates, port.coordinates) && Objects.equals(totalDepartures, port.totalDepartures)
-            && Objects.equals(totalArrivals, port.totalArrivals);
+            && Objects.equals(totalArrivals, port.totalArrivals) && Objects.equals(teus, port.teus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, locode, coordinates, totalDepartures, totalArrivals);
+        return Objects.hash(id, name, locode, coordinates, totalDepartures, totalArrivals, teus);
     }
 }

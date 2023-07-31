@@ -34,7 +34,7 @@ class IncrementPortEventsOnPortEventCreatedShould extends PortModuleUnitTestCase
         PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
 
         Port port = PortMother.fromId(portEvent.portId());
-        Port expectedPortToSave = PortMother.incrementingDepartures(port);
+        Port expectedPortToSave = PortMother.incrementing(port, portEvent);
         shouldExists(port);
 
         subscriber.on(domainEvent);
@@ -48,7 +48,7 @@ class IncrementPortEventsOnPortEventCreatedShould extends PortModuleUnitTestCase
         PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
 
         Port port = PortMother.fromId(portEvent.portId());
-        Port expectedPortToSave = PortMother.incrementingArrivals(port);
+        Port expectedPortToSave = PortMother.incrementing(port, portEvent);
         shouldExists(port);
 
         subscriber.on(domainEvent);
