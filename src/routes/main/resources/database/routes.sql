@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS routes
     destinationPort CHAR(36) NOT NULL,
     path            JSON     NOT NULL,
     journeys        BIGINT   NOT NULL,
+    teus            INT      NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS journeys_month
     month           INT      NOT NULL,
     year            INT      NOT NULL,
     journeys        BIGINT   NOT NULL,
+    teus            INT      NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
@@ -50,6 +52,7 @@ CREATE TABLE IF NOT EXISTS journeys_year
     path            JSON,
     year            INT      NOT NULL,
     journeys        BIGINT   NOT NULL,
+    teus            INT      NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
