@@ -25,12 +25,12 @@ class IncrementPortEventsByMonthOnPortEventCreatedShould extends PortEventsByMon
     }
 
     @Test
-    void increment_departures_of_existent_entity() {
+    void increment_departures_and_teus_of_existent_entity() {
         PortEvent portEvent = PortEventMother.randomDeparture();
         PortEventCreated event = PortEventCreatedMother.fromPortEvent(portEvent);
         PortEventsByMonth portEventsByMonth = PortEventsByMonthMother.fromPortEvent(portEvent);
         PortEventsByMonth expectedPortEventsByMonthToSave =
-            PortEventsByMonthMother.incrementingDepartures(portEventsByMonth);
+            PortEventsByMonthMother.incrementing(portEventsByMonth, portEvent);
 
         shouldExists(portEventsByMonth);
 
@@ -40,12 +40,12 @@ class IncrementPortEventsByMonthOnPortEventCreatedShould extends PortEventsByMon
     }
 
     @Test
-    void increment_arrivals_of_existent_entity() {
+    void increment_arrivals_and_teus_of_existent_entity() {
         PortEvent portEvent = PortEventMother.randomArrival();
         PortEventCreated event = PortEventCreatedMother.fromPortEvent(portEvent);
         PortEventsByMonth portEventsByMonth = PortEventsByMonthMother.fromPortEvent(portEvent);
         PortEventsByMonth expectedPortEventsByMonthToSave =
-            PortEventsByMonthMother.incrementingArrivals(portEventsByMonth);
+            PortEventsByMonthMother.incrementing(portEventsByMonth, portEvent);
 
         shouldExists(portEventsByMonth);
 
@@ -55,7 +55,7 @@ class IncrementPortEventsByMonthOnPortEventCreatedShould extends PortEventsByMon
     }
 
     @Test
-    void create_entity_and_increment_departures_when_entity_not_exist() {
+    void create_entity_and_increment_departures_and_teus_when_entity_not_exist() {
         PortEvent portEvent = PortEventMother.randomDeparture();
         PortEventCreated event = PortEventCreatedMother.fromPortEvent(portEvent);
         PortEventsByMonth expectedPortEventsByMonthToSave =
@@ -71,7 +71,7 @@ class IncrementPortEventsByMonthOnPortEventCreatedShould extends PortEventsByMon
     }
 
     @Test
-    void create_entity_and_increment_arrivals_when_entity_not_exist() {
+    void create_entity_and_increment_arrivals_and_teus_when_entity_not_exist() {
         PortEvent portEvent = PortEventMother.randomArrival();
         PortEventCreated event = PortEventCreatedMother.fromPortEvent(portEvent);
         PortEventsByMonth expectedPortEventsByMonthToSave =

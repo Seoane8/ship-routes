@@ -7,6 +7,7 @@ import com.shiproutes.ports.port_event_year.domain.PortEventsByYearRepository;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.UuidGenerator;
 import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
@@ -29,7 +30,7 @@ public class PortEventsByYearIncrementer {
         this.queryBus = queryBus;
     }
 
-    public void increment(PortId portId, Year year, PortEventType type) {
+    public void increment(PortId portId, Year year, PortEventType type, Teus teus) {
         PortEventsByYear portEventsByYear = repository.search(portId, year)
             .orElseGet(() -> createPortEventsByYear(portId, year));
 
@@ -38,6 +39,7 @@ public class PortEventsByYearIncrementer {
         } else {
             portEventsByYear.incrementDepartures();
         }
+        portEventsByYear.incrementTeus(teus);
 
         repository.save(portEventsByYear);
     }

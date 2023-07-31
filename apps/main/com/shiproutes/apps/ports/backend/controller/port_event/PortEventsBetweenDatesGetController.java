@@ -45,6 +45,7 @@ public class PortEventsBetweenDatesGetController extends ApiController {
                 put("latitude", portEvent.latitude());
                 put("departures", portEvent.departures());
                 put("arrivals", portEvent.arrivals());
+                put("teus", portEvent.teus());
             }})
             .collect(Collectors.toCollection(HashSet::new));
 

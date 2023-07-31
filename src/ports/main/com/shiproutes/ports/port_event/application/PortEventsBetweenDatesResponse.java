@@ -11,20 +11,22 @@ public class PortEventsBetweenDatesResponse implements Response {
     private final Double latitude;
     private Long departures;
     private Long arrivals;
+    private Integer teus;
 
     public PortEventsBetweenDatesResponse(String portId, Double longitude, Double latitude,
-                                          Long departures, Long arrivals) {
+                                          Long departures, Long arrivals, Integer teus) {
         this.portId = portId;
         this.longitude = longitude;
         this.latitude = latitude;
         this.departures = departures;
         this.arrivals = arrivals;
+        this.teus = teus;
     }
 
     public static PortEventsBetweenDatesResponse from(PortEvent entity) {
         return new PortEventsBetweenDatesResponse(entity.portId().value(),
             entity.coordinates().longitude().value(), entity.coordinates().latitude().value(),
-            0L, 0L);
+            0L, 0L, 0);
     }
 
     public String portId() {
@@ -47,12 +49,16 @@ public class PortEventsBetweenDatesResponse implements Response {
         return arrivals;
     }
 
+    public Integer teus() {
+        return teus;
+    }
+
     public void addEvents(PortEvent event) {
         if (event.type() == PortEventType.ARRIVAL) {
             this.arrivals++;
         } else {
             this.departures++;
         }
+        this.teus += event.teus().value();
     }
-
 }

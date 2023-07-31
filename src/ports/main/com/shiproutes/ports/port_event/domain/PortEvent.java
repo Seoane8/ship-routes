@@ -39,7 +39,8 @@ public final class PortEvent extends AggregateRoot {
             portId.value(),
             type.value(),
             shipId.value(),
-            date.value()
+            date.value(),
+            teus.value()
         ));
 
         return portEvent;

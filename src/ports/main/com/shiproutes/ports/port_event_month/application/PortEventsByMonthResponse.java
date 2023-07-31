@@ -50,17 +50,19 @@ public class PortEventsByMonthResponse implements Response {
         private final Integer month;
         private final Long departures;
         private final Long arrivals;
+        private final Integer teus;
 
-        public EventsResponse(Integer year, Integer month, Long departures, Long arrivals) {
+        public EventsResponse(Integer year, Integer month, Long departures, Long arrivals, Integer teus) {
             this.year = year;
             this.month = month;
             this.departures = departures;
             this.arrivals = arrivals;
+            this.teus = teus;
         }
 
         public static EventsResponse fromEntity(PortEventsByMonth entity) {
             return new EventsResponse(entity.year().value(), entity.month().value(),
-                entity.departures().value(), entity.arrivals().value());
+                entity.departures().value(), entity.arrivals().value(), entity.teusCounter().value());
         }
 
         public Integer year() {
@@ -77,6 +79,10 @@ public class PortEventsByMonthResponse implements Response {
 
         public Long arrivals() {
             return arrivals;
+        }
+
+        public Integer teus() {
+            return teus;
         }
     }
 }

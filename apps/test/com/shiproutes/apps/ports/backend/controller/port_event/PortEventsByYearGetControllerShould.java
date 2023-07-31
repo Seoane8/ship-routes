@@ -35,21 +35,24 @@ public class PortEventsByYearGetControllerShould extends PortApplicationTestCase
                 "043e6223-0b38-4483-8735-f9f4bc224f58",
                 "ARRIVAL",
                 "b02b328b-da56-4120-9474-d766005d07ca",
-                Instant.parse("2020-01-01T00:00:00Z")
+                Instant.parse("2020-01-01T00:00:00Z"),
+                10000
             ),
             new PortEventCreated(
                 "3de3e633-64d5-4213-b527-575efc4dfde8",
                 "043e6223-0b38-4483-8735-f9f4bc224f58",
                 "DEPARTURE",
                 "b02b328b-da56-4120-9474-d766005d07ca",
-                Instant.parse("2020-01-02T00:00:00Z")
+                Instant.parse("2020-01-02T00:00:00Z"),
+                10000
             ),
             new PortEventCreated(
                 "8fdfe167-ea5e-4281-8287-005ec7103850",
                 "043e6223-0b38-4483-8735-f9f4bc224f58",
                 "ARRIVAL",
                 "b02b328b-da56-4120-9474-d766005d07ca",
-                Instant.parse("2021-01-01T00:00:00Z")
+                Instant.parse("2021-01-01T00:00:00Z"),
+                10000
             )
         );
 
@@ -61,11 +64,13 @@ public class PortEventsByYearGetControllerShould extends PortApplicationTestCase
             "{" +
             "\"year\": 2020," +
             "\"departures\": 1," +
-            "\"arrivals\": 1" +
+            "\"arrivals\": 1," +
+            "\"teus\": 20000" +
             "},{" +
             "\"year\": 2021," +
             "\"departures\": 0," +
-            "\"arrivals\": 1" +
+            "\"arrivals\": 1," +
+            "\"teus\": 10000" +
             "}" +
             "]}]");
     }

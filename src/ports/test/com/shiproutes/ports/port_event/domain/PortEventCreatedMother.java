@@ -10,7 +10,8 @@ public final class PortEventCreatedMother {
             portEvent.portId().value(),
             portEvent.type().value(),
             portEvent.shipId().value(),
-            portEvent.date().value()
+            portEvent.date().value(),
+            portEvent.teus().value()
         );
     }
 

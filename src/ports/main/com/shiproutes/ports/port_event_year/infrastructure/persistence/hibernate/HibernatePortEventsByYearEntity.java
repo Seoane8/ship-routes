@@ -2,6 +2,7 @@ package com.shiproutes.ports.port_event_year.infrastructure.persistence.hibernat
 
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearId;
+import com.shiproutes.ports.shared.domain.TeusCounter;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.Year;
@@ -26,6 +27,7 @@ public class HibernatePortEventsByYearEntity {
     private Integer year;
     private Long departures;
     private Long arrivals;
+    private Integer teus;
 
     public HibernatePortEventsByYearEntity() {
     }
@@ -38,6 +40,7 @@ public class HibernatePortEventsByYearEntity {
         this.year = portEventsByYear.year().value();
         this.departures = portEventsByYear.departures().value();
         this.arrivals = portEventsByYear.arrivals().value();
+        this.teus = portEventsByYear.teusCounter().value();
     }
 
     public PortEventsByYear toEntity() {
@@ -50,7 +53,8 @@ public class HibernatePortEventsByYearEntity {
             ),
             new Year(this.year),
             new TotalDepartures(this.departures),
-            new TotalArrivals(this.arrivals)
+            new TotalArrivals(this.arrivals),
+            new TeusCounter(this.teus)
         );
     }
 

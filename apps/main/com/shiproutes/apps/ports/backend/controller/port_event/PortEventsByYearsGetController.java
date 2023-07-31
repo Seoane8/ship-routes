@@ -37,6 +37,7 @@ public final class PortEventsByYearsGetController extends ApiController {
                         put("year", event.year());
                         put("departures", event.departures());
                         put("arrivals", event.arrivals());
+                        put("teus", event.teus());
                     }}
                 ).collect(Collectors.toCollection(HashSet::new))
             )).collect(Collectors.toCollection(HashSet::new));

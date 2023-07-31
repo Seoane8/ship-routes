@@ -49,15 +49,18 @@ public class PortEventsByYearResponse implements Response {
         private final Integer year;
         private final Long departures;
         private final Long arrivals;
+        private final Integer teus;
 
-        public EventsResponse(Integer year, Long departures, Long arrivals) {
+        public EventsResponse(Integer year, Long departures, Long arrivals, Integer teus) {
             this.year = year;
             this.departures = departures;
             this.arrivals = arrivals;
+            this.teus = teus;
         }
 
         public static EventsResponse fromEntity(PortEventsByYear entity) {
-            return new EventsResponse(entity.year().value(), entity.departures().value(), entity.arrivals().value());
+            return new EventsResponse(entity.year().value(), entity.departures().value(), entity.arrivals().value(),
+                entity.teusCounter().value());
         }
 
         public Integer year() {
@@ -70,6 +73,10 @@ public class PortEventsByYearResponse implements Response {
 
         public Long arrivals() {
             return arrivals;
+        }
+
+        public Integer teus() {
+            return teus;
         }
     }
 }

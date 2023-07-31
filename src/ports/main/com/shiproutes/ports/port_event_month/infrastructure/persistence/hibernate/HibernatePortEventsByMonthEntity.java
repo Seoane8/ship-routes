@@ -2,6 +2,7 @@ package com.shiproutes.ports.port_event_month.infrastructure.persistence.hiberna
 
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonth;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthId;
+import com.shiproutes.ports.shared.domain.TeusCounter;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.Month;
@@ -28,6 +29,7 @@ public class HibernatePortEventsByMonthEntity {
     private Integer month;
     private Long departures;
     private Long arrivals;
+    private Integer teus;
 
     public HibernatePortEventsByMonthEntity() {
     }
@@ -41,6 +43,7 @@ public class HibernatePortEventsByMonthEntity {
         this.month = portEventsByMonth.month().value();
         this.departures = portEventsByMonth.departures().value();
         this.arrivals = portEventsByMonth.arrivals().value();
+        this.teus = portEventsByMonth.teusCounter().value();
     }
 
     public PortEventsByMonth toEntity() {
@@ -54,7 +57,8 @@ public class HibernatePortEventsByMonthEntity {
             new Year(this.year),
             new Month(this.month),
             new TotalDepartures(this.departures),
-            new TotalArrivals(this.arrivals)
+            new TotalArrivals(this.arrivals),
+            new TeusCounter(this.teus)
         );
     }
 }

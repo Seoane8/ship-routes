@@ -38,6 +38,7 @@ public final class PortEventsByMonthsGetController extends ApiController {
                         put("month", event.month());
                         put("departures", event.departures());
                         put("arrivals", event.arrivals());
+                        put("teus", event.teus());
                     }}
                 ).collect(Collectors.toCollection(HashSet::new))
             )).collect(Collectors.toCollection(HashSet::new));

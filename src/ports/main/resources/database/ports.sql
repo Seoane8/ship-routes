@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS port_events_month
     month      INT      NOT NULL,
     departures BIGINT   NOT NULL,
     arrivals   BIGINT   NOT NULL,
+    teus       INT      NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
@@ -54,6 +55,7 @@ CREATE TABLE IF NOT EXISTS port_events_year
     year       INT      NOT NULL,
     departures BIGINT   NOT NULL,
     arrivals   BIGINT   NOT NULL,
+    teus       INT      NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB

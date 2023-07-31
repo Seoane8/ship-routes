@@ -6,10 +6,7 @@ import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthId;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthRepository;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
-import com.shiproutes.shared.domain.Month;
-import com.shiproutes.shared.domain.Service;
-import com.shiproutes.shared.domain.UuidGenerator;
-import com.shiproutes.shared.domain.Year;
+import com.shiproutes.shared.domain.*;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
 import com.shiproutes.shared.domain.ports.Coordinates;
 import com.shiproutes.shared.domain.ports.Latitude;
@@ -30,7 +27,7 @@ public class PortEventsByMonthIncrementer {
         this.queryBus = queryBus;
     }
 
-    public void increment(PortId portId, Year year, Month month, PortEventType type) {
+    public void increment(PortId portId, Year year, Month month, PortEventType type, Teus teus) {
         PortEventsByMonth portEventsByMonth = repository.search(portId, year, month)
             .orElseGet(() -> createPortEventsByMonth(portId, year, month));
 
@@ -39,6 +36,7 @@ public class PortEventsByMonthIncrementer {
         } else {
             portEventsByMonth.incrementDepartures();
         }
+        portEventsByMonth.incrementTeus(teus);
 
         repository.save(portEventsByMonth);
     }
