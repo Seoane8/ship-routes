@@ -6,10 +6,7 @@ import com.shiproutes.routes.journey_month.domain.JourneysByMonthRepository;
 import com.shiproutes.routes.shared.application.FindRoutePathQuery;
 import com.shiproutes.routes.shared.application.RoutePathResponse;
 import com.shiproutes.routes.shared.domain.RoutePath;
-import com.shiproutes.shared.domain.Month;
-import com.shiproutes.shared.domain.Service;
-import com.shiproutes.shared.domain.UuidGenerator;
-import com.shiproutes.shared.domain.Year;
+import com.shiproutes.shared.domain.*;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
 import com.shiproutes.shared.domain.ports.PortId;
 
@@ -27,12 +24,13 @@ public class JourneysByMonthIncrementer {
         this.queryBus = queryBus;
     }
 
-    public void increment(PortId originPort, PortId destinationPort, Month month, Year year) {
+    public void increment(PortId originPort, PortId destinationPort, Teus teus, Month month, Year year) {
 
         JourneysByMonth journeysByMonth = repository.search(originPort, destinationPort, month, year)
             .orElseGet(() -> createJourneysByMonth(originPort, destinationPort, month, year));
 
         journeysByMonth.incrementJourneys();
+        journeysByMonth.incrementTeus(teus);
 
         repository.save(journeysByMonth);
     }

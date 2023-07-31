@@ -30,7 +30,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldExists(completeUnmatch);
         shouldGenerateUuid(arrival.id().value());
 
-        creator.create(arrival.shipId(), arrival.destinationPort(), arrival.arrivalDate());
+        creator.create(arrival.shipId(), arrival.teus(), arrival.destinationPort(), arrival.arrivalDate());
 
         shouldHaveSaved(arrival);
     }
@@ -43,7 +43,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHaveSaved(journey);
     }
@@ -56,7 +56,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHaveRemoved(incompleteMatch);
     }
@@ -70,7 +70,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHavePublished(event);
     }
@@ -85,7 +85,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldNotHavePublished(List.of(removedEvent, unlinkedEvent));
     }
@@ -98,7 +98,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHaveSaved(journey);
     }
@@ -111,7 +111,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHaveRemoved(completeMatch);
     }
@@ -125,7 +125,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHavePublished(event);
     }
@@ -140,7 +140,7 @@ class JourneyFromArrivalCreatorShould extends JourneyModuleUnitTestCase {
         shouldGenerateUuid(journey.id().value());
         shouldExistRoutePath(journey);
 
-        creator.create(journey.shipId(), journey.destinationPort(), journey.arrivalDate());
+        creator.create(journey.shipId(), journey.teus(), journey.destinationPort(), journey.arrivalDate());
 
         shouldHavePublished(List.of(removedEvent, unlinkedEvent));
     }

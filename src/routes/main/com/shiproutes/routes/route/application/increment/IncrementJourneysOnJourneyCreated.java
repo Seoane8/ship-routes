@@ -2,6 +2,7 @@ package com.shiproutes.routes.route.application.increment;
 
 import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
@@ -19,7 +20,8 @@ public class IncrementJourneysOnJourneyCreated implements DomainEventSubscriber<
     public void on(JourneyCreatedEvent event) {
         incrementer.increment(
             new PortId(event.originPort()),
-            new PortId(event.destinationPort())
+            new PortId(event.destinationPort()),
+            new Teus(event.teus())
         );
     }
 }

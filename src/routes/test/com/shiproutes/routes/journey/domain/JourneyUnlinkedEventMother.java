@@ -6,6 +6,7 @@ public class JourneyUnlinkedEventMother {
         return new JourneyUnlinkedEvent(
             journey.id().value(),
             journey.shipId().value(),
+            journey.teus().value(),
             journey.originPort().value(),
             journey.departureDate().value(),
             "DEPARTURE"
@@ -16,6 +17,7 @@ public class JourneyUnlinkedEventMother {
         return new JourneyUnlinkedEvent(
             journey.id().value(),
             journey.shipId().value(),
+            journey.teus().value(),
             journey.destinationPort().value(),
             journey.arrivalDate().value(),
             "ARRIVAL"

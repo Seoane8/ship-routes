@@ -8,6 +8,7 @@ import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePa
 import com.shiproutes.shared.domain.Month;
 import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class HibernateJourneysByMonthEntity {
     private Integer month;
     private Integer year;
     private Long journeys;
+    private Integer teus;
 
     public HibernateJourneysByMonthEntity() {
     }
@@ -40,6 +42,7 @@ public class HibernateJourneysByMonthEntity {
         this.month = journeysByMonth.month().value();
         this.year = journeysByMonth.year().value();
         this.journeys = journeysByMonth.journeys().value();
+        this.teus = journeysByMonth.teus().value();
     }
 
     public JourneysByMonth toEntity() {
@@ -50,7 +53,8 @@ public class HibernateJourneysByMonthEntity {
             RoutePath.fromPrimitives(this.path),
             new Month(this.month),
             new Year(this.year),
-            new JourneysCounter(this.journeys)
+            new JourneysCounter(this.journeys),
+            new TeusCounter(this.teus)
         );
     }
 }

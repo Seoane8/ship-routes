@@ -51,6 +51,7 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             new JourneyCreatedEvent(
                 "e8c6e0ee-596f-4d8c-82d6-0c4dd1584b83",
                 "043e6223-0b38-4483-8735-f9f4bc224f58",
+                10000,
                 "058a766b-fa60-49e9-88ed-2970380f5a2f",
                 "f68caed9-6b5c-405b-ad4c-a50bf0ceae48",
                 Instant.parse("2020-01-28T00:00:00Z"),
@@ -59,6 +60,7 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             new JourneyCreatedEvent(
                 "3de3e633-64d5-4213-b527-575efc4dfde8",
                 "ec704f4b-4a68-4740-a4ee-22844e0efad1",
+                10000,
                 "058a766b-fa60-49e9-88ed-2970380f5a2f",
                 "f68caed9-6b5c-405b-ad4c-a50bf0ceae48",
                 Instant.parse("2020-02-02T00:00:00Z"),
@@ -67,6 +69,7 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             new JourneyCreatedEvent(
                 "8fdfe167-ea5e-4281-8287-005ec7103850",
                 "2f0df52b-6c99-4e3c-9410-78051db93da9",
+                10000,
                 "f68caed9-6b5c-405b-ad4c-a50bf0ceae48",
                 "058a766b-fa60-49e9-88ed-2970380f5a2f",
                 Instant.parse("2021-01-01T00:00:00Z"),
@@ -75,6 +78,7 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             new JourneyCreatedEvent(
                 "02ad34ca-3a28-4d82-867c-d594ebcaf53e",
                 "59395e1a-bcad-451d-a5a0-f97c041c2adc",
+                10000,
                 "f68caed9-6b5c-405b-ad4c-a50bf0ceae48",
                 "058a766b-fa60-49e9-88ed-2970380f5a2f",
                 Instant.parse("2021-01-05T00:00:00Z"),
@@ -83,6 +87,7 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             new JourneyRemovedEvent(
                 "8fdfe167-ea5e-4281-8287-005ec7103850",
                 "2f0df52b-6c99-4e3c-9410-78051db93da9",
+                10000,
                 "f68caed9-6b5c-405b-ad4c-a50bf0ceae48",
                 "058a766b-fa60-49e9-88ed-2970380f5a2f",
                 Instant.parse("2021-01-01T00:00:00Z"),
@@ -99,11 +104,13 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             "{" +
             "\"year\": 2020," +
             "\"month\": 1," +
-            "\"total\": 1" +
+            "\"total\": 1," +
+            "\"teus\": 10000" +
             "},{" +
             "\"year\": 2020," +
             "\"month\": 2," +
-            "\"total\": 1" +
+            "\"total\": 1," +
+            "\"teus\": 10000" +
             "}" +
             "]}," +
             "{" +
@@ -114,7 +121,8 @@ class JourneysByMonthsGetControllerShould extends RoutesApplicationTestCase {
             "{" +
             "\"year\": 2021," +
             "\"month\": 1," +
-            "\"total\": 1" +
+            "\"total\": 1," +
+            "\"teus\": 10000" +
             "}" +
             "]}" +
             "]");

@@ -36,6 +36,7 @@ public class JourneysByMonthsGetController extends ApiController {
                         put("month", j.month());
                         put("year", j.year());
                         put("total", j.journeys());
+                        put("teus", j.teus());
                     }}
                 ).collect(Collectors.toCollection(HashSet::new))
             )).collect(Collectors.toCollection(HashSet::new));

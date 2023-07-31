@@ -7,6 +7,7 @@ import com.shiproutes.routes.shared.application.FindRoutePathQuery;
 import com.shiproutes.routes.shared.application.RoutePathResponse;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.UuidGenerator;
 import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
@@ -25,12 +26,13 @@ public class JourneysByYearDecrementer {
         this.queryBus = queryBus;
     }
 
-    public void decrement(PortId originPort, PortId destinationPort, Year year) {
+    public void decrement(PortId originPort, PortId destinationPort, Teus teus, Year year) {
 
         JourneysByYear journeysByYear = repository.search(originPort, destinationPort, year)
             .orElseGet(() -> createJourneysByYear(originPort, destinationPort, year));
 
         journeysByYear.decrementJourneys();
+        journeysByYear.decrementTeus(teus);
 
         repository.save(journeysByYear);
     }

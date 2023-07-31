@@ -3,7 +3,9 @@ package com.shiproutes.routes.route.domain;
 import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.JourneysCounterMother;
 import com.shiproutes.routes.shared.domain.RoutePathMother;
+import com.shiproutes.shared.domain.IntegerMother;
 import com.shiproutes.shared.domain.ports.PortIdMother;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 public class RouteMother {
 
@@ -13,7 +15,9 @@ public class RouteMother {
             PortIdMother.random(),
             PortIdMother.random(),
             RoutePathMother.random(),
-            JourneysCounterMother.random());
+            JourneysCounterMother.random(),
+            new TeusCounter(IntegerMother.random())
+        );
     }
 
     public static Route randomNew() {
@@ -22,7 +26,9 @@ public class RouteMother {
             PortIdMother.random(),
             PortIdMother.random(),
             RoutePathMother.random(),
-            JourneysCounter.initialize());
+            JourneysCounter.initialize(),
+            TeusCounter.initialize()
+        );
     }
 
     public static Route reverse(Route route) {
@@ -31,7 +37,9 @@ public class RouteMother {
             route.destinationPort(),
             route.originPort(),
             route.path().reverse(),
-            JourneysCounterMother.random());
+            JourneysCounterMother.random(),
+            new TeusCounter(IntegerMother.random())
+        );
     }
 
     public static Route reverseNew(Route route) {
@@ -40,7 +48,9 @@ public class RouteMother {
             route.destinationPort(),
             route.originPort(),
             route.path().reverse(),
-            JourneysCounter.initialize());
+            JourneysCounter.initialize(),
+            TeusCounter.initialize()
+        );
     }
 
     public static Route updatePath(Route existentRoute) {
@@ -49,6 +59,8 @@ public class RouteMother {
             existentRoute.originPort(),
             existentRoute.destinationPort(),
             RoutePathMother.update(existentRoute.path()),
-            existentRoute.journeys());
+            existentRoute.journeys(),
+            existentRoute.teus()
+        );
     }
 }

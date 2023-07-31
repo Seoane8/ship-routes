@@ -3,14 +3,10 @@ package com.shiproutes.ports.port_event_year.infrastructure.persistence.hibernat
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYear;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearId;
 import com.shiproutes.ports.shared.domain.PortName;
-import com.shiproutes.ports.shared.domain.TeusCounter;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.Year;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
-import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

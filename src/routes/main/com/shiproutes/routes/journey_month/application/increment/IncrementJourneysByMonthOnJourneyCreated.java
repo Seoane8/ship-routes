@@ -3,6 +3,7 @@ package com.shiproutes.routes.journey_month.application.increment;
 import com.shiproutes.routes.shared.domain.JourneyCreatedEvent;
 import com.shiproutes.shared.domain.Month;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.Year;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.domain.ports.PortId;
@@ -22,6 +23,7 @@ public class IncrementJourneysByMonthOnJourneyCreated implements DomainEventSubs
         incrementer.increment(
             new PortId(event.originPort()),
             new PortId(event.destinationPort()),
+            new Teus(event.teus()),
             Month.fromInstant(event.departureDate()),
             Year.fromInstant(event.departureDate())
         );

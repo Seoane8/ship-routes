@@ -8,6 +8,7 @@ public class JourneyRemovedEventMother {
         return new JourneyRemovedEvent(
             journey.id().value(),
             journey.shipId().value(),
+            journey.teus().value(),
             journey.originPort().value(),
             journey.destinationPort().value(),
             journey.departureDate().value(),

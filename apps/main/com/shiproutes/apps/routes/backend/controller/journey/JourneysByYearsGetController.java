@@ -35,6 +35,7 @@ public class JourneysByYearsGetController extends ApiController {
                 "journeys", journey.journeys().stream().map(j -> new HashMap<String, Object>() {{
                         put("year", j.year());
                         put("total", j.journeys());
+                        put("teus", j.teus());
                     }}
                 ).collect(Collectors.toCollection(HashSet::new))
             )).collect(Collectors.toCollection(HashSet::new));

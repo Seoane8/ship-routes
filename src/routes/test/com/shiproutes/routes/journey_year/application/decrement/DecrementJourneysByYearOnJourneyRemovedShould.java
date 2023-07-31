@@ -29,7 +29,7 @@ class DecrementJourneysByYearOnJourneyRemovedShould extends JourneysByYearModule
         Journey journey = JourneyMother.random();
         JourneyRemovedEvent event = JourneyRemovedEventMother.from(journey);
         JourneysByYear journeysByYear = JourneysByYearMother.fromJourney(journey);
-        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.decrementing(journeysByYear);
+        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.decrementing(journeysByYear, journey);
 
         shouldExists(journeysByYear);
 
@@ -43,7 +43,7 @@ class DecrementJourneysByYearOnJourneyRemovedShould extends JourneysByYearModule
         Journey journey = JourneyMother.random();
         JourneyRemovedEvent event = JourneyRemovedEventMother.from(journey);
         JourneysByYear journeysByYear = JourneysByYearMother.initialized(journey);
-        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.decrementing(journeysByYear);
+        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.decrementing(journeysByYear, journey);
 
         shouldGenerateUuid(expectedJourneysByYearToSave.id().value());
         shouldExistRoutePath(expectedJourneysByYearToSave);

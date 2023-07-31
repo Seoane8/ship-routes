@@ -4,11 +4,9 @@ import com.shiproutes.routes.journey.domain.Journey;
 import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.JourneysCounterMother;
 import com.shiproutes.routes.shared.domain.RoutePathMother;
-import com.shiproutes.shared.domain.Month;
-import com.shiproutes.shared.domain.MonthMother;
-import com.shiproutes.shared.domain.Year;
-import com.shiproutes.shared.domain.YearMother;
+import com.shiproutes.shared.domain.*;
 import com.shiproutes.shared.domain.ports.PortIdMother;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 public class JourneysByMonthMother {
 
@@ -20,8 +18,8 @@ public class JourneysByMonthMother {
             RoutePathMother.random(),
             MonthMother.random(),
             YearMother.random(),
-            JourneysCounterMother.random()
-        );
+            JourneysCounterMother.random(),
+            new TeusCounter(IntegerMother.random()));
     }
 
     public static JourneysByMonth initialized(Journey journey) {
@@ -32,7 +30,8 @@ public class JourneysByMonthMother {
             journey.path(),
             Month.fromInstant(journey.departureDate().value()),
             Year.fromInstant(journey.departureDate().value()),
-            JourneysCounter.initialize()
+            JourneysCounter.initialize(),
+            TeusCounter.initialize()
         );
     }
 
@@ -44,11 +43,12 @@ public class JourneysByMonthMother {
             journey.path(),
             Month.fromInstant(journey.departureDate().value()),
             Year.fromInstant(journey.departureDate().value()),
-            JourneysCounterMother.random()
+            JourneysCounterMother.random(),
+            TeusCounter.initialize()
         );
     }
 
-    public static JourneysByMonth incrementing(JourneysByMonth journeysByMonth) {
+    public static JourneysByMonth incrementing(JourneysByMonth journeysByMonth, Journey journey) {
         return new JourneysByMonth(
             journeysByMonth.id(),
             journeysByMonth.originPort(),
@@ -56,11 +56,12 @@ public class JourneysByMonthMother {
             journeysByMonth.path(),
             journeysByMonth.month(),
             journeysByMonth.year(),
-            journeysByMonth.journeys().increment()
+            journeysByMonth.journeys().increment(),
+            journeysByMonth.teus().increment(journey.teus())
         );
     }
 
-    public static JourneysByMonth decrementing(JourneysByMonth journeysByMonth) {
+    public static JourneysByMonth decrementing(JourneysByMonth journeysByMonth, Journey journey) {
         return new JourneysByMonth(
             journeysByMonth.id(),
             journeysByMonth.originPort(),
@@ -68,7 +69,8 @@ public class JourneysByMonthMother {
             journeysByMonth.path(),
             journeysByMonth.month(),
             journeysByMonth.year(),
-            journeysByMonth.journeys().decrement()
+            journeysByMonth.journeys().decrement(),
+            journeysByMonth.teus().decrement(journey.teus())
         );
     }
 }

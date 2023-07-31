@@ -7,6 +7,7 @@ import com.shiproutes.routes.journey.domain.JourneyId;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePathConverter;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import javax.persistence.Convert;
@@ -23,6 +24,7 @@ public class HibernateJourneyEntity {
     @Id
     private String id;
     private String shipId;
+    private Integer teus;
     private String originPort;
     private String destinationPort;
     private Instant departureDate;
@@ -36,6 +38,7 @@ public class HibernateJourneyEntity {
     public HibernateJourneyEntity(Journey journey) {
         this.id = journey.id().value();
         this.shipId = journey.shipId().value();
+        this.teus = journey.teus().value();
         this.originPort = journey.originPort().value();
         this.destinationPort = journey.destinationPort().value();
         this.departureDate = journey.departureDate().value();
@@ -47,6 +50,7 @@ public class HibernateJourneyEntity {
         return new Journey(
             new JourneyId(this.id),
             new IMO(this.shipId),
+            new Teus(this.teus),
             originPort == null ? PortId.empty() : new PortId(this.originPort),
             destinationPort == null ? PortId.empty() : new PortId(this.destinationPort),
             new DepartureDate(this.departureDate),

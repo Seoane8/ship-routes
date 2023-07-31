@@ -44,6 +44,7 @@ public class JourneysBetweenDatesGetController extends ApiController {
                     .collect(Collectors.toCollection(ArrayList::new))
                 );
                 put("journeys", journey.journeys());
+                put("teus", journey.teus());
             }})
             .collect(Collectors.toCollection(HashSet::new));
 

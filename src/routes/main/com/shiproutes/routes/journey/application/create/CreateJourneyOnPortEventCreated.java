@@ -4,6 +4,7 @@ import com.shiproutes.routes.journey.domain.ArrivalDate;
 import com.shiproutes.routes.journey.domain.DepartureDate;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.domain.ports.PortEventCreated;
 import com.shiproutes.shared.domain.ports.PortId;
@@ -30,6 +31,7 @@ public class CreateJourneyOnPortEventCreated implements DomainEventSubscriber<Po
     private void onArrival(PortEventCreated event) {
         fromArrivalCreator.create(
             new IMO(event.shipId()),
+            new Teus(event.teus()),
             new PortId(event.portId()),
             new ArrivalDate(event.date())
         );
@@ -38,6 +40,7 @@ public class CreateJourneyOnPortEventCreated implements DomainEventSubscriber<Po
     private void onDeparture(PortEventCreated event) {
         fromDepartureCreator.create(
             new IMO(event.shipId()),
+            new Teus(event.teus()),
             new PortId(event.portId()),
             new DepartureDate(event.date())
         );

@@ -3,6 +3,7 @@ package com.shiproutes.routes.journey.domain;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.domain.RoutePathMother;
 import com.shiproutes.shared.domain.IMOMother;
+import com.shiproutes.shared.domain.TeusMother;
 import com.shiproutes.shared.domain.ports.PortId;
 import com.shiproutes.shared.domain.ports.PortIdMother;
 
@@ -13,6 +14,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             IMOMother.random(),
+            TeusMother.random(),
             PortIdMother.random(),
             PortIdMother.random(),
             departureDate,
@@ -25,6 +27,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             IMOMother.random(),
+            TeusMother.random(),
             PortIdMother.random(),
             PortId.empty(),
             DepartureDateMother.random(),
@@ -37,6 +40,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             IMOMother.random(),
+            TeusMother.random(),
             PortId.empty(),
             PortIdMother.random(),
             DepartureDate.empty(),
@@ -49,6 +53,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortId.empty(),
             journey.destinationPort(),
             DepartureDate.empty(),
@@ -61,6 +66,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             journey.originPort(),
             PortId.empty(),
             journey.departureDate(),
@@ -73,6 +79,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortIdMother.random(),
             journey.destinationPort(),
             DepartureDateMother.randomBefore(journey.departureDate()),
@@ -85,6 +92,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             journey.originPort(),
             PortIdMother.random(),
             journey.departureDate(),
@@ -97,6 +105,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortId.empty(),
             PortIdMother.random(),
             DepartureDate.empty(),
@@ -109,6 +118,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortIdMother.random(),
             PortId.empty(),
             DepartureDateMother.randomAfter(journey.arrivalDate()),
@@ -121,6 +131,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortIdMother.random(),
             PortIdMother.random(),
             DepartureDateMother.randomAfter(journey.departureDate()),
@@ -133,6 +144,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             journey.shipId(),
+            journey.teus(),
             PortIdMother.random(),
             PortIdMother.random(),
             DepartureDateMother.randomBefore(journey.arrivalDate()),
@@ -145,6 +157,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             IMOMother.random(),
+            TeusMother.random(),
             PortIdMother.random(),
             PortIdMother.random(),
             DepartureDateMother.randomBetween(startDate, endDate),
@@ -157,6 +170,7 @@ public class JourneyMother {
         return new Journey(
             JourneyIdMother.random(),
             IMOMother.random(),
+            TeusMother.random(),
             PortIdMother.random(),
             PortIdMother.random(),
             DepartureDateMother.randomBefore(date),

@@ -5,6 +5,7 @@ import com.shiproutes.routes.journey.domain.DepartureDate;
 import com.shiproutes.routes.journey.domain.JourneyUnlinkedEvent;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
@@ -30,6 +31,7 @@ public class CreateJourneyOnJourneyUnlinked implements DomainEventSubscriber<Jou
     private void onArrival(JourneyUnlinkedEvent event) {
         fromArrivalCreator.create(
             new IMO(event.shipId()),
+            new Teus(event.teus()),
             new PortId(event.portId()),
             new ArrivalDate(event.date())
         );
@@ -38,6 +40,7 @@ public class CreateJourneyOnJourneyUnlinked implements DomainEventSubscriber<Jou
     private void onDeparture(JourneyUnlinkedEvent event) {
         fromDepartureCreator.create(
             new IMO(event.shipId()),
+            new Teus(event.teus()),
             new PortId(event.portId()),
             new DepartureDate(event.date())
         );

@@ -28,6 +28,7 @@ public class AllJourneysBetweenDatesSearcher {
             JourneysBetweenDatesResponse journey = result.computeIfAbsent(key,
                 k -> JourneysBetweenDatesResponse.from(event));
             journey.incrementJourney();
+            journey.incrementTeus(event.teus());
         }
         return new AllJourneysBetweenDatesResponse(result.values());
     }

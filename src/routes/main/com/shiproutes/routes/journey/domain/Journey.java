@@ -5,6 +5,7 @@ import com.shiproutes.routes.shared.domain.JourneyRemovedEvent;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.shared.domain.AggregateRoot;
 import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.ports.PortId;
 
 import java.util.Objects;
@@ -13,16 +14,18 @@ public class Journey extends AggregateRoot {
 
     private final JourneyId id;
     private final IMO shipId;
+    private final Teus teus;
     private final PortId originPort;
     private final PortId destinationPort;
     private final DepartureDate departureDate;
     private final ArrivalDate arrivalDate;
     private final RoutePath path;
 
-    public Journey(JourneyId id, IMO shipId, PortId originPort, PortId destinationPort,
+    public Journey(JourneyId id, IMO shipId, Teus teus, PortId originPort, PortId destinationPort,
                    DepartureDate departureDate, ArrivalDate arrivalDate, RoutePath path) {
         this.id = id;
         this.shipId = shipId;
+        this.teus = teus;
         this.originPort = originPort;
         this.destinationPort = destinationPort;
         this.departureDate = departureDate;
@@ -30,13 +33,14 @@ public class Journey extends AggregateRoot {
         this.path = path;
     }
 
-    public static Journey create(JourneyId id, IMO shipId, PortId originPort, PortId destinationPort,
+    public static Journey create(JourneyId id, IMO shipId, Teus teus, PortId originPort, PortId destinationPort,
                                  DepartureDate departureDate, ArrivalDate arrivalDate, RoutePath path) {
-        Journey journey = new Journey(id, shipId, originPort, destinationPort, departureDate, arrivalDate, path);
+        Journey journey = new Journey(id, shipId, teus, originPort, destinationPort, departureDate, arrivalDate, path);
 
         journey.record(new JourneyCreatedEvent(
             id.value(),
             shipId.value(),
+            teus.value(),
             originPort.value(),
             destinationPort.value(),
             departureDate.value(),
@@ -46,13 +50,15 @@ public class Journey extends AggregateRoot {
         return journey;
     }
 
-    public static Journey departure(JourneyId journeyId, IMO shipId, PortId originPort, DepartureDate departureDate) {
-        return new Journey(journeyId, shipId, originPort, PortId.empty(), departureDate, ArrivalDate.empty(),
+    public static Journey departure(JourneyId journeyId, IMO shipId, Teus teus,
+                                    PortId originPort, DepartureDate departureDate) {
+        return new Journey(journeyId, shipId, teus, originPort, PortId.empty(), departureDate, ArrivalDate.empty(),
             RoutePath.empty());
     }
 
-    public static Journey arrival(JourneyId journeyId, IMO shipId, PortId destinationPort, ArrivalDate arrivalDate) {
-        return new Journey(journeyId, shipId, PortId.empty(), destinationPort, DepartureDate.empty(), arrivalDate,
+    public static Journey arrival(JourneyId journeyId, IMO shipId, Teus teus,
+                                  PortId destinationPort, ArrivalDate arrivalDate) {
+        return new Journey(journeyId, shipId, teus, PortId.empty(), destinationPort, DepartureDate.empty(), arrivalDate,
             RoutePath.empty());
     }
 
@@ -62,6 +68,10 @@ public class Journey extends AggregateRoot {
 
     public IMO shipId() {
         return shipId;
+    }
+
+    public Teus teus() {
+        return teus;
     }
 
     public PortId originPort() {
@@ -92,6 +102,7 @@ public class Journey extends AggregateRoot {
         this.record(new JourneyRemovedEvent(
             id.value(),
             shipId.value(),
+            teus.value(),
             originPort.value(),
             destinationPort.value(),
             departureDate.value(),
@@ -103,6 +114,7 @@ public class Journey extends AggregateRoot {
         this.record(new JourneyUnlinkedEvent(
             id.value(),
             shipId.value(),
+            teus.value(),
             originPort.value(),
             departureDate.value(),
             "DEPARTURE"
@@ -113,6 +125,7 @@ public class Journey extends AggregateRoot {
         this.record(new JourneyUnlinkedEvent(
             id.value(),
             shipId.value(),
+            teus.value(),
             destinationPort.value(),
             arrivalDate.value(),
             "ARRIVAL"

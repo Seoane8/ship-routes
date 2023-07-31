@@ -6,6 +6,7 @@ import com.shiproutes.routes.shared.domain.JourneysCounter;
 import com.shiproutes.routes.shared.domain.RoutePath;
 import com.shiproutes.routes.shared.infrastructure.persistence.hibernate.RoutePathConverter;
 import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.TeusCounter;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ public final class HibernateRouteEntity {
     @Convert(converter = RoutePathConverter.class)
     private List<List<Double>> path;
     private Long journeys;
+    private Integer teus;
 
     public HibernateRouteEntity() {
     }
@@ -34,6 +36,7 @@ public final class HibernateRouteEntity {
         this.destinationPort = route.destinationPort().value();
         this.path = route.path().toPrimitives();
         this.journeys = route.journeys().value();
+        this.teus = route.teus().value();
     }
 
     public Route toEntity() {
@@ -42,6 +45,8 @@ public final class HibernateRouteEntity {
             new PortId(this.originPort),
             new PortId(this.destinationPort),
             RoutePath.fromPrimitives(this.path),
-            new JourneysCounter(this.journeys));
+            new JourneysCounter(this.journeys),
+            new TeusCounter(this.teus)
+        );
     }
 }

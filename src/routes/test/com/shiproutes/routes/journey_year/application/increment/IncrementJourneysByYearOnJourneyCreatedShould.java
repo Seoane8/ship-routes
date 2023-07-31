@@ -29,7 +29,7 @@ class IncrementJourneysByYearOnJourneyCreatedShould extends JourneysByYearModule
         Journey journey = JourneyMother.random();
         JourneyCreatedEvent event = JourneyCreatedEventMother.from(journey);
         JourneysByYear journeysByYear = JourneysByYearMother.fromJourney(journey);
-        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.incrementing(journeysByYear);
+        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.incrementing(journeysByYear, journey);
 
         shouldExists(journeysByYear);
 
@@ -43,7 +43,7 @@ class IncrementJourneysByYearOnJourneyCreatedShould extends JourneysByYearModule
         Journey journey = JourneyMother.random();
         JourneyCreatedEvent event = JourneyCreatedEventMother.from(journey);
         JourneysByYear journeysByYear = JourneysByYearMother.initialized(journey);
-        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.incrementing(journeysByYear);
+        JourneysByYear expectedJourneysByYearToSave = JourneysByYearMother.incrementing(journeysByYear, journey);
 
         shouldGenerateUuid(expectedJourneysByYearToSave.id().value());
         shouldExistRoutePath(expectedJourneysByYearToSave);

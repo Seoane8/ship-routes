@@ -29,7 +29,7 @@ class IncrementJourneysOnJourneyCreatedShould extends JourneysByMonthModuleUnitT
         Journey journey = JourneyMother.random();
         JourneyCreatedEvent event = JourneyCreatedEventMother.from(journey);
         JourneysByMonth journeysByMonth = JourneysByMonthMother.fromJourney(journey);
-        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.incrementing(journeysByMonth);
+        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.incrementing(journeysByMonth, journey);
 
         shouldExists(journeysByMonth);
 
@@ -43,7 +43,7 @@ class IncrementJourneysOnJourneyCreatedShould extends JourneysByMonthModuleUnitT
         Journey journey = JourneyMother.random();
         JourneyCreatedEvent event = JourneyCreatedEventMother.from(journey);
         JourneysByMonth journeysByMonth = JourneysByMonthMother.initialized(journey);
-        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.incrementing(journeysByMonth);
+        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.incrementing(journeysByMonth, journey);
 
         shouldGenerateUuid(expectedJourneysByMonthToSave.id().value());
         shouldExistRoutePath(expectedJourneysByMonthToSave);

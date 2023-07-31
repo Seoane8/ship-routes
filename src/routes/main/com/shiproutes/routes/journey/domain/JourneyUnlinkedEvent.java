@@ -10,6 +10,7 @@ import java.util.Objects;
 public class JourneyUnlinkedEvent extends DomainEvent {
 
     private final String shipId;
+    private final Integer teus;
     private final String portId;
     private final Instant date;
     private final String type;
@@ -17,23 +18,26 @@ public class JourneyUnlinkedEvent extends DomainEvent {
     public JourneyUnlinkedEvent() {
         super(null);
         this.shipId = null;
+        this.teus = null;
         this.portId = null;
         this.date = null;
         this.type = null;
     }
 
-    public JourneyUnlinkedEvent(String aggregateId, String shipId, String portId, Instant date, String type) {
+    public JourneyUnlinkedEvent(String aggregateId, String shipId, Integer teus, String portId, Instant date, String type) {
         super(aggregateId);
         this.shipId = shipId;
+        this.teus = teus;
         this.portId = portId;
         this.date = date;
         this.type = type;
     }
 
     public JourneyUnlinkedEvent(String aggregateId, String eventId, String occurredOn,
-                                String shipId, String portId, Instant date, String type) {
+                                String shipId, Integer teus, String portId, Instant date, String type) {
         super(aggregateId, eventId, occurredOn);
         this.shipId = shipId;
+        this.teus = teus;
         this.portId = portId;
         this.date = date;
         this.type = type;
@@ -46,6 +50,10 @@ public class JourneyUnlinkedEvent extends DomainEvent {
 
     public String shipId() {
         return shipId;
+    }
+
+    public Integer teus() {
+        return teus;
     }
 
     public String portId() {
@@ -64,6 +72,7 @@ public class JourneyUnlinkedEvent extends DomainEvent {
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
             put("shipId", shipId);
+            put("teus", teus);
             put("portId", portId);
             put("date", date.toString());
             put("type", type);
@@ -77,6 +86,7 @@ public class JourneyUnlinkedEvent extends DomainEvent {
             eventId,
             occurredOn,
             (String) body.get("shipId"),
+            (Integer) body.get("teus"),
             (String) body.get("portId"),
             Instant.parse(body.get("date").toString()),
             (String) body.get("type"));
@@ -87,12 +97,13 @@ public class JourneyUnlinkedEvent extends DomainEvent {
         if (this == o) return true;
         if (!(o instanceof JourneyUnlinkedEvent)) return false;
         JourneyUnlinkedEvent that = (JourneyUnlinkedEvent) o;
-        return Objects.equals(shipId, that.shipId) && Objects.equals(portId, that.portId)
-            && Objects.equals(date, that.date) && Objects.equals(type, that.type);
+        return Objects.equals(shipId, that.shipId) && Objects.equals(teus, that.teus)
+            && Objects.equals(portId, that.portId) && Objects.equals(date, that.date)
+            && Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(shipId, portId, date, type);
+        return Objects.hash(shipId, teus, portId, date, type);
     }
 }

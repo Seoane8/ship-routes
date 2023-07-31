@@ -10,6 +10,7 @@ import java.util.Objects;
 public class JourneyRemovedEvent extends DomainEvent {
 
     private final String shipId;
+    private final Integer teus;
     private final String originPort;
     private final String destinationPort;
     private final Instant departureDate;
@@ -18,26 +19,29 @@ public class JourneyRemovedEvent extends DomainEvent {
     public JourneyRemovedEvent() {
         super(null);
         this.shipId = null;
+        this.teus = null;
         this.originPort = null;
         this.destinationPort = null;
         this.departureDate = null;
         this.arrivalDate = null;
     }
 
-    public JourneyRemovedEvent(String aggregateId, String shipId, String originPort, String destinationPort,
-                               Instant departureDate, Instant arrivalDate) {
+    public JourneyRemovedEvent(String aggregateId, String shipId, Integer teus, String originPort,
+                               String destinationPort, Instant departureDate, Instant arrivalDate) {
         super(aggregateId);
         this.shipId = shipId;
+        this.teus = teus;
         this.originPort = originPort;
         this.destinationPort = destinationPort;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
     }
 
-    public JourneyRemovedEvent(String aggregateId, String eventId, String occurredOn, String shipId,
+    public JourneyRemovedEvent(String aggregateId, String eventId, String occurredOn, String shipId, Integer teus,
                                String originPort, String destinationPort, Instant departureDate, Instant arrivalDate) {
         super(aggregateId, eventId, occurredOn);
         this.shipId = shipId;
+        this.teus = teus;
         this.originPort = originPort;
         this.destinationPort = destinationPort;
         this.departureDate = departureDate;
@@ -61,10 +65,15 @@ public class JourneyRemovedEvent extends DomainEvent {
         return departureDate;
     }
 
+    public Integer teus() {
+        return teus;
+    }
+
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
             put("shipId", shipId);
+            put("teus", teus);
             put("originPort", originPort);
             put("destinationPort", destinationPort);
             put("departureDate", departureDate.toString());
@@ -79,6 +88,7 @@ public class JourneyRemovedEvent extends DomainEvent {
             eventId,
             occurredOn,
             (String) body.get("shipId"),
+            (Integer) body.get("teus"),
             (String) body.get("originPort"),
             (String) body.get("destinationPOrt"),
             Instant.parse(body.get("departureDate").toString()),
@@ -91,13 +101,13 @@ public class JourneyRemovedEvent extends DomainEvent {
         if (this == o) return true;
         if (!(o instanceof JourneyRemovedEvent)) return false;
         JourneyRemovedEvent that = (JourneyRemovedEvent) o;
-        return Objects.equals(shipId, that.shipId)
+        return Objects.equals(shipId, that.shipId) && Objects.equals(teus, that.teus)
             && Objects.equals(originPort, that.originPort) && Objects.equals(destinationPort, that.destinationPort)
             && Objects.equals(departureDate, that.departureDate) && Objects.equals(arrivalDate, that.arrivalDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(shipId, originPort, destinationPort, departureDate, arrivalDate);
+        return Objects.hash(shipId, teus, originPort, destinationPort, departureDate, arrivalDate);
     }
 }

@@ -57,15 +57,18 @@ public class JourneysByMonthResponse implements Response {
         private final Integer year;
         private final Integer month;
         private final Long journeys;
+        private final Integer teus;
 
-        public JourneysResponse(Integer year, Integer month, Long journeys) {
+        public JourneysResponse(Integer year, Integer month, Long journeys, Integer teus) {
             this.year = year;
             this.month = month;
             this.journeys = journeys;
+            this.teus = teus;
         }
 
         public static JourneysResponse from(JourneysByMonth entity) {
-            return new JourneysResponse(entity.year().value(), entity.month().value(), entity.journeys().value());
+            return new JourneysResponse(entity.year().value(), entity.month().value(),
+                entity.journeys().value(), entity.teus().value());
         }
 
         public Integer year() {
@@ -80,5 +83,8 @@ public class JourneysByMonthResponse implements Response {
             return journeys;
         }
 
+        public Integer teus() {
+            return teus;
+        }
     }
 }

@@ -29,7 +29,7 @@ class DecrementJourneysOnJourneyRemovedShould extends JourneysByMonthModuleUnitT
         Journey journey = JourneyMother.random();
         JourneyRemovedEvent event = JourneyRemovedEventMother.from(journey);
         JourneysByMonth journeysByMonth = JourneysByMonthMother.fromJourney(journey);
-        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.decrementing(journeysByMonth);
+        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.decrementing(journeysByMonth, journey);
 
         shouldExists(journeysByMonth);
 
@@ -43,7 +43,7 @@ class DecrementJourneysOnJourneyRemovedShould extends JourneysByMonthModuleUnitT
         Journey journey = JourneyMother.random();
         JourneyRemovedEvent event = JourneyRemovedEventMother.from(journey);
         JourneysByMonth journeysByMonth = JourneysByMonthMother.initialized(journey);
-        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.decrementing(journeysByMonth);
+        JourneysByMonth expectedJourneysByMonthToSave = JourneysByMonthMother.decrementing(journeysByMonth, journey);
 
         shouldGenerateUuid(expectedJourneysByMonthToSave.id().value());
         shouldExistRoutePath(expectedJourneysByMonthToSave);

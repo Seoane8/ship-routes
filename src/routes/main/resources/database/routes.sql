@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS journeys
 (
     id              CHAR(36) NOT NULL,
     shipId          CHAR(7)  NOT NULL,
+    teus            INT      NOT NULL,
     originPort      CHAR(36),
     destinationPort CHAR(36),
     departureDate   TIMESTAMP(3),
