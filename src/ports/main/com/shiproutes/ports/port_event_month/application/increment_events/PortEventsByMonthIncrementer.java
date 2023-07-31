@@ -6,6 +6,7 @@ import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthId;
 import com.shiproutes.ports.port_event_month.domain.PortEventsByMonthRepository;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.*;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
 import com.shiproutes.shared.domain.ports.Coordinates;
@@ -43,15 +44,13 @@ public class PortEventsByMonthIncrementer {
 
     private PortEventsByMonth createPortEventsByMonth(PortId portId, Year year, Month month) {
         PortEventsByMonthId id = new PortEventsByMonthId(uuidGenerator.generate());
-        Coordinates coordinates = findPortCoordinates(portId);
-        return PortEventsByMonth.create(id, portId, coordinates, year, month);
-    }
-
-    private Coordinates findPortCoordinates(PortId portId) {
         PortResponse port = queryBus.ask(new FindPortQuery(portId.value()));
-        return new Coordinates(
+        Coordinates coordinates = new Coordinates(
             new Latitude(port.latitude()),
             new Longitude(port.longitude())
         );
+        PortName portName = new PortName(port.name());
+        return PortEventsByMonth.create(id, portId, portName, coordinates, year, month);
     }
+
 }

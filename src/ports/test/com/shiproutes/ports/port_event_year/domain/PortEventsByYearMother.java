@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event_year.domain;
 
+import com.shiproutes.ports.port.domain.PortNameMother;
 import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.shared.domain.TeusCounter;
@@ -15,6 +16,7 @@ public class PortEventsByYearMother {
         return new PortEventsByYear(
             new PortEventsByYearId(UuidMother.random()),
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             YearMother.random(),
             new TotalDepartures(LongMother.random()),
@@ -27,6 +29,7 @@ public class PortEventsByYearMother {
         return new PortEventsByYear(
             new PortEventsByYearId(UuidMother.random()),
             portEvent.portId(),
+            portEvent.portName(),
             portEvent.coordinates(),
             Year.fromInstant(portEvent.date().value()),
             new TotalDepartures(portEvent.type() == PortEventType.DEPARTURE ? 1L : 0L),
@@ -39,6 +42,7 @@ public class PortEventsByYearMother {
         return new PortEventsByYear(
             new PortEventsByYearId(UuidMother.random()),
             portEvent.portId(),
+            portEvent.portName(),
             portEvent.coordinates(),
             Year.fromInstant(portEvent.date().value()),
             new TotalDepartures(LongMother.random()),
@@ -51,6 +55,7 @@ public class PortEventsByYearMother {
         return new PortEventsByYear(
             portEventsByYear.id(),
             portEventsByYear.portId(),
+            portEventsByYear.portName(),
             portEventsByYear.coordinates(),
             portEventsByYear.year(),
             portEvent.type() == PortEventType.DEPARTURE ? portEventsByYear.departures().increment() : portEventsByYear.departures(),

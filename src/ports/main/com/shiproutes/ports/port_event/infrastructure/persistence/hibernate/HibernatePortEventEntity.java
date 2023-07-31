@@ -4,6 +4,7 @@ import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventDate;
 import com.shiproutes.ports.port_event.domain.PortEventId;
 import com.shiproutes.ports.port_event.domain.PortEventType;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.ports.Coordinates;
@@ -24,6 +25,7 @@ public final class HibernatePortEventEntity {
     private String id;
     private String type;
     private String portId;
+    private String portName;
     private Double latitude;
     private Double longitude;
     private String shipId;
@@ -37,6 +39,7 @@ public final class HibernatePortEventEntity {
         this.id = portEvent.id().value();
         this.type = portEvent.type().value();
         this.portId = portEvent.portId().value();
+        this.portName = portEvent.portName().value();
         this.latitude = portEvent.coordinates().latitude().value();
         this.longitude = portEvent.coordinates().longitude().value();
         this.shipId = portEvent.shipId().value();
@@ -49,6 +52,7 @@ public final class HibernatePortEventEntity {
             new PortEventId(this.id),
             PortEventType.valueOf(type),
             new PortId(this.portId),
+            new PortName(this.portName),
             new Coordinates(
                 new Latitude(this.latitude),
                 new Longitude(this.longitude)

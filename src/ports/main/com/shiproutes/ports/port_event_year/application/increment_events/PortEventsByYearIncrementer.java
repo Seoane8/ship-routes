@@ -6,6 +6,7 @@ import com.shiproutes.ports.port_event_year.domain.PortEventsByYearId;
 import com.shiproutes.ports.port_event_year.domain.PortEventsByYearRepository;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.Teus;
 import com.shiproutes.shared.domain.UuidGenerator;
@@ -46,15 +47,13 @@ public class PortEventsByYearIncrementer {
 
     private PortEventsByYear createPortEventsByYear(PortId portId, Year year) {
         PortEventsByYearId id = new PortEventsByYearId(uuidGenerator.generate());
-        Coordinates coordinates = findPortCoordinates(portId);
-        return PortEventsByYear.create(id, portId, coordinates, year);
-    }
-
-    private Coordinates findPortCoordinates(PortId portId) {
         PortResponse port = queryBus.ask(new FindPortQuery(portId.value()));
-        return new Coordinates(
+        Coordinates coordinates = new Coordinates(
             new Latitude(port.latitude()),
             new Longitude(port.longitude())
         );
+        PortName portName = new PortName(port.name());
+        return PortEventsByYear.create(id, portId, portName, coordinates, year);
     }
+
 }

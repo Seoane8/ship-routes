@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event_month.domain;
 
+import com.shiproutes.ports.port.domain.PortNameMother;
 import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventType;
 import com.shiproutes.ports.shared.domain.TeusCounter;
@@ -14,6 +15,7 @@ public class PortEventsByMonthMother {
         return new PortEventsByMonth(
             new PortEventsByMonthId(UuidMother.random()),
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             YearMother.random(),
             MonthMother.random(),
@@ -26,6 +28,7 @@ public class PortEventsByMonthMother {
         return new PortEventsByMonth(
             new PortEventsByMonthId(UuidMother.random()),
             portEvent.portId(),
+            portEvent.portName(),
             portEvent.coordinates(),
             Year.fromInstant(portEvent.date().value()),
             Month.fromInstant(portEvent.date().value()),
@@ -39,6 +42,7 @@ public class PortEventsByMonthMother {
         return new PortEventsByMonth(
             new PortEventsByMonthId(UuidMother.random()),
             portEvent.portId(),
+            portEvent.portName(),
             portEvent.coordinates(),
             Year.fromInstant(portEvent.date().value()),
             Month.fromInstant(portEvent.date().value()),
@@ -51,6 +55,7 @@ public class PortEventsByMonthMother {
         return new PortEventsByMonth(
             portEventsByMonth.id(),
             portEventsByMonth.portId(),
+            portEventsByMonth.portName(),
             portEventsByMonth.coordinates(),
             portEventsByMonth.year(),
             portEventsByMonth.month(),

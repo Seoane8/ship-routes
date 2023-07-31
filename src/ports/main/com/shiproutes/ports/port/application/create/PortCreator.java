@@ -1,6 +1,10 @@
 package com.shiproutes.ports.port.application.create;
 
-import com.shiproutes.ports.port.domain.*;
+import com.shiproutes.ports.port.domain.Locode;
+import com.shiproutes.ports.port.domain.Port;
+import com.shiproutes.ports.port.domain.PortAlreadyExists;
+import com.shiproutes.ports.port.domain.PortRepository;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.ports.Coordinates;

@@ -2,7 +2,7 @@ package com.shiproutes.ports.port.infrastructure.persistence.hibernate;
 
 import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port.domain.Port;
-import com.shiproutes.ports.port.domain.PortName;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
 import com.shiproutes.shared.domain.ports.Coordinates;

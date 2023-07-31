@@ -23,7 +23,7 @@ class PortEventCreatorShould extends PortEventModuleUnitTestCase {
     @Test
     void create_new_port_event() {
         PortEvent portEvent = PortEventMother.random();
-        shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
+        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
         creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());
@@ -35,7 +35,7 @@ class PortEventCreatorShould extends PortEventModuleUnitTestCase {
     void publish_port_event_created_event() {
         PortEvent portEvent = PortEventMother.random();
         PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
-        shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
+        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
         creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());

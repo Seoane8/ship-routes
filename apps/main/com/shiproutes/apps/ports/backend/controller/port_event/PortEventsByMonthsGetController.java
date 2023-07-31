@@ -31,6 +31,7 @@ public final class PortEventsByMonthsGetController extends ApiController {
         Set<Map<String, Serializable>> ports = response.ports().stream()
             .map(portEvent -> Map.of(
                 "port_id", portEvent.portId(),
+                "port_name", portEvent.portName(),
                 "longitude", portEvent.longitude(),
                 "latitude", portEvent.latitude(),
                 "events", portEvent.events().stream().map(event -> new HashMap<String, Serializable>() {{

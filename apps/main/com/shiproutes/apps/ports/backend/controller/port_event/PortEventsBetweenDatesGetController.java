@@ -41,6 +41,7 @@ public class PortEventsBetweenDatesGetController extends ApiController {
         Set<Map<String, Serializable>> ports = response.ports().stream()
             .map(portEvent -> new HashMap<String, Serializable>() {{
                 put("port_id", portEvent.portId());
+                put("port_name", portEvent.portName());
                 put("longitude", portEvent.longitude());
                 put("latitude", portEvent.latitude());
                 put("departures", portEvent.departures());

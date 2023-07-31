@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event_year.domain;
 
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.ports.shared.domain.TeusCounter;
 import com.shiproutes.ports.shared.domain.TotalArrivals;
 import com.shiproutes.ports.shared.domain.TotalDepartures;
@@ -14,16 +15,18 @@ public final class PortEventsByYear {
 
     private final PortEventsByYearId id;
     private final PortId portId;
+    private final PortName portName;
     private final Coordinates coordinates;
     private final Year year;
     private TotalDepartures departures;
     private TotalArrivals arrivals;
     private TeusCounter teusCounter;
 
-    public PortEventsByYear(PortEventsByYearId id, PortId portId, Coordinates coordinates, Year year,
+    public PortEventsByYear(PortEventsByYearId id, PortId portId, PortName portName, Coordinates coordinates, Year year,
                             TotalDepartures departures, TotalArrivals arrivals, TeusCounter teusCounter) {
         this.id = id;
         this.portId = portId;
+        this.portName = portName;
         this.coordinates = coordinates;
         this.year = year;
         this.departures = departures;
@@ -31,8 +34,9 @@ public final class PortEventsByYear {
         this.teusCounter = teusCounter;
     }
 
-    public static PortEventsByYear create(PortEventsByYearId id, PortId portId, Coordinates coordinates, Year year) {
-        return new PortEventsByYear(id, portId, coordinates, year,
+    public static PortEventsByYear create(PortEventsByYearId id, PortId portId, PortName portName,
+                                          Coordinates coordinates, Year year) {
+        return new PortEventsByYear(id, portId, portName, coordinates, year,
             TotalDepartures.initialize(), TotalArrivals.initialize(), TeusCounter.initialize());
     }
 
@@ -42,6 +46,10 @@ public final class PortEventsByYear {
 
     public PortId portId() {
         return portId;
+    }
+
+    public PortName portName() {
+        return portName;
     }
 
     public Coordinates coordinates() {
@@ -82,13 +90,13 @@ public final class PortEventsByYear {
         if (!(o instanceof PortEventsByYear)) return false;
         PortEventsByYear that = (PortEventsByYear) o;
         return Objects.equals(id, that.id) && Objects.equals(portId, that.portId)
-            && Objects.equals(coordinates, that.coordinates) && Objects.equals(year, that.year)
-            && Objects.equals(departures, that.departures) && Objects.equals(arrivals, that.arrivals)
-            && Objects.equals(teusCounter, that.teusCounter);
+            && Objects.equals(portName, that.portName) && Objects.equals(coordinates, that.coordinates)
+            && Objects.equals(year, that.year) && Objects.equals(departures, that.departures)
+            && Objects.equals(arrivals, that.arrivals) && Objects.equals(teusCounter, that.teusCounter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, portId, coordinates, year, departures, arrivals, teusCounter);
+        return Objects.hash(id, portId, portName, coordinates, year, departures, arrivals, teusCounter);
     }
 }

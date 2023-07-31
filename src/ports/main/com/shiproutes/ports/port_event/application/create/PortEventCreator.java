@@ -5,6 +5,7 @@ import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.ports.shared.application.TeusResponse;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.Teus;
@@ -29,20 +30,17 @@ public final class PortEventCreator {
     }
 
     public void create(PortEventId id, PortEventType type, PortId portId, IMO shipId, PortEventDate date) {
-        Coordinates coordinates = findPortCoordinates(portId);
-        Teus teus = findShipTeus(shipId);
-        PortEvent portEvent = PortEvent.create(id, type, portId, coordinates, shipId, teus, date);
-
-        repository.save(portEvent);
-        eventBus.publish(portEvent.pullDomainEvents());
-    }
-
-    private Coordinates findPortCoordinates(PortId portId) {
         PortResponse port = queryBus.ask(new FindPortQuery(portId.value()));
-        return new Coordinates(
+        Coordinates coordinates = new Coordinates(
             new Latitude(port.latitude()),
             new Longitude(port.longitude())
         );
+        PortName portName = new PortName(port.name());
+        Teus teus = findShipTeus(shipId);
+        PortEvent portEvent = PortEvent.create(id, type, portId, portName, coordinates, shipId, teus, date);
+
+        repository.save(portEvent);
+        eventBus.publish(portEvent.pullDomainEvents());
     }
 
     private Teus findShipTeus(IMO shipId) {

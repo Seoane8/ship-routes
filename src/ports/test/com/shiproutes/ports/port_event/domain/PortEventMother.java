@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event.domain;
 
+import com.shiproutes.ports.port.domain.PortNameMother;
 import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.shared.domain.TeusMother;
 import com.shiproutes.shared.domain.ports.CoordinatesMother;
@@ -12,6 +13,7 @@ public final class PortEventMother {
             PortEventIdMother.random(),
             PortEventTypeMother.random(),
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),
@@ -24,6 +26,7 @@ public final class PortEventMother {
             PortEventIdMother.random(),
             PortEventType.DEPARTURE,
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),
@@ -36,6 +39,7 @@ public final class PortEventMother {
             PortEventIdMother.random(),
             PortEventType.ARRIVAL,
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),
@@ -48,6 +52,7 @@ public final class PortEventMother {
             PortEventIdMother.random(),
             PortEventTypeMother.random(),
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),
@@ -60,6 +65,7 @@ public final class PortEventMother {
             PortEventIdMother.random(),
             PortEventTypeMother.random(),
             PortIdMother.random(),
+            PortNameMother.random(),
             CoordinatesMother.random(),
             IMOMother.random(),
             TeusMother.random(),

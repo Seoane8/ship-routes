@@ -63,7 +63,7 @@ class IncrementPortEventsByYearOnPortEventCreatedShould extends PortEventsByYear
 
         shouldNotExist(expectedPortEventsByYearToSave);
         shouldGenerateUuid(expectedPortEventsByYearToSave.id().value());
-        shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
+        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
 
         subscriber.on(event);
 
@@ -79,7 +79,7 @@ class IncrementPortEventsByYearOnPortEventCreatedShould extends PortEventsByYear
 
         shouldNotExist(expectedPortEventsByYearToSave);
         shouldGenerateUuid(expectedPortEventsByYearToSave.id().value());
-        shouldExistPortWithCoordinates(portEvent.portId(), portEvent.coordinates());
+        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
 
         subscriber.on(event);
 

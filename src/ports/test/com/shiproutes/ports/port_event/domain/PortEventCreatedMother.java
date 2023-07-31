@@ -8,6 +8,7 @@ public final class PortEventCreatedMother {
         return new PortEventCreated(
             portEvent.id().value(),
             portEvent.portId().value(),
+            portEvent.portName().value(),
             portEvent.type().value(),
             portEvent.shipId().value(),
             portEvent.date().value(),

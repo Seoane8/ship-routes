@@ -7,15 +7,17 @@ import com.shiproutes.shared.domain.bus.query.Response;
 public class PortEventsBetweenDatesResponse implements Response {
 
     private final String portId;
+    private final String portName;
     private final Double longitude;
     private final Double latitude;
     private Long departures;
     private Long arrivals;
     private Integer teus;
 
-    public PortEventsBetweenDatesResponse(String portId, Double longitude, Double latitude,
+    public PortEventsBetweenDatesResponse(String portId, String portName, Double longitude, Double latitude,
                                           Long departures, Long arrivals, Integer teus) {
         this.portId = portId;
+        this.portName = portName;
         this.longitude = longitude;
         this.latitude = latitude;
         this.departures = departures;
@@ -24,13 +26,17 @@ public class PortEventsBetweenDatesResponse implements Response {
     }
 
     public static PortEventsBetweenDatesResponse from(PortEvent entity) {
-        return new PortEventsBetweenDatesResponse(entity.portId().value(),
+        return new PortEventsBetweenDatesResponse(entity.portId().value(), entity.portName().value(),
             entity.coordinates().longitude().value(), entity.coordinates().latitude().value(),
             0L, 0L, 0);
     }
 
     public String portId() {
         return portId;
+    }
+
+    public String portName() {
+        return portName;
     }
 
     public Double longitude() {

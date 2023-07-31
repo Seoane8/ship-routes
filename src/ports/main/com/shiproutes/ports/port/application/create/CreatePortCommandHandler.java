@@ -1,7 +1,7 @@
 package com.shiproutes.ports.port.application.create;
 
 import com.shiproutes.ports.port.domain.Locode;
-import com.shiproutes.ports.port.domain.PortName;
+import com.shiproutes.ports.shared.domain.PortName;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.command.CommandHandler;
 import com.shiproutes.shared.domain.ports.Coordinates;

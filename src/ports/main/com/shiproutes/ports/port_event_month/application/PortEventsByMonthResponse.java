@@ -9,24 +9,31 @@ import java.util.Set;
 public class PortEventsByMonthResponse implements Response {
 
     private final String portId;
+    private final String portName;
     private final Double longitude;
     private final Double latitude;
     private final Set<EventsResponse> events;
 
-    public PortEventsByMonthResponse(String portId, Double longitude, Double latitude, Set<EventsResponse> events) {
+    public PortEventsByMonthResponse(String portId, String portName, Double longitude, Double latitude,
+                                     Set<EventsResponse> events) {
         this.portId = portId;
+        this.portName = portName;
         this.longitude = longitude;
         this.latitude = latitude;
         this.events = events;
     }
 
     public static PortEventsByMonthResponse from(PortEventsByMonth entity) {
-        return new PortEventsByMonthResponse(entity.portId().value(),
+        return new PortEventsByMonthResponse(entity.portId().value(), entity.portName().value(),
             entity.coordinates().longitude().value(), entity.coordinates().latitude().value(), new HashSet<>());
     }
 
     public String portId() {
         return portId;
+    }
+
+    public String portName() {
+        return portName;
     }
 
     public Double longitude() {

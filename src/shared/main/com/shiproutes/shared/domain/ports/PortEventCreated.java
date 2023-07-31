@@ -10,6 +10,7 @@ import java.util.Objects;
 public final class PortEventCreated extends DomainEvent {
 
     private final String portId;
+    private final String portName;
     private final String type;
     private final String shipId;
     private final Instant date;
@@ -18,14 +19,16 @@ public final class PortEventCreated extends DomainEvent {
     public PortEventCreated() {
         super(null);
         this.portId = null;
+        this.portName = null;
         this.type = null;
         this.shipId = null;
         this.date = null;
         this.teus = null;
     }
 
-    public PortEventCreated(String aggregateId, String portId, String type, String shipId, Instant date, Integer teus) {
+    public PortEventCreated(String aggregateId, String portId, String portName, String type, String shipId, Instant date, Integer teus) {
         super(aggregateId);
+        this.portName = portName;
         this.type = type;
         this.portId = portId;
         this.shipId = shipId;
@@ -33,9 +36,10 @@ public final class PortEventCreated extends DomainEvent {
         this.teus = teus;
     }
 
-    public PortEventCreated(String aggregateId, String eventId, String occurredOn, String portId, String type,
+    public PortEventCreated(String aggregateId, String eventId, String occurredOn, String portId, String portName, String type,
                             String shipId, Instant date, Integer teus) {
         super(aggregateId, eventId, occurredOn);
+        this.portName = portName;
         this.type = type;
         this.portId = portId;
         this.shipId = shipId;
@@ -72,6 +76,7 @@ public final class PortEventCreated extends DomainEvent {
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
             put("portId", portId);
+            put("portName", portName);
             put("type", type);
             put("shipId", shipId);
             put("date", date.toString());
@@ -87,6 +92,7 @@ public final class PortEventCreated extends DomainEvent {
             eventId,
             occurredOn,
             (String) body.get("portId"),
+            (String) body.get("portName"),
             (String) body.get("type"),
             (String) body.get("shipId"),
             Instant.parse(body.get("date").toString()),
@@ -99,13 +105,13 @@ public final class PortEventCreated extends DomainEvent {
         if (this == o) return true;
         if (!(o instanceof PortEventCreated)) return false;
         PortEventCreated that = (PortEventCreated) o;
-        return Objects.equals(portId, that.portId) && Objects.equals(type, that.type)
-            && Objects.equals(shipId, that.shipId) && Objects.equals(date, that.date)
-            && Objects.equals(teus, that.teus);
+        return Objects.equals(portId, that.portId) && Objects.equals(portName, that.portName)
+            && Objects.equals(type, that.type) && Objects.equals(shipId, that.shipId)
+            && Objects.equals(date, that.date) && Objects.equals(teus, that.teus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(portId, type, shipId, date, teus);
+        return Objects.hash(portId, portName, type, shipId, date, teus);
     }
 }
