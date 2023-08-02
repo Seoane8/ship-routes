@@ -6,6 +6,7 @@ import com.shiproutes.routes.shared.application.RoutePathResponse;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.infrastructure.auth.AuthorizeAll;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@AuthorizeAll
 public class RouteGetController extends ApiController {
 
     public RouteGetController(QueryBus queryBus, CommandBus commandBus) {

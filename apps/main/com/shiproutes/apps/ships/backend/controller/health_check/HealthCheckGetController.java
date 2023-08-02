@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-public final class HealthCheckGetController extends ApiController {
+public class HealthCheckGetController extends ApiController {
     public HealthCheckGetController(
         QueryBus queryBus,
         CommandBus commandBus

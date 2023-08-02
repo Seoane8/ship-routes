@@ -3,6 +3,7 @@ package com.shiproutes.apps.ships.backend.controller.ship;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.infrastructure.auth.AuthorizeAdmins;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
 import com.shiproutes.ships.ship.application.create.CreateShipCommand;
 import com.shiproutes.ships.ship.domain.ShipAlreadyExists;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-public final class ShipPostController extends ApiController {
+@AuthorizeAdmins
+public class ShipPostController extends ApiController {
 
     public ShipPostController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);

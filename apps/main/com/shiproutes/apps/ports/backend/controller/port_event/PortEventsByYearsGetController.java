@@ -5,6 +5,7 @@ import com.shiproutes.ports.port_event_year.application.search_all.SearchAllPort
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.infrastructure.auth.AuthorizeAll;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-public final class PortEventsByYearsGetController extends ApiController {
+@AuthorizeAll
+public class PortEventsByYearsGetController extends ApiController {
     public PortEventsByYearsGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
