@@ -1,6 +1,6 @@
 package com.shiproutes.apps;
 
-import com.shiproutes.apps.ingest.backend.IngestApplication;
+import com.shiproutes.apps.backoffice.backend.BackofficeApplication;
 import com.shiproutes.apps.ports.backend.PortsApplication;
 import com.shiproutes.apps.routes.backend.RoutesApplication;
 import com.shiproutes.apps.ships.backend.ShipsApplication;
@@ -70,7 +70,7 @@ public class Starter {
             put("ships", ShipsApplication.class);
             put("ports", PortsApplication.class);
             put("routes", RoutesApplication.class);
-            put("ingest", IngestApplication.class);
+            put("backoffice", BackofficeApplication.class);
         }};
     }
 
@@ -79,7 +79,7 @@ public class Starter {
             put("ships", ShipsApplication.commands());
             put("ports", PortsApplication.commands());
             put("routes", RoutesApplication.commands());
-            put("ingest", IngestApplication.commands());
+            put("backoffice", BackofficeApplication.commands());
         }};
     }
 

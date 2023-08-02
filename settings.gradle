@@ -12,6 +12,6 @@ project(':ports').projectDir = new File('src/ports')
 include ':routes'
 project(':routes').projectDir = new File('src/routes')
 
-include ':ingest'
-project(':ingest').projectDir = new File('src/ingest')
+include ':backoffice'
+project(':backoffice').projectDir = new File('src/backoffice')
 
