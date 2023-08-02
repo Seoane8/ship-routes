@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 @RestController
 @AuthorizeAdmins
-public final class PortPostController extends ApiController {
+public class PortPostController extends ApiController {
 
     public PortPostController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);

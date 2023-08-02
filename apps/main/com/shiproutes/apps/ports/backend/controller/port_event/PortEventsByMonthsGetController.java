@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @AuthorizeAll
-public final class PortEventsByMonthsGetController extends ApiController {
+public class PortEventsByMonthsGetController extends ApiController {
     public PortEventsByMonthsGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }

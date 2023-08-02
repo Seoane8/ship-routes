@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("(" +
-    "hasRole(T(com.shiproutes.shared.domain.UserRole).ADMIN) + " +
+    "hasRole(T(com.shiproutes.shared.domain.UserRole).ADMIN) or " +
     "hasRole(T(com.shiproutes.shared.domain.UserRole).USER))")
 public @interface AuthorizeAll {
 }

@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @AuthorizeAll
-public final class ShipGetController extends ApiController {
+public class ShipGetController extends ApiController {
 
     public ShipGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);

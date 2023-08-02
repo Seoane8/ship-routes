@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-public final class PortsGetController extends ApiController {
+public class PortsGetController extends ApiController {
 
     public PortsGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
