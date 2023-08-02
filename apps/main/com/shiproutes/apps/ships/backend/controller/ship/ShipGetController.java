@@ -3,6 +3,7 @@ package com.shiproutes.apps.ships.backend.controller.ship;
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.infrastructure.auth.AuthorizeAll;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
 import com.shiproutes.ships.ship.application.find.FindShipQuery;
 import com.shiproutes.ships.ship.application.find.ShipResponse;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@AuthorizeAll
 public final class ShipGetController extends ApiController {
 
     public ShipGetController(QueryBus queryBus, CommandBus commandBus) {

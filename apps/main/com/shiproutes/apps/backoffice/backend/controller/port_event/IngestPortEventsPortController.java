@@ -4,6 +4,7 @@ import com.shiproutes.backoffice.port_event.application.ingest.IngestPortEventCo
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
+import com.shiproutes.shared.infrastructure.auth.AuthorizeAdmins;
 import com.shiproutes.shared.infrastructure.spring.ApiController;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -35,6 +36,7 @@ import java.time.Instant;
 import java.util.HashMap;
 
 @RestController
+@AuthorizeAdmins
 public class IngestPortEventsPortController extends ApiController {
 
     private final JobLauncher jobLauncher;
