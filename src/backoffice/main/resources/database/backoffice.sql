@@ -17,6 +17,19 @@ CREATE TABLE IF NOT EXISTS ports
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS users
+(
+    id       CHAR(36)     NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email    VARCHAR(255) NOT NULL UNIQUE,
+    role     VARCHAR(36)  NOT NULL,
+    PRIMARY KEY (id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS domain_events
 (
     id           CHAR(36)     NOT NULL,

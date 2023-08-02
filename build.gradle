@@ -135,7 +135,7 @@ bootJar {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.1.8.RELEASE'
-    implementation 'org.springframework.batch:spring-batch-core:4.2.8.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-batch:2.1.8.RELEASE'
 
     implementation project(":shared")
     implementation project(":ships")
