@@ -14,8 +14,6 @@ import org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.context.ApplicationContext;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,12 +65,6 @@ public final class RabbitMqDomainEventsConsumer {
 
         try {
             subscriber.on(domainEvent);
-        } catch (IllegalArgumentException error) {
-            throw new Exception(String.format(
-                "The subscriber <%s> should implement a method `on` listening the domain event <%s>",
-                queue,
-                domainEvent.eventName()
-            ));
         } catch (Exception error) {
             handleConsumptionError(message, queue);
         }
