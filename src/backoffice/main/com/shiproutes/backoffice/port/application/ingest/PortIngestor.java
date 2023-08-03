@@ -33,8 +33,8 @@ public class PortIngestor {
 
         PortIngestedEvent event = new PortIngestedEvent(
             port.id().value(),
-            port.locode(),
             name,
+            port.locode(),
             latitude,
             longitude
         );
