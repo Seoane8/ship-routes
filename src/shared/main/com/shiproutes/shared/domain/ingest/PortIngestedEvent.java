@@ -39,6 +39,10 @@ public final class PortIngestedEvent extends DomainEvent {
         this.longitude = longitude;
     }
 
+    public String name() {
+        return name;
+    }
+
     public Double latitude() {
         return latitude;
     }
