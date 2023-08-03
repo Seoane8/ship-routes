@@ -5,10 +5,7 @@ import com.shiproutes.backoffice.port_event.domain.IngestPortEventCommandMother;
 import com.shiproutes.backoffice.port_event.domain.PortEventIngestedEventMother;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.PortEventIngestedEvent;
-import com.shiproutes.shared.domain.ports.Coordinates;
-import com.shiproutes.shared.domain.ports.Latitude;
-import com.shiproutes.shared.domain.ports.Longitude;
-import com.shiproutes.shared.domain.ports.PortId;
+import com.shiproutes.shared.domain.ports.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +28,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldExistShip(imo);
         shouldExistPort(portId, command.locode());
         shouldGenerateUuid(event.aggregateId());
@@ -46,7 +43,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldExistShip(imo);
         shouldNotExistPort(command.locode());
         shouldGenerateUuids(portId.value(), event.aggregateId());
@@ -61,7 +58,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldNotExistShip(imo);
         shouldExistPort(portId, command.locode());
         shouldGenerateUuids(event.aggregateId());
@@ -76,7 +73,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldNotExistShip(imo);
         shouldNotExistPort(command.locode());
         shouldGenerateUuids(portId.value(), event.aggregateId());
@@ -91,7 +88,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldExistShip(imo);
         shouldNotExistPort(command.locode());
         shouldGenerateUuids(portId.value(), event.aggregateId());
@@ -107,7 +104,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
         IMO imo = new IMO(command.imo());
-        PortId portId = new PortId(event.portId());
+        PortId portId = PortIdMother.random();
         shouldNotExistShip(imo);
         shouldExistPort(portId, command.locode());
         shouldGenerateUuids(event.aggregateId());

@@ -1,5 +1,7 @@
 package com.shiproutes.ports.port_event.application.create;
 
+import com.shiproutes.ports.port.domain.Port;
+import com.shiproutes.ports.port.domain.PortMother;
 import com.shiproutes.ports.port_event.PortEventModuleUnitTestCase;
 import com.shiproutes.ports.port_event.domain.PortEvent;
 import com.shiproutes.ports.port_event.domain.PortEventCreatedMother;
@@ -22,23 +24,25 @@ class PortEventCreatorShould extends PortEventModuleUnitTestCase {
 
     @Test
     void create_new_port_event() {
-        PortEvent portEvent = PortEventMother.random();
-        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
+        Port port = PortMother.random();
+        shouldExistPort(port);
+        PortEvent portEvent = PortEventMother.random(port);
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
-        creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());
+        creator.create(portEvent.id(), portEvent.type(), port.locode(), portEvent.shipId(), portEvent.date());
 
         shouldHaveSaved(portEvent);
     }
 
     @Test
     void publish_port_event_created_event() {
-        PortEvent portEvent = PortEventMother.random();
+        Port port = PortMother.random();
+        shouldExistPort(port);
+        PortEvent portEvent = PortEventMother.random(port);
         PortEventCreated domainEvent = PortEventCreatedMother.fromPortEvent(portEvent);
-        shouldExistPort(portEvent.portId(), portEvent.portName(), portEvent.coordinates());
         shouldExistShipWithTeus(portEvent.shipId(), portEvent.teus());
 
-        creator.create(portEvent.id(), portEvent.type(), portEvent.portId(), portEvent.shipId(), portEvent.date());
+        creator.create(portEvent.id(), portEvent.type(), port.locode(), portEvent.shipId(), portEvent.date());
 
         shouldHavePublished(domainEvent);
     }

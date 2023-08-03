@@ -1,7 +1,8 @@
 package com.shiproutes.ports.port_event.application.create;
 
+import com.shiproutes.ports.port.application.find_by_locode.FindPortByLocodeQuery;
+import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port_event.domain.*;
-import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
 import com.shiproutes.ports.shared.application.TeusResponse;
@@ -29,13 +30,14 @@ public final class PortEventCreator {
         this.eventBus = eventBus;
     }
 
-    public void create(PortEventId id, PortEventType type, PortId portId, IMO shipId, PortEventDate date) {
-        PortResponse port = queryBus.ask(new FindPortQuery(portId.value()));
+    public void create(PortEventId id, PortEventType type, Locode locode, IMO shipId, PortEventDate date) {
+        PortResponse port = queryBus.ask(new FindPortByLocodeQuery(locode.value()));
+        PortId portId = new PortId(port.id());
+        PortName portName = new PortName(port.name());
         Coordinates coordinates = new Coordinates(
             new Latitude(port.latitude()),
             new Longitude(port.longitude())
         );
-        PortName portName = new PortName(port.name());
         Teus teus = findShipTeus(shipId);
         PortEvent portEvent = PortEvent.create(id, type, portId, portName, coordinates, shipId, teus, date);
 

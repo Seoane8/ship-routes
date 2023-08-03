@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event.application.create;
 
+import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port_event.domain.PortEventDate;
 import com.shiproutes.ports.port_event.domain.PortEventId;
 import com.shiproutes.ports.port_event.domain.PortEventType;
@@ -7,7 +8,6 @@ import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.PortEventIngestedEvent;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
-import com.shiproutes.shared.domain.ports.PortId;
 import org.springframework.context.event.EventListener;
 
 @Service
@@ -24,8 +24,8 @@ public class CreatePortEventOnPortEventIngested implements DomainEventSubscriber
         creator.create(
             new PortEventId(event.aggregateId()),
             PortEventType.valueOf(event.type()),
-            new PortId(event.portId()),
-            new IMO(event.shipId()),
+            new Locode(event.locode()),
+            new IMO(event.imo()),
             new PortEventDate(event.date())
         );
     }

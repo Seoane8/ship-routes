@@ -55,7 +55,7 @@ public class PortEventIngestor {
 
         PortEventIngestedEvent event = new PortEventIngestedEvent(
             uuidGenerator.generate(),
-            portId.value(),
+            locode,
             shipId.value(),
             timestamp,
             eventType.name()

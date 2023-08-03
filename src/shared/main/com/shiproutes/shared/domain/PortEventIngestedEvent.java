@@ -9,32 +9,32 @@ import java.util.Objects;
 
 public class PortEventIngestedEvent extends DomainEvent {
 
-    private final String portId;
-    private final String shipId;
+    private final String locode;
+    private final String imo;
     private final Instant date;
     private final String type;
 
     public PortEventIngestedEvent() {
         super(null);
-        this.portId = null;
-        this.shipId = null;
+        this.locode = null;
+        this.imo = null;
         this.date = null;
         this.type = null;
     }
 
-    public PortEventIngestedEvent(String aggregateId, String portId, String shipId, Instant date, String type) {
+    public PortEventIngestedEvent(String aggregateId, String locode, String imo, Instant date, String type) {
         super(aggregateId);
-        this.portId = portId;
-        this.shipId = shipId;
+        this.locode = locode;
+        this.imo = imo;
         this.date = date;
         this.type = type;
     }
 
     public PortEventIngestedEvent(String aggregateId, String eventId, String occurredOn,
-                                  String portId, String shipId, Instant date, String type) {
+                                  String locode, String imo, Instant date, String type) {
         super(aggregateId, eventId, occurredOn);
-        this.portId = portId;
-        this.shipId = shipId;
+        this.locode = locode;
+        this.imo = imo;
         this.date = date;
         this.type = type;
     }
@@ -44,12 +44,12 @@ public class PortEventIngestedEvent extends DomainEvent {
         return "portEvent.received";
     }
 
-    public String portId() {
-        return portId;
+    public String locode() {
+        return locode;
     }
 
-    public String shipId() {
-        return shipId;
+    public String imo() {
+        return imo;
     }
 
     public Instant date() {
@@ -63,8 +63,8 @@ public class PortEventIngestedEvent extends DomainEvent {
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<>() {{
-            put("portId", portId);
-            put("shipId", shipId);
+            put("locode", locode);
+            put("imo", imo);
             put("date", date.toString());
             put("type", type);
 
@@ -78,8 +78,8 @@ public class PortEventIngestedEvent extends DomainEvent {
             aggregateId,
             eventId,
             occurredOn,
-            (String) body.get("portId"),
-            (String) body.get("shipId"),
+            (String) body.get("locode"),
+            (String) body.get("imo"),
             Instant.parse(body.get("date").toString()),
             (String) body.get("type")
         );
@@ -90,12 +90,12 @@ public class PortEventIngestedEvent extends DomainEvent {
         if (this == o) return true;
         if (!(o instanceof PortEventIngestedEvent)) return false;
         PortEventIngestedEvent that = (PortEventIngestedEvent) o;
-        return Objects.equals(portId, that.portId) && Objects.equals(shipId, that.shipId)
+        return Objects.equals(locode, that.locode) && Objects.equals(imo, that.imo)
             && Objects.equals(date, that.date) && Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(portId, shipId, date, type);
+        return Objects.hash(locode, imo, date, type);
     }
 }
