@@ -7,4 +7,8 @@ public final class PortNotExist extends DomainError {
     public PortNotExist(PortId id) {
         super("port_not_exist", String.format("Port <%s> doesn't exist", id));
     }
+
+    public PortNotExist(Locode locode) {
+        super("port_not_exist", String.format("Port <%s> doesn't exist", locode));
+    }
 }

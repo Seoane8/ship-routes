@@ -1,14 +1,14 @@
-package com.shiproutes.backoffice.port.application.find_id;
+package com.shiproutes.ports.port.application.find_by_locode;
 
 import com.shiproutes.shared.domain.bus.query.Query;
 
 import java.util.Objects;
 
-public class FindIngestPortIdQuery implements Query {
+public class FindPortByLocodeQuery implements Query {
 
     private final String locode;
 
-    public FindIngestPortIdQuery(String locode) {
+    public FindPortByLocodeQuery(String locode) {
         this.locode = locode;
     }
 
@@ -19,8 +19,8 @@ public class FindIngestPortIdQuery implements Query {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FindIngestPortIdQuery)) return false;
-        FindIngestPortIdQuery that = (FindIngestPortIdQuery) o;
+        if (!(o instanceof FindPortByLocodeQuery)) return false;
+        FindPortByLocodeQuery that = (FindPortByLocodeQuery) o;
         return Objects.equals(locode, that.locode);
     }
 

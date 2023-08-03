@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port.infrastructure.persistence;
 
+import com.shiproutes.ports.port.domain.Locode;
 import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortRepository;
 import com.shiproutes.ports.port.infrastructure.persistence.hibernate.HibernatePortEntity;
@@ -29,6 +30,15 @@ public class MySqlPortRepository extends HibernateRepository<HibernatePortEntity
     @Override
     public Optional<Port> search(PortId id) {
         return byId(id.value()).map(HibernatePortEntity::toEntity);
+    }
+
+    @Override
+    public Optional<Port> searchByLocode(Locode locode) {
+        var sql = "select p from port p where p.locode = :locode";
+        return sessionFactory.getCurrentSession().createQuery(sql, HibernatePortEntity.class)
+            .setParameter("locode", locode.value())
+            .uniqueResultOptional()
+            .map(HibernatePortEntity::toEntity);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.shiproutes.ports.port_event.domain;
 
+import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.port.domain.PortNameMother;
 import com.shiproutes.shared.domain.IMOMother;
 import com.shiproutes.shared.domain.TeusMother;
@@ -70,6 +71,19 @@ public final class PortEventMother {
             IMOMother.random(),
             TeusMother.random(),
             PortEventDateMother.before(date)
+        );
+    }
+
+    public static PortEvent random(Port port) {
+        return new PortEvent(
+            PortEventIdMother.random(),
+            PortEventTypeMother.random(),
+            port.id(),
+            port.name(),
+            port.coordinates(),
+            IMOMother.random(),
+            TeusMother.random(),
+            PortEventDateMother.random()
         );
     }
 }

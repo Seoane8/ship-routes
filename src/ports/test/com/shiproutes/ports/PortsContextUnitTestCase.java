@@ -1,5 +1,7 @@
 package com.shiproutes.ports;
 
+import com.shiproutes.ports.port.application.find_by_locode.FindPortByLocodeQuery;
+import com.shiproutes.ports.port.domain.Port;
 import com.shiproutes.ports.shared.application.FindPortQuery;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
@@ -31,6 +33,12 @@ public class PortsContextUnitTestCase extends UnitTestCase {
                 IntegerMother.random()
             )
         );
+    }
+
+    protected void shouldExistPort(Port port) {
+        PortResponse portResponse = PortResponse.from(port);
+        shouldAsk(new FindPortQuery(port.id().value()), portResponse);
+        shouldAsk(new FindPortByLocodeQuery(port.locode().value()), portResponse);
     }
 
     protected void shouldExistShipWithTeus(IMO shipId, Teus teus) {

@@ -31,6 +31,15 @@ class MySqlPortRepositoryShould extends PortModuleInfrastructureTestCase {
     }
 
     @Test
+    void return_an_existent_port_by_locode() {
+        Port port = PortMother.random();
+        mySqlPortRepository.save(port);
+
+        Optional<Port> portFound = mySqlPortRepository.searchByLocode(port.locode());
+        assertEquals(Optional.of(port), portFound);
+    }
+
+    @Test
     void not_return_a_non_existent_port() {
         assertEquals(Optional.empty(), mySqlPortRepository.search(PortIdMother.random()));
     }

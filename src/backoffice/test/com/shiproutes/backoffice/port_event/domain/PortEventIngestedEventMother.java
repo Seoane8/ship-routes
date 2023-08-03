@@ -8,7 +8,7 @@ public class PortEventIngestedEventMother {
     public static PortEventIngestedEvent from(IngestPortEventCommand command) {
         return new PortEventIngestedEvent(
             UuidMother.random(),
-            UuidMother.random(),
+            command.locode(),
             command.imo(),
             command.timestamp(),
             command.eventType()
