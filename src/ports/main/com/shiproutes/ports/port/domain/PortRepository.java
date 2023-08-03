@@ -11,6 +11,8 @@ public interface PortRepository {
 
     Optional<Port> search(PortId id);
 
+    Optional<Port> searchByLocode(Locode locode);
+
     Set<Port> searchAll();
 
 }
