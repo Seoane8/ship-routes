@@ -65,6 +65,20 @@ class MySqlJourneyRepositoryShould extends JourneyModuleInfrastructureTestCase {
     }
 
     @Test
+    void should_return_first_journey_arrival() {
+        Journey expectedJourney = JourneyMother.randomArrival();
+        Journey journey = JourneyMother.randomIncompleteArrivalAfter(expectedJourney);
+        mySqlJourneyRepository.save(journey);
+        mySqlJourneyRepository.save(expectedJourney);
+        DepartureDate departureDate = DepartureDateMother.randomBefore(expectedJourney.arrivalDate());
+
+        assertEquals(
+            Optional.of(expectedJourney),
+            mySqlJourneyRepository.searchJourneyArrival(journey.shipId(), departureDate)
+        );
+    }
+
+    @Test
     void not_return_an_incomplete_journey_arrival_when_departure_date_not_match() {
         Journey journey = JourneyMother.randomArrival();
         mySqlJourneyRepository.save(journey);
@@ -108,6 +122,20 @@ class MySqlJourneyRepositoryShould extends JourneyModuleInfrastructureTestCase {
 
         assertEquals(
             Optional.of(journey),
+            mySqlJourneyRepository.searchJourneyDeparture(journey.shipId(), arrivalDate)
+        );
+    }
+
+    @Test
+    void should_return_first_journey_departure() {
+        Journey expectedJourney = JourneyMother.randomDeparture();
+        Journey journey = JourneyMother.randomIncompleteDepartureBefore(expectedJourney);
+        mySqlJourneyRepository.save(journey);
+        mySqlJourneyRepository.save(expectedJourney);
+        ArrivalDate arrivalDate = ArrivalDateMother.randomAfter(expectedJourney.departureDate());
+
+        assertEquals(
+            Optional.of(expectedJourney),
             mySqlJourneyRepository.searchJourneyDeparture(journey.shipId(), arrivalDate)
         );
     }

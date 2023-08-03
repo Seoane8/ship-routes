@@ -34,11 +34,13 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
     @Override
     public Optional<Journey> searchJourneyArrival(IMO shipId, DepartureDate departureDate) {
         var sql = "SELECT j FROM journey j WHERE j.shipId = :shipId AND " +
-            "j.arrivalDate > :departureDate AND (j.departureDate < :departureDate OR j.departureDate IS NULL)";
+            "j.arrivalDate > :departureDate AND (j.departureDate < :departureDate OR j.departureDate IS NULL)" +
+            "order by j.arrivalDate asc";
         return sessionFactory.getCurrentSession()
             .createQuery(sql, HibernateJourneyEntity.class)
             .setParameter("shipId", shipId.value())
             .setParameter("departureDate", departureDate.value())
+            .setFirstResult(0).setMaxResults(1)
             .uniqueResultOptional()
             .map(HibernateJourneyEntity::toEntity);
     }
@@ -46,11 +48,13 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
     @Override
     public Optional<Journey> searchJourneyDeparture(IMO shipId, ArrivalDate arrivalDate) {
         var sql = "SELECT j FROM journey j WHERE j.shipId = :shipId AND " +
-            "j.departureDate < :arrivalDate AND (j.arrivalDate > :arrivalDate OR j.arrivalDate IS NULL)";
+            "j.departureDate < :arrivalDate AND (j.arrivalDate > :arrivalDate OR j.arrivalDate IS NULL)" +
+            "order by j.departureDate desc";
         return sessionFactory.getCurrentSession()
             .createQuery(sql, HibernateJourneyEntity.class)
             .setParameter("shipId", shipId.value())
             .setParameter("arrivalDate", arrivalDate.value())
+            .setFirstResult(0).setMaxResults(1)
             .uniqueResultOptional()
             .map(HibernateJourneyEntity::toEntity);
     }

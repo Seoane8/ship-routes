@@ -178,4 +178,30 @@ public class JourneyMother {
             RoutePathMother.random()
         );
     }
+
+    public static Journey randomIncompleteDepartureBefore(Journey departure) {
+        return new Journey(
+            JourneyIdMother.random(),
+            departure.shipId(),
+            departure.teus(),
+            PortIdMother.random(),
+            PortId.empty(),
+            DepartureDateMother.randomBefore(departure.departureDate()),
+            ArrivalDate.empty(),
+            RoutePathMother.random()
+        );
+    }
+
+    public static Journey randomIncompleteArrivalAfter(Journey arrival) {
+        return new Journey(
+            JourneyIdMother.random(),
+            arrival.shipId(),
+            arrival.teus(),
+            PortId.empty(),
+            arrival.destinationPort(),
+            DepartureDate.empty(),
+            ArrivalDateMother.randomAfter(arrival.arrivalDate()),
+            RoutePathMother.random()
+        );
+    }
 }
