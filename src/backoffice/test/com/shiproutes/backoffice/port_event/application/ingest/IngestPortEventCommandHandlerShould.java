@@ -3,7 +3,7 @@ package com.shiproutes.backoffice.port_event.application.ingest;
 import com.shiproutes.backoffice.port_event.PortEventModuleUnitTestCase;
 import com.shiproutes.backoffice.port_event.domain.IngestPortEventCommandMother;
 import com.shiproutes.backoffice.port_event.domain.PortEventIngestedEventMother;
-import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.backoffice.ship.domain.CreateShipCommandMother;
 import com.shiproutes.shared.domain.PortEventIngestedEvent;
 import com.shiproutes.shared.domain.ports.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
         super.setUp();
 
         handler = new IngestPortEventCommandHandler(
-            new PortEventIngestor(portCreator, shipCreator, uuidGenerator, queryBus, eventBus)
+            new PortEventIngestor(portCreator, uuidGenerator, queryBus, commandBus, eventBus)
         );
     }
 
@@ -27,9 +27,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
     void publish_ingested_event_when_ship_and_port_already_exists() {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
         PortId portId = PortIdMother.random();
-        shouldExistShip(imo);
         shouldExistPort(portId, command.locode());
         shouldGenerateUuid(event.aggregateId());
 
@@ -42,39 +40,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
     void publish_ingested_event_when_port_not_exist() {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
         PortId portId = PortIdMother.random();
-        shouldExistShip(imo);
-        shouldNotExistPort(command.locode());
-        shouldGenerateUuids(portId.value(), event.aggregateId());
-
-        handler.handle(command);
-
-        shouldHavePublished(event);
-    }
-
-    @Test
-    void publish_ingested_event_when_ship_not_exist() {
-        IngestPortEventCommand command = IngestPortEventCommandMother.random();
-        PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
-        PortId portId = PortIdMother.random();
-        shouldNotExistShip(imo);
-        shouldExistPort(portId, command.locode());
-        shouldGenerateUuids(event.aggregateId());
-
-        handler.handle(command);
-
-        shouldHavePublished(event);
-    }
-
-    @Test
-    void publish_ingested_event_when_ship_and_port_not_exist() {
-        IngestPortEventCommand command = IngestPortEventCommandMother.random();
-        PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
-        PortId portId = PortIdMother.random();
-        shouldNotExistShip(imo);
         shouldNotExistPort(command.locode());
         shouldGenerateUuids(portId.value(), event.aggregateId());
 
@@ -87,9 +53,7 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
     void create_port_when_not_exist() {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
         PortId portId = PortIdMother.random();
-        shouldExistShip(imo);
         shouldNotExistPort(command.locode());
         shouldGenerateUuids(portId.value(), event.aggregateId());
 
@@ -103,14 +67,12 @@ class IngestPortEventCommandHandlerShould extends PortEventModuleUnitTestCase {
     void create_ship_when_not_exist() {
         IngestPortEventCommand command = IngestPortEventCommandMother.random();
         PortEventIngestedEvent event = PortEventIngestedEventMother.from(command);
-        IMO imo = new IMO(command.imo());
         PortId portId = PortIdMother.random();
-        shouldNotExistShip(imo);
         shouldExistPort(portId, command.locode());
         shouldGenerateUuids(event.aggregateId());
 
         handler.handle(command);
 
-        shouldHaveCreatedShip(imo, command.shipName(), command.teus());
+        shouldHaveDispatched(CreateShipCommandMother.from(command));
     }
 }

@@ -4,13 +4,11 @@ import com.shiproutes.backoffice.port.application.find_id.FindIngestPortIdQuery;
 import com.shiproutes.backoffice.port.application.find_id.IngestPortIdResponse;
 import com.shiproutes.backoffice.port_event.domain.PortCreator;
 import com.shiproutes.backoffice.port_event.domain.PortEventType;
-import com.shiproutes.backoffice.port_event.domain.ShipCreator;
-import com.shiproutes.backoffice.ship.application.find_ship.FindIngestShipQuery;
-import com.shiproutes.backoffice.ship.application.find_ship.IngestShipResponse;
-import com.shiproutes.shared.domain.IMO;
+import com.shiproutes.backoffice.ship.application.ingest.IngestShipCommand;
 import com.shiproutes.shared.domain.PortEventIngestedEvent;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.UuidGenerator;
+import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.QueryBus;
 import com.shiproutes.shared.domain.ports.Coordinates;
@@ -24,28 +22,24 @@ import java.util.Optional;
 public class PortEventIngestor {
 
     private final PortCreator portCreator;
-    private final ShipCreator shipCreator;
     private final UuidGenerator uuidGenerator;
     private final QueryBus queryBus;
+    private final CommandBus commandBus;
     private final EventBus eventBus;
 
-    public PortEventIngestor(PortCreator portCreator, ShipCreator shipCreator, UuidGenerator uuidGenerator,
-                             QueryBus queryBus, EventBus eventBus) {
+    public PortEventIngestor(PortCreator portCreator, UuidGenerator uuidGenerator,
+                             QueryBus queryBus, CommandBus commandBus, EventBus eventBus) {
         this.portCreator = portCreator;
-        this.shipCreator = shipCreator;
         this.uuidGenerator = uuidGenerator;
         this.queryBus = queryBus;
+        this.commandBus = commandBus;
         this.eventBus = eventBus;
     }
 
     public void ingest(String locode, String portName, Coordinates coordinates,
                        String imo, String shipName, Integer teus, Instant timestamp, PortEventType eventType) {
 
-        IMO shipId = searchIMO(imo).orElseGet(() -> {
-            IMO newImo = new IMO(imo);
-            shipCreator.create(newImo, shipName, teus);
-            return newImo;
-        });
+        commandBus.dispatch(new IngestShipCommand(imo, shipName, teus));
 
         PortId portId = searchPortId(locode).orElseGet(() -> {
             PortId newPortId = new PortId(uuidGenerator.generate());
@@ -56,7 +50,7 @@ public class PortEventIngestor {
         PortEventIngestedEvent event = new PortEventIngestedEvent(
             uuidGenerator.generate(),
             locode,
-            shipId.value(),
+            imo,
             timestamp,
             eventType.name()
         );
@@ -67,15 +61,6 @@ public class PortEventIngestor {
         try {
             IngestPortIdResponse response = queryBus.ask(new FindIngestPortIdQuery(locode));
             return Optional.of(response.portId()).map(PortId::new);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<IMO> searchIMO(String imo) {
-        try {
-            IngestShipResponse response = queryBus.ask(new FindIngestShipQuery(imo));
-            return Optional.of(response.imo()).map(IMO::new);
         } catch (Exception e) {
             return Optional.empty();
         }

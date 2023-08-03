@@ -2,6 +2,8 @@ package com.shiproutes.shared.infrastructure;
 
 import com.shiproutes.shared.domain.DomainError;
 import com.shiproutes.shared.domain.UuidGenerator;
+import com.shiproutes.shared.domain.bus.command.Command;
+import com.shiproutes.shared.domain.bus.command.CommandBus;
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 import com.shiproutes.shared.domain.bus.event.EventBus;
 import com.shiproutes.shared.domain.bus.query.Query;
@@ -21,12 +23,14 @@ import static org.mockito.Mockito.*;
 public abstract class UnitTestCase {
     protected EventBus eventBus;
     protected QueryBus queryBus;
+    protected CommandBus commandBus;
     protected UuidGenerator uuidGenerator;
 
     @BeforeEach
     protected void setUp() {
         eventBus = mock(EventBus.class);
         queryBus = mock(QueryBus.class);
+        commandBus = mock(CommandBus.class);
         uuidGenerator = mock(UuidGenerator.class);
     }
 
@@ -48,6 +52,10 @@ public abstract class UnitTestCase {
 
     public void shouldGenerateUuids(String uuid, String... others) {
         when(uuidGenerator.generate()).thenReturn(uuid, others);
+    }
+
+    public void shouldHaveDispatched(Command command) {
+        verify(commandBus, atLeastOnce()).dispatch(command);
     }
 
     public void shouldAsk(Query query, Response response) {

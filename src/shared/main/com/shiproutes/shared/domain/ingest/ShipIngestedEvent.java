@@ -1,4 +1,4 @@
-package com.shiproutes.shared.domain;
+package com.shiproutes.shared.domain.ingest;
 
 import com.shiproutes.shared.domain.bus.event.DomainEvent;
 
@@ -6,24 +6,24 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
-public final class ShipCreatedEvent extends DomainEvent {
+public final class ShipIngestedEvent extends DomainEvent {
 
     private final String name;
     private final Integer teus;
 
-    public ShipCreatedEvent() {
+    public ShipIngestedEvent() {
         super(null);
         this.name = null;
         this.teus = null;
     }
 
-    public ShipCreatedEvent(String aggregateId, String name, Integer teus) {
+    public ShipIngestedEvent(String aggregateId, String name, Integer teus) {
         super(aggregateId);
         this.name = name;
         this.teus = teus;
     }
 
-    public ShipCreatedEvent(String aggregateId, String eventId, String occurredOn, String name, Integer teus) {
+    public ShipIngestedEvent(String aggregateId, String eventId, String occurredOn, String name, Integer teus) {
         super(aggregateId, eventId, occurredOn);
         this.name = name;
         this.teus = teus;
@@ -31,7 +31,7 @@ public final class ShipCreatedEvent extends DomainEvent {
 
     @Override
     public String eventName() {
-        return "ship.created";
+        return "ship.received";
     }
 
     public String name() {
@@ -53,7 +53,7 @@ public final class ShipCreatedEvent extends DomainEvent {
     @Override
     public DomainEvent fromPrimitives(String aggregateId, HashMap<String, Serializable> body, String eventId,
                                       String occurredOn) {
-        return new ShipCreatedEvent(
+        return new ShipIngestedEvent(
             aggregateId,
             eventId,
             occurredOn,
@@ -65,8 +65,8 @@ public final class ShipCreatedEvent extends DomainEvent {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ShipCreatedEvent)) return false;
-        ShipCreatedEvent that = (ShipCreatedEvent) o;
+        if (!(o instanceof ShipIngestedEvent)) return false;
+        ShipIngestedEvent that = (ShipIngestedEvent) o;
         return Objects.equals(name, that.name) && Objects.equals(teus, that.teus);
     }
 
