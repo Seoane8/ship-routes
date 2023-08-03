@@ -1,6 +1,5 @@
 package com.shiproutes.backoffice.ship.application.ingest;
 
-import com.shiproutes.backoffice.ship.application.create.IngestShipCreator;
 import com.shiproutes.shared.domain.IMO;
 import com.shiproutes.shared.domain.Service;
 import com.shiproutes.shared.domain.Teus;
