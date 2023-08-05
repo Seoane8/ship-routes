@@ -2,11 +2,9 @@ package com.shiproutes.apps.ports.backend.config;
 
 import com.shiproutes.shared.infrastructure.auth.AuthorizationFilter;
 import com.shiproutes.shared.infrastructure.auth.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Profile;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,12 +15,20 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class PortsSecurityConfig {
+@EnableWebSecurity
+public class PortsSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtUtils jwtUtils;
+    @Autowired
+    private JwtUtils jwtUtils;
 
-    public PortsSecurityConfig(JwtUtils jwtUtils) {
-        this.jwtUtils = jwtUtils;
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.cors().and().csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            .addFilterBefore(new AuthorizationFilter(jwtUtils), UsernamePasswordAuthenticationFilter.class)
+            .authorizeRequests().anyRequest().permitAll();
+
     }
 
     @Bean
@@ -39,38 +45,6 @@ public class PortsSecurityConfig {
         source.registerCorsConfiguration("/**", config);
 
         return source;
-    }
-
-    @Profile("test")
-    @EnableWebSecurity
-    public static class SecurityDisabledConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated();
-        }
-
-    }
-
-    @Profile("!test")
-    @EnableWebSecurity
-    @EnableGlobalMethodSecurity(prePostEnabled = true)
-    @DependsOn("corsConfigurationSource")
-    public class SecurityEnabledConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-
-            // We are using token based authentication, csrf is not required
-            http.cors().and().csrf().disable();
-
-            // In a stateless server, no session is required
-            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-            // Filter to get application roles from the token
-            http.addFilterBefore(new AuthorizationFilter(jwtUtils), UsernamePasswordAuthenticationFilter.class);
-        }
     }
 
 }
