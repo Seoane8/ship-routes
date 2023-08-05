@@ -43,6 +43,7 @@ public class UserGetController extends ApiController {
         return ResponseEntity.ok().body(new HashMap<>() {{
             put("id", response.id());
             put("username", response.username());
+            put("email", response.email());
             put("role", response.role());
             put("token", token);
         }});
