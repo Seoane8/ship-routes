@@ -4,6 +4,7 @@ import com.shiproutes.shared.infrastructure.auth.AuthorizationFilter;
 import com.shiproutes.shared.infrastructure.auth.JwtUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,11 +17,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class IngestSecurityConfig {
+public class BackofficeSecurityConfig {
 
     private final JwtUtils jwtUtils;
 
-    public IngestSecurityConfig(JwtUtils jwtUtils) {
+    public BackofficeSecurityConfig(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
@@ -55,6 +56,7 @@ public class IngestSecurityConfig {
     @Profile("!test")
     @EnableWebSecurity
     @EnableGlobalMethodSecurity(prePostEnabled = true)
+    @DependsOn("corsConfigurationSource")
     public class SecurityEnabledConfig extends WebSecurityConfigurerAdapter {
 
         @Override

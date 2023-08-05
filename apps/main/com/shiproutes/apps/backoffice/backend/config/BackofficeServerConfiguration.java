@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
-public class IngestServerConfiguration {
+public class BackofficeServerConfiguration {
     private final RequestMappingHandlerMapping mapping;
 
-    public IngestServerConfiguration(RequestMappingHandlerMapping mapping) {
+    public BackofficeServerConfiguration(RequestMappingHandlerMapping mapping) {
         this.mapping = mapping;
     }
 

@@ -7,10 +7,10 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class IngestServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
+public final class BackofficeServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     private final Parameter param;
 
-    public IngestServerPortCustomizer(Parameter param) {
+    public BackofficeServerPortCustomizer(Parameter param) {
         this.param = param;
     }
 
