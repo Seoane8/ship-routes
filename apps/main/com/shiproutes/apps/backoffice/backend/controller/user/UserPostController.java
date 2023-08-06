@@ -37,7 +37,7 @@ public class UserPostController extends ApiController {
             command.email(),
             UserRole.USER.name()
         ));
-        return ResponseEntity.ok().body(new HashMap<>() {{
+        return ResponseEntity.status(HttpStatus.CREATED).body(new HashMap<>() {{
             put("id", command.id());
             put("username", command.username());
             put("email", command.email());

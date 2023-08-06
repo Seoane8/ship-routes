@@ -74,6 +74,7 @@ public final class ApiExceptionMiddleware implements Filter {
 
         httpResponse.reset();
         httpResponse.setHeader("Content-Type", "application/json");
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpResponse.setStatus(statusCode);
         PrintWriter writer = response.getWriter();
         writer.write(String.format(
