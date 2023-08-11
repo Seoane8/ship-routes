@@ -1,6 +1,7 @@
 package com.shiproutes.backoffice.user.domain;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserRepository {
 
@@ -10,4 +11,5 @@ public interface UserRepository {
 
     boolean exists(Username username, UserEmail email);
 
+    Set<User> search(String partialUsername);
 }

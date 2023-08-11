@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("backoffice-transaction_manager")
@@ -42,6 +44,16 @@ public class MySqlUserRepository extends HibernateRepository<HibernateUserEntity
             .setParameter("email", email.value())
             .uniqueResultOptional()
             .isPresent();
+    }
+
+    @Override
+    public Set<User> search(String partialUsername) {
+        var sql = "select u from user u where u.username like :partialUsername";
+        return sessionFactory.getCurrentSession().createQuery(sql, HibernateUserEntity.class)
+            .setParameter("partialUsername", "%" + partialUsername + "%")
+            .list().stream()
+            .map(HibernateUserEntity::toEntity)
+            .collect(Collectors.toSet());
     }
 
 }
