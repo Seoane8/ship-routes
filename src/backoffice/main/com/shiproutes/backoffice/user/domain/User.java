@@ -10,7 +10,7 @@ public final class User {
     private final Username username;
     private final UserPassword password;
     private final UserEmail email;
-    private final UserRole role;
+    private UserRole role;
 
     public User(UserId id, Username username, UserPassword password, UserEmail email, UserRole role) {
         this.id = id;
@@ -38,6 +38,10 @@ public final class User {
 
     public UserRole role() {
         return role;
+    }
+
+    public void upgrade() {
+        role = UserRole.ADMIN;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.shiproutes.backoffice.user.infrastructure.persistence;
 
-import com.shiproutes.backoffice.user.domain.User;
-import com.shiproutes.backoffice.user.domain.UserEmail;
-import com.shiproutes.backoffice.user.domain.UserRepository;
-import com.shiproutes.backoffice.user.domain.Username;
+import com.shiproutes.backoffice.user.domain.*;
 import com.shiproutes.backoffice.user.infrastructure.persistence.hibernate.HibernateUserEntity;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
@@ -54,6 +51,11 @@ public class MySqlUserRepository extends HibernateRepository<HibernateUserEntity
             .list().stream()
             .map(HibernateUserEntity::toEntity)
             .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<User> search(UserId userId) {
+        return byId(userId.value()).map(HibernateUserEntity::toEntity);
     }
 
 }

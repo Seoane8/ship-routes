@@ -12,4 +12,6 @@ public interface UserRepository {
     boolean exists(Username username, UserEmail email);
 
     Set<User> search(String partialUsername);
+
+    Optional<User> search(UserId userId);
 }
