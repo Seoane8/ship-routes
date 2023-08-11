@@ -19,7 +19,7 @@ public class UserModuleUnitTestCase extends UnitTestCase {
         repository = mock(UserRepository.class);
         encoder = mock(PasswordEncoder.class);
 
-        when(repository.search(any())).thenReturn(Optional.empty());
+        when(repository.search((Username) any())).thenReturn(Optional.empty());
         when(repository.exists(any(), any())).thenReturn(false);
         when(encoder.matches(any(), any())).thenReturn(false);
     }

@@ -1,9 +1,6 @@
 package com.shiproutes.backoffice.user.infrastructure.persistence;
 
-import com.shiproutes.backoffice.user.domain.User;
-import com.shiproutes.backoffice.user.domain.UserEmail;
-import com.shiproutes.backoffice.user.domain.UserRepository;
-import com.shiproutes.backoffice.user.domain.Username;
+import com.shiproutes.backoffice.user.domain.*;
 import com.shiproutes.backoffice.user.infrastructure.persistence.hibernate.HibernateUserEntity;
 import com.shiproutes.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
@@ -11,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional("backoffice-transaction_manager")
@@ -42,6 +41,21 @@ public class MySqlUserRepository extends HibernateRepository<HibernateUserEntity
             .setParameter("email", email.value())
             .uniqueResultOptional()
             .isPresent();
+    }
+
+    @Override
+    public Set<User> search(String partialUsername) {
+        var sql = "select u from user u where u.username like :partialUsername";
+        return sessionFactory.getCurrentSession().createQuery(sql, HibernateUserEntity.class)
+            .setParameter("partialUsername", "%" + partialUsername + "%")
+            .list().stream()
+            .map(HibernateUserEntity::toEntity)
+            .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<User> search(UserId userId) {
+        return byId(userId.value()).map(HibernateUserEntity::toEntity);
     }
 
 }
