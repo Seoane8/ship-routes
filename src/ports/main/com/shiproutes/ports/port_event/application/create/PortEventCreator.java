@@ -2,6 +2,7 @@ package com.shiproutes.ports.port_event.application.create;
 
 import com.shiproutes.ports.port.application.find_by_locode.FindPortByLocodeQuery;
 import com.shiproutes.ports.port.domain.Locode;
+import com.shiproutes.ports.port.domain.PortNotExist;
 import com.shiproutes.ports.port_event.domain.*;
 import com.shiproutes.ports.shared.application.FindTeusQuery;
 import com.shiproutes.ports.shared.application.PortResponse;
@@ -31,7 +32,7 @@ public final class PortEventCreator {
     }
 
     public void create(PortEventId id, PortEventType type, Locode locode, IMO shipId, PortEventDate date) {
-        PortResponse port = queryBus.ask(new FindPortByLocodeQuery(locode.value()));
+        PortResponse port = findPort(locode);
         PortId portId = new PortId(port.id());
         PortName portName = new PortName(port.name());
         Coordinates coordinates = new Coordinates(
@@ -45,8 +46,20 @@ public final class PortEventCreator {
         eventBus.publish(portEvent.pullDomainEvents());
     }
 
+    private PortResponse findPort(Locode locode) {
+        try {
+            return queryBus.ask(new FindPortByLocodeQuery(locode.value()));
+        } catch (Exception e) {
+            throw new PortNotExist(locode);
+        }
+    }
+
     private Teus findShipTeus(IMO shipId) {
-        TeusResponse teus = queryBus.ask(new FindTeusQuery(shipId.value()));
-        return new Teus(teus.value());
+        try {
+            TeusResponse teus = queryBus.ask(new FindTeusQuery(shipId.value()));
+            return new Teus(teus.value());
+        } catch (Exception e) {
+            throw new ShipNotExist(shipId);
+        }
     }
 }
