@@ -10,7 +10,10 @@ import eu.europa.ec.eurostat.jgiscotools.feature.Feature;
 import eu.europa.ec.eurostat.searoute.SeaRouting;
 import org.locationtech.jts.geom.Geometry;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class EurostatPathGenerator implements PathGenerator {
@@ -34,6 +37,37 @@ public class EurostatPathGenerator implements PathGenerator {
                 new Latitude(coordinate.getY()),
                 new Longitude(coordinate.getX())
             )).collect(RoutePath.collector());
+
+        if (path.origin().equals(origin) && path.destination().equals(destination)) {
+            return path;
+        }
+
+        if (path.origin().equals(destination) && path.destination().equals(origin)) {
+            return path.reverse();
+        }
+
+        List<Coordinates> fixedPath = new ArrayList<>();
+        List<Coordinates> iterationPath = new ArrayList<>();
+        for (Coordinates point : path) {
+            if (!point.equals(origin) && !point.equals(destination)) {
+                iterationPath.add(point);
+                continue;
+            }
+            if (fixedPath.isEmpty()) {
+                iterationPath.add(point);
+                Collections.reverse(iterationPath);
+                fixedPath.addAll(iterationPath);
+                iterationPath.clear();
+            } else {
+                fixedPath.addAll(iterationPath);
+                iterationPath.clear();
+                iterationPath.add(point);
+            }
+        }
+        Collections.reverse(iterationPath);
+        fixedPath.addAll(iterationPath);
+
+        path = new RoutePath(fixedPath);
 
         return path.origin().equals(origin) ? path : path.reverse();
     }
