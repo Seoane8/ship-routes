@@ -4,7 +4,7 @@ import com.shiproutes.apps.routes.backend.controller.RoutesApplicationTestCase;
 import com.shiproutes.shared.domain.ports.PortCreatedEvent;
 import org.junit.jupiter.api.Test;
 
-class RoutePostControllerShould extends RoutesApplicationTestCase {
+class RoutePutControllerShould extends RoutesApplicationTestCase {
 
     @Test
     void create_a_valid_port() throws Exception {

@@ -22,8 +22,8 @@ import java.util.List;
 
 @RestController
 @AuthorizeAdmins
-public class RoutePostController extends ApiController {
-    public RoutePostController(QueryBus queryBus, CommandBus commandBus) {
+public class RoutePutController extends ApiController {
+    public RoutePutController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 
