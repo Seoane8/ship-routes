@@ -37,16 +37,15 @@ public final class ApiExceptionMiddleware implements Filter {
         HttpServletResponse httpResponse = ((HttpServletResponse) response);
 
         try {
-            Object possibleController = (
-                (HandlerMethod) Objects.requireNonNull(
-                    mapping.getHandler(httpRequest)).getHandler()
-            ).getBean();
-
             try {
                 chain.doFilter(request, response);
             } catch (NestedServletException exception) {
+                Object possibleController = (
+                    (HandlerMethod) Objects.requireNonNull(
+                        mapping.getHandler(httpRequest)).getHandler()
+                ).getBean();
                 if (possibleController instanceof ApiController) {
-                        handleCustomError(response, httpResponse, (ApiController) possibleController, exception);
+                    handleCustomError(response, httpResponse, (ApiController) possibleController, exception);
                 }
             }
         } catch (Exception e) {
