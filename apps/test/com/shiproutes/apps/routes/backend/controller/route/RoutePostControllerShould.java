@@ -25,9 +25,8 @@ class RoutePostControllerShould extends RoutesApplicationTestCase {
             )
         );
         assertRequestWithBody(
-            "POST", "/routes",
+            "PUT", "/routes/043e6223-0b38-4483-8735-f9f4bc224f58",
             "{" +
-                "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
                 "\"origin\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
                 "\"destination\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
                 "\"path\": [[51.0455, 2.1543], [31.36636, 121.6147]]" +
@@ -56,15 +55,14 @@ class RoutePostControllerShould extends RoutesApplicationTestCase {
         );
 
         String route = "{" +
-            "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
             "\"origin\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
             "\"destination\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
             "\"path\": [[51.0455, 2.1543], [31.36636, 121.6147]]" +
             "}";
 
-        givenThenIsAExistentRoute(route);
+        givenThenIsAExistentRoute("043e6223-0b38-4483-8735-f9f4bc224f58", route);
 
-        assertRequestWithBody("POST", "/routes", route, 201);
+        assertRequestWithBody("PUT", "/routes/043e6223-0b38-4483-8735-f9f4bc224f58", route, 201);
     }
 
     @Test
@@ -79,9 +77,8 @@ class RoutePostControllerShould extends RoutesApplicationTestCase {
             )
         );
         assertRequestWithBody(
-            "POST", "/routes",
+            "PUT", "/routes/043e6223-0b38-4483-8735-f9f4bc224f58",
             "{" +
-                "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
                 "\"origin\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
                 "\"destination\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
                 "\"path\": [[51.0455, 2.1543], [31.36636, 121.6147]]" +
@@ -102,9 +99,8 @@ class RoutePostControllerShould extends RoutesApplicationTestCase {
             )
         );
         assertRequestWithBody(
-            "POST", "/routes",
+            "PUT", "/routes/043e6223-0b38-4483-8735-f9f4bc224f58",
             "{" +
-                "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
                 "\"origin\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
                 "\"destination\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
                 "\"path\": [[51.0455, 2.1543], [43.36636, 103.6147]]" +

@@ -100,6 +100,10 @@ public final class Route extends AggregateRoot {
         this.teus = this.teus.decrement(teus);
     }
 
+    public boolean matches(PortId originPort, PortId destinationPort) {
+        return this.originPort.equals(originPort) && this.destinationPort.equals(destinationPort);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional("routes-transaction_manager")
 public abstract class RoutesApplicationTestCase extends ApplicationTestCase {
-    protected void givenThenIsAExistentRoute(String route) throws Exception {
-        assertRequestWithBody("POST", "/routes", route, 201);
+    protected void givenThenIsAExistentRoute(String id, String route) throws Exception {
+        assertRequestWithBody("PUT", "/routes/" + id, route, 201);
     }
 }

@@ -63,4 +63,15 @@ public class RouteMother {
             existentRoute.teus()
         );
     }
+
+    public static Route withSamePorts(Route route) {
+        return new Route(
+            RouteIdMother.random(),
+            route.originPort(),
+            route.destinationPort(),
+            RoutePathMother.random(),
+            JourneysCounter.initialize(),
+            TeusCounter.initialize()
+        );
+    }
 }

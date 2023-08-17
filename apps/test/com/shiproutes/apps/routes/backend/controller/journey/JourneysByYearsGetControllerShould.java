@@ -38,14 +38,12 @@ class JourneysByYearsGetControllerShould extends RoutesApplicationTestCase {
             )
         );
 
-        givenThenIsAExistentRoute("{" +
-            "\"id\": \"043e6223-0b38-4483-8735-f9f4bc224f58\", " +
+        givenThenIsAExistentRoute("043e6223-0b38-4483-8735-f9f4bc224f58", "{" +
             "\"origin\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
             "\"destination\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
             "\"path\": [[51.0455, 2.1543], [31.36636, 121.6147]]" +
             "}");
-        givenThenIsAExistentRoute("{" +
-            "\"id\": \"2c7a359d-f16b-4273-be0e-2d1d02d348e8\", " +
+        givenThenIsAExistentRoute("2c7a359d-f16b-4273-be0e-2d1d02d348e8", "{" +
             "\"origin\": \"f68caed9-6b5c-405b-ad4c-a50bf0ceae48\", " +
             "\"destination\": \"058a766b-fa60-49e9-88ed-2970380f5a2f\", " +
             "\"path\": [[31.36636, 121.6147], [51.0455, 2.1543]]" +

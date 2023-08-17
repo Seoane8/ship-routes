@@ -29,10 +29,11 @@ public class RouteCreator {
 
     public void create(RouteId id, PortId originPort, PortId destinationPort, RoutePath path)
         throws PortNotExist, RoutePathMismatch {
-        ensurePathIsCorrect(originPort, destinationPort, path);
 
         Route route;
-        Optional<Route> existentRoute = repository.search(originPort, destinationPort);
+        ensurePathIsCorrect(originPort, destinationPort, path);
+
+        Optional<Route> existentRoute = searchExistentRoute(id, originPort, destinationPort);
         if (existentRoute.isPresent()) {
             route = existentRoute.get();
             route.updatePath(path);
@@ -63,5 +64,16 @@ public class RouteCreator {
         } catch (Exception e) {
             throw new PortNotExist(portId);
         }
+    }
+
+    private Optional<Route> searchExistentRoute(RouteId id, PortId originPort, PortId destinationPort) {
+        Optional<Route> existentRoute = repository.search(id);
+        if (existentRoute.isPresent() && !existentRoute.get().matches(originPort, destinationPort)) {
+            throw new ExistentRouteMismatch(id, originPort, destinationPort);
+        }
+        if (existentRoute.isEmpty() && repository.search(originPort, destinationPort).isPresent()) {
+            throw new RouteAlreadyExist(originPort, destinationPort);
+        }
+        return existentRoute;
     }
 }

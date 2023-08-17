@@ -97,4 +97,28 @@ class RouteCreatorShould extends RouteModuleUnitTestCase {
             creator.create(route.id(), route.originPort(), route.destinationPort(), path);
         });
     }
+
+    @Test
+    void fail_when_route_mismatch_from_existent_route() {
+        assertThrows(ExistentRouteMismatch.class, () -> {
+            Route existentRoute = RouteMother.random();
+            Route route = RouteMother.random();
+            shouldExistRoutePorts(route);
+            shouldExists(existentRoute);
+
+            creator.create(existentRoute.id(), route.originPort(), route.destinationPort(), route.path());
+        });
+    }
+
+    @Test
+    void fail_when_route_already_exists() {
+        assertThrows(RouteAlreadyExist.class, () -> {
+            Route existentRoute = RouteMother.random();
+            Route route = RouteMother.withSamePorts(existentRoute);
+            shouldExistRoutePorts(route);
+            shouldExists(existentRoute);
+
+            creator.create(route.id(), route.originPort(), route.destinationPort(), route.path());
+        });
+    }
 }
