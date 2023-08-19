@@ -13,8 +13,16 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-      - name: Build images
-        run: make build-images
+      - name: Build app
+        run: make assemble
+      - name: Build ships image
+        run: docker build . -f ships.dockerfile -t ship-routes-ships
+      - name: Build ports image
+        run: docker build . -f ports.dockerfile -t ship-routes-ports 
+      - name: Build routes image
+        run: docker build . -f routes.dockerfile -t ship-routes-routes 
+      - name: Build backoffice image
+        run: docker build . -f backoffice.dockerfile -t ship-routes-backoffice 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
