@@ -6,35 +6,35 @@ services:
     image: mysql:8
     platform: linux/amd64
     ports:
-      - "3360:3306"
+      - "${MYSQL_EXTERNAL_PORT}:${MYSQL_PORT}"
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_ALLOW_EMPTY_PASSWORD
     entrypoint:
       sh -c "
       echo 'CREATE DATABASE IF NOT EXISTS ships; CREATE DATABASE IF NOT EXISTS ports; CREATE DATABASE IF NOT EXISTS routes; CREATE DATABASE IF NOT EXISTS backoffice;' > /docker-entrypoint-initdb.d/init.sql;
       /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
       "
     command: [ "--default-authentication-plugin=mysql_native_password" ]
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   rabbitmq:
     container_name: ship-routes-rabbitmq
     image: 'rabbitmq:3.7-management'
     platform: linux/amd64
-    restart: unless-stopped
     ports:
-      - "5630:5672"
+      - "${RABBITMQ_EXTERNAL_PORT}:${RABBITMQ_PORT}"
       - "8090:15672"
     environment:
-      - RABBITMQ_DEFAULT_USER=shiproutes
-      - RABBITMQ_DEFAULT_PASS=sh1pr0ut3s
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_LOGIN}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
 
-  java:
-    container_name: ship-routes-java
+  main:
+    container_name: ship-routes-main
     build:
       context: .
-      dockerfile: Dockerfile
-    restart: unless-stopped
+      dockerfile: main.dockerfile
     platform: linux/amd64
     ports:
       - "8030:8080"
@@ -46,3 +46,68 @@ services:
     depends_on:
       - mysql
       - rabbitmq
+
+  ships:
+    container_name: ships
+    build:
+      context: .
+      dockerfile: ships.dockerfile
+    platform: linux/amd64
+    ports:
+      - "8031:8080"
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  ports:
+    container_name: ports
+    build:
+      context: .
+      dockerfile: ports.dockerfile
+    platform: linux/amd64
+    ports:
+      - "8032:8080"
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  routes:
+    container_name: routes
+    build:
+      context: .
+      dockerfile: routes.dockerfile
+    platform: linux/amd64
+    ports:
+      - "8033:8080"
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  backoffice:
+    container_name: backoffice
+    build:
+      context: .
+      dockerfile: backoffice.dockerfile
+    platform: linux/amd64
+    ports:
+      - "8034:8080"
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - mysql
+      - rabbitmq
+
+volumes:
+  mysql-data:
+
+
