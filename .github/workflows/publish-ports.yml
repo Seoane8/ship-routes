@@ -11,19 +11,29 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repo 
+      - name: Checkout the repo
         uses: actions/checkout@v2
-      - name: Build app 
-        run: make assemble
-      - name: Build image 
-        run: docker build . -f ports.dockerfile -t ship-routes/ports
-      - name: Install doctl 
+      - name: Build images
+        run: make build-images
+      - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Log in to DO Container Registry 
+      - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
-      - name: Tag image 
-        run: docker tag ship-routes/ports registry.digitalocean.com/ship-routes-containers/ports:${{github.event.inputs.version }}
-      - name: Push image to DO Container Registry 
+      - name: Tag ships image
+        run: docker tag ship-routes-ships registry.digitalocean.com/ship-routes-containers/ships:${{github.event.inputs.version }}
+      - name: Tag ports image
+        run: docker tag ship-routes-ports registry.digitalocean.com/ship-routes-containers/ports:${{github.event.inputs.version }}
+      - name: Tag routes image
+        run: docker tag ship-routes-routes registry.digitalocean.com/ship-routes-containers/routes:${{github.event.inputs.version }}
+      - name: Tag backoffice image
+        run: docker tag ship-routes-backoffice registry.digitalocean.com/ship-routes-containers/backoffice:${{github.event.inputs.version }}
+      - name: Push ships image
+        run: docker push registry.digitalocean.com/ship-routes-containers/ships:${{ github.event.inputs.version }}
+      - name: Push ports image
         run: docker push registry.digitalocean.com/ship-routes-containers/ports:${{ github.event.inputs.version }}
+      - name: Push routes image
+        run: docker push registry.digitalocean.com/ship-routes-containers/routes:${{ github.event.inputs.version }}
+      - name: Push backoffice image
+        run: docker push registry.digitalocean.com/ship-routes-containers/backoffice:${{ github.event.inputs.version }}
