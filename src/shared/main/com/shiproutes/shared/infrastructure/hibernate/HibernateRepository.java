@@ -36,8 +36,9 @@ public abstract class HibernateRepository<T> {
     }
 
     protected void remove(T entity) {
+        Object managedEntity = sessionFactory.getCurrentSession().merge(entity);
         sessionFactory.getCurrentSession().clear();
-        sessionFactory.getCurrentSession().remove(entity);
+        sessionFactory.getCurrentSession().remove(managedEntity);
         sessionFactory.getCurrentSession().flush();
         sessionFactory.getCurrentSession().clear();
     }
