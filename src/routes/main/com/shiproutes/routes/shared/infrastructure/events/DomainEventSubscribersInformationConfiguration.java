@@ -9,6 +9,6 @@ public class DomainEventSubscribersInformationConfiguration {
 
     @Bean
     public DomainEventSubscribersInformation domainEventSubscribersInformation() {
-        return new DomainEventSubscribersInformation("com.shiproutes.routes.journey.");
+        return new DomainEventSubscribersInformation("com.shiproutes.routes.journey");
     }
 }
