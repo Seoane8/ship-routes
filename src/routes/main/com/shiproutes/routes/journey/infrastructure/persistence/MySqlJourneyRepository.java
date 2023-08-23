@@ -61,7 +61,11 @@ public class MySqlJourneyRepository extends HibernateRepository<HibernateJourney
 
     @Override
     public void remove(Journey journey) {
-        remove(new HibernateJourneyEntity(journey));
+        var sql = "DELETE FROM journey j WHERE j.id = :id";
+        sessionFactory.getCurrentSession()
+            .createQuery(sql)
+            .setParameter("id", journey.id().value())
+            .executeUpdate();
     }
 
     @Override
