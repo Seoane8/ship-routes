@@ -1,5 +1,6 @@
 package com.shiproutes.apps.routes.backend;
 
+import com.shiproutes.apps.routes.backend.command.ConsumeRabbitMqDomainEventsCommand;
 import com.shiproutes.shared.domain.Service;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 public class RoutesApplication {
     public static HashMap<String, Class<?>> commands() {
         return new HashMap<String, Class<?>>() {{
+            put("domain-events:rabbitmq:consume", ConsumeRabbitMqDomainEventsCommand.class);
         }};
     }
 }
