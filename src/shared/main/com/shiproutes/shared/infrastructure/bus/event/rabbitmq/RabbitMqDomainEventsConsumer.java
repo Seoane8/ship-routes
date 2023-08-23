@@ -21,7 +21,6 @@ import java.util.Map;
 
 @Service
 public final class RabbitMqDomainEventsConsumer {
-    private static final Logger logger = LoggerFactory.getLogger(RabbitMqDomainEventsConsumer.class);
     private final String CONSUMER_NAME = "domain_events_consumer";
     private final int MAX_RETRIES = 2;
     private final DomainEventJsonDeserializer deserializer;
@@ -73,7 +72,6 @@ public final class RabbitMqDomainEventsConsumer {
         try {
             subscriber.on(domainEvent);
         } catch (Exception error) {
-            logger.error("Error consuming {}. Cause {}", domainEvent.eventName(), error.getMessage());
             handleConsumptionError(message, queue);
         }
     }
