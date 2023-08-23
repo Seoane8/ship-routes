@@ -6,6 +6,8 @@ import com.shiproutes.shared.domain.bus.event.DomainEventSubscriber;
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventJsonDeserializer;
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventSubscriberInformation;
 import com.shiproutes.shared.infrastructure.bus.event.DomainEventSubscribersInformation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessagePropertiesBuilder;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 @Service
 public final class RabbitMqDomainEventsConsumer {
+    private static final Logger logger = LoggerFactory.getLogger(RabbitMqDomainEventsConsumer.class);
     private final String CONSUMER_NAME = "domain_events_consumer";
     private final int MAX_RETRIES = 2;
     private final DomainEventJsonDeserializer deserializer;
@@ -42,12 +45,16 @@ public final class RabbitMqDomainEventsConsumer {
         this.publisher = publisher;
     }
 
-    public void consume() {
+    public void consume(String[] queues) {
         AbstractMessageListenerContainer container = (AbstractMessageListenerContainer) registry.getListenerContainer(
             CONSUMER_NAME
         );
 
-        container.addQueueNames(information.rabbitMqFormattedNames());
+        if (queues.length > 0) {
+            container.addQueueNames(queues);
+        } else {
+            container.addQueueNames(information.rabbitMqFormattedNames());
+        }
 
         container.start();
     }
@@ -66,6 +73,7 @@ public final class RabbitMqDomainEventsConsumer {
         try {
             subscriber.on(domainEvent);
         } catch (Exception error) {
+            logger.error("Error consuming {}. Cause {}", domainEvent.eventName(), error.getMessage());
             handleConsumptionError(message, queue);
         }
     }
