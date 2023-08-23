@@ -66,6 +66,7 @@ public final class RabbitMqDomainEventsConsumer {
         try {
             subscriber.on(domainEvent);
         } catch (Exception error) {
+            logger.error("Error consuming {}. Cause {}", domainEvent.eventName(), error.getMessage());
             handleConsumptionError(message, queue);
         }
     }
